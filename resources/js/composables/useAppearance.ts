@@ -1,4 +1,5 @@
 import { onMounted, ref } from 'vue';
+import { useTheme } from "vuetify";
 
 type Appearance = 'light' | 'dark' | 'system';
 
@@ -7,6 +8,8 @@ export function updateTheme(value: Appearance) {
         return;
     }
 
+    const theme = useTheme();
+    
     if (value === 'system') {
         const mediaQueryList = window.matchMedia(
             '(prefers-color-scheme: dark)',
@@ -17,8 +20,10 @@ export function updateTheme(value: Appearance) {
             'dark',
             systemTheme === 'dark',
         );
+        theme.global.name.value = systemTheme;
     } else {
         document.documentElement.classList.toggle('dark', value === 'dark');
+        theme.global.name.value = value;
     }
 }
 
@@ -59,9 +64,15 @@ export function initializeTheme() {
         return;
     }
 
+    const theme = useTheme();
+    
     // Initialize theme from saved preference or default to system...
     const savedAppearance = getStoredAppearance();
-    updateTheme(savedAppearance || 'system');
+    const appearanceToApply = savedAppearance || 'system';
+    updateTheme(appearanceToApply);
+
+    // Sync initial appearance ref
+    appearance.value = appearanceToApply;
 
     // Set up system theme change listener...
     mediaQuery()?.addEventListener('change', handleSystemThemeChange);
@@ -70,6 +81,8 @@ export function initializeTheme() {
 const appearance = ref<Appearance>('system');
 
 export function useAppearance() {
+    const theme = useTheme();
+
     onMounted(() => {
         const savedAppearance = localStorage.getItem(
             'appearance',
@@ -77,6 +90,7 @@ export function useAppearance() {
 
         if (savedAppearance) {
             appearance.value = savedAppearance;
+            updateTheme(savedAppearance);
         }
     });
 
@@ -89,11 +103,13 @@ export function useAppearance() {
         // Store in cookie for SSR...
         setCookie('appearance', value);
 
+        // Update both DOM and Vuetify theme
         updateTheme(value);
     }
 
     return {
         appearance,
         updateAppearance,
+        vuetifyTheme: theme,
     };
 }
