@@ -5,8 +5,14 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import type { DefineComponent } from 'vue';
 import { createApp, h } from 'vue';
 import { initializeTheme } from './composables/useAppearance';
+// Vuetify
+import '@mdi/font/css/materialdesignicons.css'
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+// Register Vuetify as plugin
+const vuetify = createVuetify()
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
@@ -18,6 +24,7 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
+            .use(vuetify)
             .mount(el);
     },
     progress: {
@@ -27,3 +34,4 @@ createInertiaApp({
 
 // This will set light / dark mode on page load...
 initializeTheme();
+
