@@ -3,11 +3,8 @@ import ProfileController from '@/actions/App/Http/Controllers/Settings/ProfileCo
 import { Form } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
-// Components
-import HeadingSmall from '@/components/HeadingSmall.vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import {
     VDialog,
     VCard,
@@ -22,17 +19,18 @@ const isDialogOpen = ref(false);
 </script>
 
 <template>
-    <div class="space-y-6">
-        <HeadingSmall
-            title="Delete account"
-            description="Delete your account and all of its resources"
-        />
+    <div class="d-flex flex-column ga-4">
+        <div>
+            <h2 class="text-h6 font-weight-bold text-high-emphasis mb-1">Delete account</h2>
+            <p class="text-body-2 text-medium-emphasis">Delete your account and all of its resources</p>
+        </div>
         <div
-            class="space-y-4 rounded-lg border border-red-100 bg-red-50 p-4 dark:border-red-200/10 dark:bg-red-700/10"
+            class="d-flex flex-column ga-3 rounded-lg border pa-4 bg-error-lighten-5"
+            style="border-color: rgb(var(--v-theme-error)) !important; border-width: 1px;"
         >
-            <div class="relative space-y-0.5 text-red-600 dark:text-red-100">
-                <p class="font-medium">Warning</p>
-                <p class="text-sm">
+            <div class="d-flex flex-column ga-1">
+                <p class="font-weight-medium text-error">Warning</p>
+                <p class="text-body-2 text-error">
                     Please proceed with caution, this cannot be undone.
                 </p>
             </div>
@@ -62,7 +60,7 @@ const isDialogOpen = ref(false);
                         </VCardTitle>
 
                         <VCardText class="px-6 pb-4">
-                            <div class="space-y-4">
+                            <div class="d-flex flex-column ga-4">
                                 <p class="text-body-2 text-medium-emphasis">
                                     Once your account is deleted, all of its
                                     resources and data will also be permanently
@@ -71,16 +69,14 @@ const isDialogOpen = ref(false);
                                     your account.
                                 </p>
 
-                                <div class="grid ga-2">
-                                    <Label for="password" class="sr-only">
-                                        Password
-                                    </Label>
+                                <div class="d-flex flex-column ga-2">
                                     <Input
                                         id="password"
                                         type="password"
                                         name="password"
                                         ref="passwordInput"
                                         placeholder="Password"
+                                        aria-label="Password"
                                         :error-messages="errors.password"
                                     />
                                 </div>

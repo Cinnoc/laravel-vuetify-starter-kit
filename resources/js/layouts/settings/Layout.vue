@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import Heading from '@/components/Heading.vue';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
+import { VDivider } from 'vuetify/components';
 import { toUrl, urlIsActive } from '@/lib/utils';
 import { edit as editAppearance } from '@/routes/appearance';
 import { edit as editProfile } from '@/routes/profile';
 import { show } from '@/routes/two-factor';
 import { edit as editPassword } from '@/routes/user-password';
 import { type NavItem } from '@/types';
+import { Link } from '@inertiajs/vue3';
 
 const sidebarNavItems: NavItem[] = [
     {
@@ -28,41 +27,42 @@ const sidebarNavItems: NavItem[] = [
     },
 ];
 
-const currentPath = typeof window !== undefined ? window.location.pathname : '';
+const currentPath = typeof window !== 'undefined' ? window.location.pathname : '';
 </script>
 
 <template>
-    <div class="px-4 py-6">
-        <Heading
-            title="Settings"
-            description="Manage your profile and account settings"
-        />
+    <div class="pa-0">
+        <div class="mb-6">
+            <h1 class="text-h4 font-weight-bold text-high-emphasis mb-2">Settings</h1>
+            <p class="text-body-2 text-medium-emphasis">Manage your profile and account settings</p>
+        </div>
 
-        <div class="flex flex-col lg:flex-row lg:space-x-12">
-            <aside class="w-full max-w-xl lg:w-48">
-                <nav class="flex flex-col space-y-1 space-x-0">
-                    <Button
+        <div class="d-flex flex-column flex-lg-row ga-6">
+            <aside style="width: 100%; max-width: 240px" class="flex-shrink-0">
+                <nav class="d-flex flex-column ga-1">
+                    <Link
                         v-for="item in sidebarNavItems"
                         :key="toUrl(item.href)"
-                        variant="ghost"
                         :href="toUrl(item.href)"
+                        class="d-flex align-center ga-2 px-3 py-2 rounded text-decoration-none text-body-2 transition-all"
                         :class="[
-                            'w-full justify-start',
-                            { 'bg-muted': urlIsActive(item.href, currentPath) },
+                            urlIsActive(item.href, currentPath)
+                                ? 'bg-surface-variant text-high-emphasis font-weight-medium'
+                                : 'text-medium-emphasis hover:bg-surface-variant/50',
                         ]"
                     >
-                        <component :is="item.icon" class="h-4 w-4" />
+                        <component v-if="item.icon" :is="item.icon" class="size-4" />
                         {{ item.title }}
-                    </Button>
+                    </Link>
                 </nav>
             </aside>
 
-            <Separator class="my-6 lg:hidden" />
+            <VDivider class="my-4 d-lg-none" />
 
-            <div class="flex-1 md:max-w-2xl">
-                <section class="max-w-xl space-y-12">
+            <div class="flex-grow-1" style="max-width: 600px">
+                <div class="d-flex flex-column ga-8">
                     <slot />
-                </section>
+                </div>
             </div>
         </div>
     </div>

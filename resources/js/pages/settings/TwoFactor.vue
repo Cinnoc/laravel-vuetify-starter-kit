@@ -42,19 +42,19 @@ onUnmounted(() => {
     <AppLayout :breadcrumbs="breadcrumbs">
         <Head title="Two-Factor Authentication" />
         <SettingsLayout>
-            <div class="space-y-6">
-                <HeadingSmall
-                    title="Two-Factor Authentication"
-                    description="Manage your two-factor authentication settings"
-                />
+            <div class="d-flex flex-column ga-4">
+                <div>
+                    <h2 class="text-h6 font-weight-bold text-high-emphasis mb-1">Two-Factor Authentication</h2>
+                    <p class="text-body-2 text-medium-emphasis">Manage your two-factor authentication settings</p>
+                </div>
 
                 <div
                     v-if="!twoFactorEnabled"
-                    class="flex flex-col items-start justify-start space-y-4"
+                    class="d-flex flex-column align-start ga-4"
                 >
                     <Badge variant="destructive">Disabled</Badge>
 
-                    <p class="text-muted-foreground">
+                    <p class="text-body-2 text-medium-emphasis">
                         When you enable two-factor authentication, you will be
                         prompted for a secure pin during login. This pin can be
                         retrieved from a TOTP-supported application on your
@@ -66,7 +66,7 @@ onUnmounted(() => {
                             v-if="hasSetupData"
                             @click="showSetupModal = true"
                         >
-                            <ShieldCheck />Continue Setup
+                            <ShieldCheck class="size-4" />Continue Setup
                         </Button>
                         <Form
                             v-else
@@ -75,7 +75,7 @@ onUnmounted(() => {
                             #default="{ processing }"
                         >
                             <Button type="submit" :disabled="processing">
-                                <ShieldCheck />Enable 2FA</Button
+                                <ShieldCheck class="size-4" />Enable 2FA</Button
                             ></Form
                         >
                     </div>
@@ -83,11 +83,11 @@ onUnmounted(() => {
 
                 <div
                     v-else
-                    class="flex flex-col items-start justify-start space-y-4"
+                    class="d-flex flex-column align-start ga-4"
                 >
                     <Badge variant="default">Enabled</Badge>
 
-                    <p class="text-muted-foreground">
+                    <p class="text-body-2 text-medium-emphasis">
                         With two-factor authentication enabled, you will be
                         prompted for a secure, random pin during login, which
                         you can retrieve from the TOTP-supported application on
@@ -96,14 +96,14 @@ onUnmounted(() => {
 
                     <TwoFactorRecoveryCodes />
 
-                    <div class="relative inline">
+                    <div>
                         <Form v-bind="disable.form()" #default="{ processing }">
                             <Button
                                 variant="destructive"
                                 type="submit"
                                 :disabled="processing"
                             >
-                                <ShieldBan />
+                                <ShieldBan class="size-4" />
                                 Disable 2FA
                             </Button>
                         </Form>

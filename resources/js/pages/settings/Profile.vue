@@ -36,22 +36,21 @@ const user = page.props.auth.user;
         <Head title="Profile settings" />
 
         <SettingsLayout>
-            <div class="flex flex-col space-y-6">
-                <HeadingSmall
-                    title="Profile information"
-                    description="Update your name and email address"
-                />
+            <div class="d-flex flex-column ga-4">
+                <div>
+                    <h2 class="text-h6 font-weight-bold text-high-emphasis mb-1">Profile information</h2>
+                    <p class="text-body-2 text-medium-emphasis">Update your name and email address</p>
+                </div>
 
                 <Form
                     v-bind="ProfileController.update.form()"
-                    class="space-y-6"
+                    class="d-flex flex-column ga-4"
                     v-slot="{ errors, processing, recentlySuccessful }"
                 >
-                    <div class="grid ga-2">
+                    <div class="d-flex flex-column ga-2">
                         <Label for="name">Name</Label>
                         <Input
                             id="name"
-                            class="mt-1 block w-full"
                             name="name"
                             :default-value="user.name"
                             required
@@ -61,12 +60,11 @@ const user = page.props.auth.user;
                         />
                     </div>
 
-                    <div class="grid ga-2">
+                    <div class="d-flex flex-column ga-2">
                         <Label for="email">Email address</Label>
                         <Input
                             id="email"
                             type="email"
-                            class="mt-1 block w-full"
                             name="email"
                             :default-value="user.email"
                             required
@@ -77,12 +75,12 @@ const user = page.props.auth.user;
                     </div>
 
                     <div v-if="mustVerifyEmail && !user.email_verified_at">
-                        <p class="-mt-4 text-sm text-muted-foreground">
+                        <p class="text-body-2 text-medium-emphasis">
                             Your email address is unverified.
                             <Link
                                 :href="send()"
                                 as="button"
-                                class="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-neutral-500"
+                                class="text-primary text-decoration-underline"
                             >
                                 Click here to resend the verification email.
                             </Link>
@@ -90,14 +88,14 @@ const user = page.props.auth.user;
 
                         <div
                             v-if="status === 'verification-link-sent'"
-                            class="mt-2 text-sm font-medium text-green-600"
+                            class="mt-2 text-body-2 font-weight-medium text-success"
                         >
                             A new verification link has been sent to your email
                             address.
                         </div>
                     </div>
 
-                    <div class="flex items-center ga-4">
+                    <div class="d-flex align-center ga-4">
                         <Button
                             :disabled="processing"
                             data-test="update-profile-button"
@@ -105,14 +103,12 @@ const user = page.props.auth.user;
                         >
 
                         <Transition
-                            enter-active-class="transition ease-in-out"
-                            enter-from-class="opacity-0"
-                            leave-active-class="transition ease-in-out"
-                            leave-to-class="opacity-0"
+                            enter-active-class="v-fade-transition"
+                            leave-active-class="v-fade-transition"
                         >
                             <p
                                 v-show="recentlySuccessful"
-                                class="text-sm text-neutral-600"
+                                class="text-body-2 text-medium-emphasis"
                             >
                                 Saved.
                             </p>

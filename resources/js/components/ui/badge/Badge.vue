@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import { VChip } from 'vuetify/components';
 
-type BadgeVariant = 'default' | 'secondary' | 'outline';
+type BadgeVariant = 'default' | 'secondary' | 'outline' | 'destructive';
 
 const props = withDefaults(
     defineProps<{
@@ -19,6 +19,8 @@ const variantProps = computed(() => {
             return { color: 'secondary', variant: 'tonal' as const };
         case 'outline':
             return { color: 'primary', variant: 'outlined' as const };
+        case 'destructive':
+            return { color: 'error', variant: 'flat' as const };
         default:
             return { color: 'primary', variant: 'flat' as const };
     }

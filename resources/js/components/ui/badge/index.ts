@@ -1,2 +1,2 @@
 export { default as Badge } from "./Badge.vue"
-export type BadgeVariant = 'default' | 'secondary' | 'outline'
+export type BadgeVariant = 'default' | 'secondary' | 'outline' | 'destructive'

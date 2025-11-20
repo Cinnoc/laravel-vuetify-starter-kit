@@ -28,11 +28,11 @@ const currentPasswordInput = ref<HTMLInputElement | null>(null);
         <Head title="Password settings" />
 
         <SettingsLayout>
-            <div class="space-y-6">
-                <HeadingSmall
-                    title="Update password"
-                    description="Ensure your account is using a long, random password to stay secure"
-                />
+            <div class="d-flex flex-column ga-4">
+                <div>
+                    <h2 class="text-h6 font-weight-bold text-high-emphasis mb-1">Update password</h2>
+                    <p class="text-body-2 text-medium-emphasis">Ensure your account is using a long, random password to stay secure</p>
+                </div>
 
                 <Form
                     v-bind="PasswordController.update.form()"
@@ -45,38 +45,36 @@ const currentPasswordInput = ref<HTMLInputElement | null>(null);
                         'password_confirmation',
                         'current_password',
                     ]"
-                    class="space-y-6"
+                    class="d-flex flex-column ga-4"
                     v-slot="{ errors, processing, recentlySuccessful }"
                 >
-                    <div class="grid ga-2">
+                    <div class="d-flex flex-column ga-2">
                         <Label for="current_password">Current password</Label>
                         <Input
                             id="current_password"
                             ref="currentPasswordInput"
                             name="current_password"
                             type="password"
-                            class="mt-1 block w-full"
                             autocomplete="current-password"
                             placeholder="Current password"
                             :error-messages="errors.current_password"
                         />
                     </div>
 
-                    <div class="grid ga-2">
+                    <div class="d-flex flex-column ga-2">
                         <Label for="password">New password</Label>
                         <Input
                             id="password"
                             ref="passwordInput"
                             name="password"
                             type="password"
-                            class="mt-1 block w-full"
                             autocomplete="new-password"
                             placeholder="New password"
                             :error-messages="errors.password"
                         />
                     </div>
 
-                    <div class="grid ga-2">
+                    <div class="d-flex flex-column ga-2">
                         <Label for="password_confirmation"
                             >Confirm password</Label
                         >
@@ -84,14 +82,13 @@ const currentPasswordInput = ref<HTMLInputElement | null>(null);
                             id="password_confirmation"
                             name="password_confirmation"
                             type="password"
-                            class="mt-1 block w-full"
                             autocomplete="new-password"
                             placeholder="Confirm password"
                             :error-messages="errors.password_confirmation"
                         />
                     </div>
 
-                    <div class="flex items-center ga-4">
+                    <div class="d-flex align-center ga-4">
                         <Button
                             :disabled="processing"
                             data-test="update-password-button"
@@ -99,14 +96,12 @@ const currentPasswordInput = ref<HTMLInputElement | null>(null);
                         >
 
                         <Transition
-                            enter-active-class="transition ease-in-out"
-                            enter-from-class="opacity-0"
-                            leave-active-class="transition ease-in-out"
-                            leave-to-class="opacity-0"
+                            enter-active-class="v-fade-transition"
+                            leave-active-class="v-fade-transition"
                         >
                             <p
                                 v-show="recentlySuccessful"
-                                class="text-sm text-neutral-600"
+                                class="text-body-2 text-medium-emphasis"
                             >
                                 Saved.
                             </p>
