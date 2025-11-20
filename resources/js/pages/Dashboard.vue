@@ -17,24 +17,18 @@ const breadcrumbs: BreadcrumbItem[] = [
     <Head title="Dashboard" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div
-            class="d-flex flex-column ga-4 overflow-x-auto rounded-xl pa-4"
-            style="height: 100%; flex: 1"
-        >
+        <div class="d-flex flex-column ga-4 my-4">
             <v-row>
                 <v-col cols="12" md="4" v-for="i in 3" :key="i">
                     <div
-                        class="position-relative overflow-hidden rounded-xl border"
-                        style="aspect-ratio: 16/9"
+                        class="position-relative overflow-hidden rounded elevation-1 border"
+                        
                     >
                         <PlaceholderPattern />
                     </div>
                 </v-col>
             </v-row>
-            <div
-                class="position-relative flex-grow-1 rounded-xl border"
-                style="min-height: 100vh"
-            >
+            <div class="position-relative rounded elevation-1 border" style="min-height: 400px">
                 <PlaceholderPattern />
             </div>
         </div>

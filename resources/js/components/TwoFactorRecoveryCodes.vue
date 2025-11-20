@@ -35,7 +35,7 @@ onMounted(async () => {
 <template>
     <Card class="w-full pa-0">
         <div class="pa-6 pb-4">
-            <div class="d-flex align-center gap-3 mb-2">
+            <div class="d-flex align-center ga-3 mb-2">
                 <LockKeyhole class="size-4" />
                 <h3 class="text-h6">2FA Recovery Codes</h3>
             </div>
@@ -45,7 +45,7 @@ onMounted(async () => {
             </p>
         </div>
         <div class="pa-6 pt-0">
-            <div class="d-flex flex-column flex-sm-row gap-3 align-sm-center justify-sm-space-between user-select-none">
+            <div class="d-flex flex-column flex-sm-row ga-3 align-sm-center justify-sm-space-between user-select-none">
                 <Button @click="toggleRecoveryCodesVisibility" class="w-auto">
                     <component
                         :is="isRecoveryCodesVisible ? EyeOff : Eye"
@@ -84,12 +84,12 @@ onMounted(async () => {
                 <div v-if="errors?.length" class="mt-6">
                     <AlertError :errors="errors" />
                 </div>
-                <div v-else class="mt-3 d-flex flex-column gap-3">
+                <div v-else class="mt-3 d-flex flex-column ga-3">
                     <div
                         ref="recoveryCodeSectionRef"
-                        class="d-grid gap-1 rounded-lg bg-muted pa-4 font-mono text-body-2"
+                        class="d-grid ga-1 rounded-lg bg-muted pa-4 font-mono text-body-2"
                     >
-                        <div v-if="!recoveryCodesList.length" class="d-flex flex-column gap-2">
+                        <div v-if="!recoveryCodesList.length" class="d-flex flex-column ga-2">
                             <div
                                 v-for="n in 8"
                                 :key="n"

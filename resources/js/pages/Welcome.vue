@@ -23,7 +23,7 @@ withDefaults(
         <header
             class="mb-6 w-full max-w-[335px] text-sm not-has-[nav]:hidden lg:max-w-4xl"
         >
-            <nav class="flex items-center justify-end gap-4">
+            <nav class="flex items-center justify-end ga-4">
                 <Link
                     v-if="$page.props.auth.user"
                     :href="dashboard()"
@@ -64,7 +64,7 @@ withDefaults(
                     </p>
                     <ul class="mb-4 flex flex-col lg:mb-6">
                         <li
-                            class="relative flex items-center gap-4 py-2 before:absolute before:top-1/2 before:bottom-0 before:left-[0.4rem] before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A]"
+                            class="relative flex items-center ga-4 py-2 before:absolute before:top-1/2 before:bottom-0 before:left-[0.4rem] before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A]"
                         >
                             <span
                                 class="relative bg-white py-1 dark:bg-[#161615]"
@@ -103,7 +103,7 @@ withDefaults(
                             </span>
                         </li>
                         <li
-                            class="relative flex items-center gap-4 py-2 before:absolute before:top-0 before:bottom-1/2 before:left-[0.4rem] before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A]"
+                            class="relative flex items-center ga-4 py-2 before:absolute before:top-0 before:bottom-1/2 before:left-[0.4rem] before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A]"
                         >
                             <span
                                 class="relative bg-white py-1 dark:bg-[#161615]"
@@ -142,7 +142,7 @@ withDefaults(
                             </span>
                         </li>
                     </ul>
-                    <ul class="flex gap-3 text-sm leading-normal">
+                    <ul class="flex ga-3 text-sm leading-normal">
                         <li>
                             <a
                                 href="https://cloud.laravel.com"

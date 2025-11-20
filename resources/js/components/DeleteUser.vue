@@ -71,7 +71,7 @@ const isDialogOpen = ref(false);
                                     your account.
                                 </p>
 
-                                <div class="grid gap-2">
+                                <div class="grid ga-2">
                                     <Label for="password" class="sr-only">
                                         Password
                                     </Label>
@@ -87,7 +87,7 @@ const isDialogOpen = ref(false);
                             </div>
                         </VCardText>
 
-                        <VCardActions class="px-6 pb-6 gap-2">
+                        <VCardActions class="px-6 pb-6 ga-2">
                             <VSpacer />
                             <Button
                                 variant="secondary"

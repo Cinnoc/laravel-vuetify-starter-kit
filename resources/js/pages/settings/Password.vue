@@ -48,7 +48,7 @@ const currentPasswordInput = ref<HTMLInputElement | null>(null);
                     class="space-y-6"
                     v-slot="{ errors, processing, recentlySuccessful }"
                 >
-                    <div class="grid gap-2">
+                    <div class="grid ga-2">
                         <Label for="current_password">Current password</Label>
                         <Input
                             id="current_password"
@@ -62,7 +62,7 @@ const currentPasswordInput = ref<HTMLInputElement | null>(null);
                         />
                     </div>
 
-                    <div class="grid gap-2">
+                    <div class="grid ga-2">
                         <Label for="password">New password</Label>
                         <Input
                             id="password"
@@ -76,7 +76,7 @@ const currentPasswordInput = ref<HTMLInputElement | null>(null);
                         />
                     </div>
 
-                    <div class="grid gap-2">
+                    <div class="grid ga-2">
                         <Label for="password_confirmation"
                             >Confirm password</Label
                         >
@@ -91,7 +91,7 @@ const currentPasswordInput = ref<HTMLInputElement | null>(null);
                         />
                     </div>
 
-                    <div class="flex items-center gap-4">
+                    <div class="flex items-center ga-4">
                         <Button
                             :disabled="processing"
                             data-test="update-password-button"

@@ -47,7 +47,7 @@ const user = page.props.auth.user;
                     class="space-y-6"
                     v-slot="{ errors, processing, recentlySuccessful }"
                 >
-                    <div class="grid gap-2">
+                    <div class="grid ga-2">
                         <Label for="name">Name</Label>
                         <Input
                             id="name"
@@ -61,7 +61,7 @@ const user = page.props.auth.user;
                         />
                     </div>
 
-                    <div class="grid gap-2">
+                    <div class="grid ga-2">
                         <Label for="email">Email address</Label>
                         <Input
                             id="email"
@@ -97,7 +97,7 @@ const user = page.props.auth.user;
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-4">
+                    <div class="flex items-center ga-4">
                         <Button
                             :disabled="processing"
                             data-test="update-profile-button"
