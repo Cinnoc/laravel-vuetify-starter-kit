@@ -1,14 +1,11 @@
 <script setup lang="ts">
-import InputError from '@/components/InputError.vue';
 import TextLink from '@/components/TextLink.vue';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import { login } from '@/routes';
 import { email } from '@/routes/password';
 import { Form, Head } from '@inertiajs/vue3';
-import { LoaderCircle } from 'lucide-vue-next';
+import { mdiLoading } from '@mdi/js';
+import { VAlert, VBtn, VIcon, VTextField } from 'vuetify/components';
 
 defineProps<{
     status?: string;
@@ -22,44 +19,48 @@ defineProps<{
     >
         <Head title="Forgot password" />
 
-        <div
+        <VAlert
             v-if="status"
-            class="mb-4 text-center text-sm font-medium text-green-600"
+            type="success"
+            variant="tonal"
+            density="comfortable"
+            class="mb-4 text-center"
         >
             {{ status }}
-        </div>
+        </VAlert>
 
-        <div class="space-y-6">
+        <div class="d-flex flex-column ga-6">
             <Form v-bind="email.form()" v-slot="{ errors, processing }">
-                <div class="grid gap-2">
-                    <Label for="email">Email address</Label>
-                    <Input
+                <div class="d-flex flex-column ga-4">
+                    <VTextField
                         id="email"
-                        type="email"
                         name="email"
+                        type="email"
+                        label="Email address"
+                        placeholder="email@example.com"
+                        variant="outlined"
+                        density="comfortable"
+                        :error-messages="errors.email"
                         autocomplete="off"
                         autofocus
-                        placeholder="email@example.com"
                     />
-                    <InputError :message="errors.email" />
-                </div>
 
-                <div class="my-6 flex items-center justify-start">
-                    <Button
-                        class="w-full"
+                    <VBtn
+                        type="submit"
+                        color="primary"
+                        size="large"
+                        block
+                        :loading="processing"
                         :disabled="processing"
                         data-test="email-password-reset-link-button"
                     >
-                        <LoaderCircle
-                            v-if="processing"
-                            class="h-4 w-4 animate-spin"
-                        />
-                        Email password reset link
-                    </Button>
+                        <VIcon v-if="processing" :icon="mdiLoading" class="animate-spin" />
+                        <span v-else>Email password reset link</span>
+                    </VBtn>
                 </div>
             </Form>
 
-            <div class="space-x-1 text-center text-sm text-muted-foreground">
+            <div class="text-center text-body-2 text-medium-emphasis">
                 <span>Or, return to</span>
                 <TextLink :href="login()">log in</TextLink>
             </div>

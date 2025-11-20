@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import type { AvatarImageProps } from 'reka-ui'
-import { AvatarImage } from 'reka-ui'
+import { VImg } from 'vuetify/components';
 
-const props = defineProps<AvatarImageProps>()
+interface Props {
+    src?: string;
+    alt?: string;
+}
+
+defineProps<Props>();
 </script>
 
 <template>
-  <AvatarImage
-    data-slot="avatar-image"
-    v-bind="props"
-    class="aspect-square size-full"
-  >
-    <slot />
-  </AvatarImage>
+    <VImg v-bind="$props" cover style="width: 100%; height: 100%">
+        <slot />
+    </VImg>
 </template>

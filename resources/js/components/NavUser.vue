@@ -1,54 +1,72 @@
 <script setup lang="ts">
 import UserInfo from '@/components/UserInfo.vue';
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
-    useSidebar,
-} from '@/components/ui/sidebar';
+} from '@/components/vuetify-sidebar';
+import { useSidebar } from '@/composables/useSidebar';
 import { usePage } from '@inertiajs/vue3';
 import { ChevronsUpDown } from 'lucide-vue-next';
 import UserMenuContent from './UserMenuContent.vue';
+import { VAvatar, VMenu, VSheet } from 'vuetify/components';
+import { computed, ref } from 'vue';
 
 const page = usePage();
 const user = page.props.auth.user;
-const { isMobile, state } = useSidebar();
+const { mobile, rail } = useSidebar();
+const isMenuOpen = ref(false);
+
+const menuLocation = computed(() => {
+    if (mobile.value) {
+        return 'bottom';
+    }
+    return rail.value ? 'end' : 'bottom';
+});
 </script>
 
 <template>
     <SidebarMenu>
         <SidebarMenuItem>
-            <DropdownMenu>
-                <DropdownMenuTrigger as-child>
+            <VMenu
+                v-model="isMenuOpen"
+                :location="menuLocation"
+                offset="8"
+                min-width="224"
+            >
+                <template #activator="{ props: menuActivatorProps }">
                     <SidebarMenuButton
+                        v-bind="menuActivatorProps"
                         size="lg"
-                        class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-                        data-test="sidebar-menu-button"
+                        :title="user.name"
+                        :subtitle="user.email"
                     >
-                        <UserInfo :user="user" />
-                        <ChevronsUpDown class="ml-auto size-4" />
+                        <template #prepend>
+                            <v-avatar
+                                rounded
+                                size="40"
+                                color="primary"
+                                class="text-on-primary font-weight-bold text-button"
+                            >
+                                <img
+                                    v-if="user.avatar && user.avatar.trim().length > 0"
+                                    :src="user.avatar"
+                                    :alt="user.name"
+                                    class="w-100 h-100"
+                                />
+                                <span v-else>{{ user.name.charAt(0).toUpperCase() }}</span>
+                            </v-avatar>
+                        </template>
+                        <template #append>
+                            <ChevronsUpDown :size="16" />
+                        </template>
                     </SidebarMenuButton>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                    class="w-(--reka-dropdown-menu-trigger-width) min-w-56 rounded-lg"
-                    :side="
-                        isMobile
-                            ? 'bottom'
-                            : state === 'collapsed'
-                              ? 'left'
-                              : 'bottom'
-                    "
-                    align="end"
-                    :side-offset="4"
-                >
+                </template>
+
+                <VSheet class="pa-2 rounded" elevation="8">
                     <UserMenuContent :user="user" />
-                </DropdownMenuContent>
-            </DropdownMenu>
+                </VSheet>
+            </VMenu>
         </SidebarMenuItem>
     </SidebarMenu>
 </template>

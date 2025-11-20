@@ -3,6 +3,23 @@ import { useTheme } from "vuetify";
 
 type Appearance = 'light' | 'dark' | 'system';
 
+// Initialize theme without Vuetify (called before app mount)
+export function initializeThemeDOM(value: Appearance) {
+    if (typeof window === 'undefined') {
+        return;
+    }
+    
+    let themeToApply = value;
+    
+    if (value === 'system') {
+        const mediaQueryList = window.matchMedia('(prefers-color-scheme: dark)');
+        themeToApply = mediaQueryList.matches ? 'dark' : 'light';
+    }
+    
+    document.documentElement.classList.toggle('dark', themeToApply === 'dark');
+}
+
+// Update theme with Vuetify (called inside Vue app)
 export function updateTheme(value: Appearance) {
     if (typeof window === 'undefined') {
         return;
@@ -59,25 +76,6 @@ const handleSystemThemeChange = () => {
     updateTheme(currentAppearance || 'system');
 };
 
-export function initializeTheme() {
-    if (typeof window === 'undefined') {
-        return;
-    }
-
-    const theme = useTheme();
-    
-    // Initialize theme from saved preference or default to system...
-    const savedAppearance = getStoredAppearance();
-    const appearanceToApply = savedAppearance || 'system';
-    updateTheme(appearanceToApply);
-
-    // Sync initial appearance ref
-    appearance.value = appearanceToApply;
-
-    // Set up system theme change listener...
-    mediaQuery()?.addEventListener('change', handleSystemThemeChange);
-}
-
 const appearance = ref<Appearance>('system');
 
 export function useAppearance() {
@@ -91,7 +89,13 @@ export function useAppearance() {
         if (savedAppearance) {
             appearance.value = savedAppearance;
             updateTheme(savedAppearance);
+        } else {
+            // Initialize with system preference
+            updateTheme('system');
         }
+
+        // Set up system theme change listener
+        mediaQuery()?.addEventListener('change', handleSystemThemeChange);
     });
 
     function updateAppearance(value: Appearance) {

@@ -1,21 +1,38 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from "vue"
-import type { AlertVariants } from "."
-import { cn } from "@/lib/utils"
-import { alertVariants } from "."
+import { computed } from 'vue';
+import { VAlert } from 'vuetify/components';
 
-const props = defineProps<{
-  class?: HTMLAttributes["class"]
-  variant?: AlertVariants["variant"]
-}>()
+type AlertVariant = 'default' | 'destructive';
+
+const props = withDefaults(
+    defineProps<{
+        variant?: AlertVariant;
+    }>(),
+    {
+        variant: 'default',
+    },
+);
+
+const alertProps = computed(() => {
+    if (props.variant === 'destructive') {
+        return { type: 'error', color: 'error', variant: 'tonal' as const };
+    }
+
+    return { type: 'info', color: 'primary', variant: 'tonal' as const };
+});
 </script>
 
 <template>
-  <div
-    data-slot="alert"
-    :class="cn(alertVariants({ variant }), props.class)"
-    role="alert"
-  >
-    <slot />
-  </div>
+    <VAlert
+        v-bind="$attrs"
+        :type="alertProps.type"
+        :color="alertProps.color"
+        :variant="alertProps.variant"
+        border="start"
+        density="comfortable"
+        class="text-body-2"
+        role="alert"
+    >
+        <slot />
+    </VAlert>
 </template>

@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import InputError from '@/components/InputError.vue';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import { store } from '@/routes/password/confirm';
 import { Form, Head } from '@inertiajs/vue3';
-import { LoaderCircle } from 'lucide-vue-next';
+import { mdiLoading } from '@mdi/js';
+import { VBtn, VIcon, VTextField } from 'vuetify/components';
 </script>
 
 <template>
@@ -21,36 +18,34 @@ import { LoaderCircle } from 'lucide-vue-next';
             reset-on-success
             v-slot="{ errors, processing }"
         >
-            <div class="space-y-6">
-                <div class="grid gap-2">
-                    <Label htmlFor="password">Password</Label>
-                    <Input
-                        id="password"
-                        type="password"
-                        name="password"
-                        class="mt-1 block w-full"
-                        required
-                        autocomplete="current-password"
-                        autofocus
-                    />
+            <div class="d-flex flex-column ga-6">
+                <VTextField
+                    id="password"
+                    name="password"
+                    type="password"
+                    label="Password"
+                    variant="outlined"
+                    density="comfortable"
+                    :error-messages="errors.password"
+                    autocomplete="current-password"
+                    autofocus
+                    required
+                />
 
-                    <InputError :message="errors.password" />
-                </div>
-
-                <div class="flex items-center">
-                    <Button
-                        class="w-full"
-                        :disabled="processing"
-                        data-test="confirm-password-button"
-                    >
-                        <LoaderCircle
-                            v-if="processing"
-                            class="h-4 w-4 animate-spin"
-                        />
-                        Confirm Password
-                    </Button>
-                </div>
+                <VBtn
+                    type="submit"
+                    color="primary"
+                    size="large"
+                    block
+                    :loading="processing"
+                    :disabled="processing"
+                    data-test="confirm-password-button"
+                >
+                    <VIcon v-if="processing" :icon="mdiLoading" class="animate-spin" />
+                    <span v-else>Confirm Password</span>
+                </VBtn>
             </div>
         </Form>
     </AuthLayout>
 </template>
+

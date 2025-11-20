@@ -18,27 +18,22 @@ const breadcrumbs: BreadcrumbItem[] = [
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <div
-            class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4"
+            class="d-flex flex-column ga-4 overflow-x-auto rounded-xl pa-4"
+            style="height: 100%; flex: 1"
         >
-            <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-                <div
-                    class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
-                >
-                    <PlaceholderPattern />
-                </div>
-                <div
-                    class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
-                >
-                    <PlaceholderPattern />
-                </div>
-                <div
-                    class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
-                >
-                    <PlaceholderPattern />
-                </div>
-            </div>
+            <v-row>
+                <v-col cols="12" md="4" v-for="i in 3" :key="i">
+                    <div
+                        class="position-relative overflow-hidden rounded-xl border"
+                        style="aspect-ratio: 16/9"
+                    >
+                        <PlaceholderPattern />
+                    </div>
+                </v-col>
+            </v-row>
             <div
-                class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border"
+                class="position-relative flex-grow-1 rounded-xl border"
+                style="min-height: 100vh"
             >
                 <PlaceholderPattern />
             </div>

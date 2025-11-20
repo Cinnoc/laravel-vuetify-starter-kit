@@ -1,17 +1,9 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from 'vue'
-import { cn } from '@/lib/utils'
-
-const props = defineProps<{
-  class?: HTMLAttributes['class']
-}>()
+import { VCardTitle } from 'vuetify/components';
 </script>
 
 <template>
-  <h3
-    data-slot="card-title"
-    :class="cn('leading-none font-semibold', props.class)"
-  >
-    <slot />
-  </h3>
+    <VCardTitle v-bind="$attrs" class="text-h6 font-semibold">
+        <slot />
+    </VCardTitle>
 </template>

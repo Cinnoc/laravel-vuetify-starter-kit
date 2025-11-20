@@ -1,14 +1,9 @@
 <script setup lang="ts">
 import AppLogoIcon from '@/components/AppLogoIcon.vue';
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { home } from '@/routes';
 import { Link } from '@inertiajs/vue3';
+import { VApp, VMain } from 'vuetify/components';
 
 defineProps<{
     title?: string;
@@ -17,34 +12,40 @@ defineProps<{
 </script>
 
 <template>
-    <div
-        class="flex min-h-svh flex-col items-center justify-center gap-6 bg-muted p-6 md:p-10"
-    >
-        <div class="flex w-full max-w-md flex-col gap-6">
-            <Link
-                :href="home()"
-                class="flex items-center gap-2 self-center font-medium"
+    <VApp>
+        <VMain>
+            <v-container
+                fluid
+                class="d-flex flex-column align-center justify-center ga-6 bg-surface-variant pa-6 pa-md-10"
+                style="min-height: 100svh"
             >
-                <div class="flex h-9 w-9 items-center justify-center">
-                    <AppLogoIcon
-                        class="size-9 fill-current text-black dark:text-white"
-                    />
-                </div>
-            </Link>
+                <div class="d-flex flex-column ga-6" style="width: 100%; max-width: 448px">
+                    <Link
+                        :href="home()"
+                        class="d-flex align-center ga-2 align-self-center text-decoration-none font-weight-medium"
+                    >
+                        <div class="d-flex align-center justify-center" style="height: 36px; width: 36px">
+                            <AppLogoIcon
+                                style="width: 36px; height: 36px"
+                            />
+                        </div>
+                    </Link>
 
-            <div class="flex flex-col gap-6">
-                <Card class="rounded-xl">
-                    <CardHeader class="px-10 pt-8 pb-0 text-center">
-                        <CardTitle class="text-xl">{{ title }}</CardTitle>
-                        <CardDescription>
-                            {{ description }}
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent class="px-10 py-8">
-                        <slot />
-                    </CardContent>
-                </Card>
-            </div>
-        </div>
-    </div>
+                    <div class="d-flex flex-column ga-6">
+                        <Card class="rounded-xl pa-0">
+                            <div class="px-10 pt-8 pb-0 text-center">
+                                <h2 class="text-h6 mb-2">{{ title }}</h2>
+                                <p class="text-body-2 text-medium-emphasis">
+                                    {{ description }}
+                                </p>
+                            </div>
+                            <div class="px-10 py-8">
+                                <slot />
+                            </div>
+                        </Card>
+                    </div>
+                </div>
+            </v-container>
+        </VMain>
+    </VApp>
 </template>

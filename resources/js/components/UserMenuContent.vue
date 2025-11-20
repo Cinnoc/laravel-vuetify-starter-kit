@@ -1,16 +1,11 @@
 <script setup lang="ts">
 import UserInfo from '@/components/UserInfo.vue';
-import {
-    DropdownMenuGroup,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-} from '@/components/ui/dropdown-menu';
 import { logout } from '@/routes';
 import { edit } from '@/routes/profile';
 import type { User } from '@/types';
 import { Link, router } from '@inertiajs/vue3';
 import { LogOut, Settings } from 'lucide-vue-next';
+import { VDivider, VList, VListItem } from 'vuetify/components';
 
 interface Props {
     user: User;
@@ -24,31 +19,37 @@ defineProps<Props>();
 </script>
 
 <template>
-    <DropdownMenuLabel class="p-0 font-normal">
-        <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+    <VList density="compact" class="pa-0">
+        <VListItem class="px-2 py-2">
             <UserInfo :user="user" :show-email="true" />
-        </div>
-    </DropdownMenuLabel>
-    <DropdownMenuSeparator />
-    <DropdownMenuGroup>
-        <DropdownMenuItem :as-child="true">
-            <Link class="block w-full" :href="edit()" prefetch as="button">
-                <Settings class="mr-2 h-4 w-4" />
-                Settings
-            </Link>
-        </DropdownMenuItem>
-    </DropdownMenuGroup>
-    <DropdownMenuSeparator />
-    <DropdownMenuItem :as-child="true">
-        <Link
-            class="block w-full"
-            :href="logout()"
-            @click="handleLogout"
-            as="button"
+        </VListItem>
+
+        <VDivider class="my-1" />
+
+        <VListItem
+            link
+            class="px-2"
+            @click="router.visit(edit())"
+            prepend-icon="mdi-cog"
+        >
+            <template #prepend>
+                <Settings :size="16" class="me-2 text-medium-emphasis" />
+            </template>
+            <span class="text-body-2">Settings</span>
+        </VListItem>
+
+        <VDivider class="my-1" />
+
+        <VListItem
+            link
+            class="px-2"
+            @click="() => { handleLogout(); router.visit(logout()); }"
             data-test="logout-button"
         >
-            <LogOut class="mr-2 h-4 w-4" />
-            Log out
-        </Link>
-    </DropdownMenuItem>
+            <template #prepend>
+                <LogOut :size="16" class="me-2 text-medium-emphasis" />
+            </template>
+            <span class="text-body-2">Log out</span>
+        </VListItem>
+    </VList>
 </template>

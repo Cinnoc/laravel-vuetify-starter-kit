@@ -1,16 +1,11 @@
 <script setup lang="ts">
-import InputError from '@/components/InputError.vue';
 import TextLink from '@/components/TextLink.vue';
-import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import AuthBase from '@/layouts/AuthLayout.vue';
 import { register } from '@/routes';
 import { store } from '@/routes/login';
 import { request } from '@/routes/password';
 import { Form, Head } from '@inertiajs/vue3';
-import { LoaderCircle } from 'lucide-vue-next';
+import { mdiLoading } from '@mdi/js';
 
 defineProps<{
     status?: string;
@@ -26,87 +21,95 @@ defineProps<{
     >
         <Head title="Log in" />
 
-        <div
+        <v-alert
             v-if="status"
-            class="mb-4 text-center text-sm font-medium text-green-600"
+            type="success"
+            variant="tonal"
+            density="comfortable"
+            class="mb-4 text-center"
         >
             {{ status }}
-        </div>
+        </v-alert>
 
         <Form
             v-bind="store.form()"
             :reset-on-success="['password']"
             v-slot="{ errors, processing }"
-            class="flex flex-col gap-6"
         >
-            <div class="grid gap-6">
-                <div class="grid gap-2">
-                    <Label for="email">Email address</Label>
-                    <Input
-                        id="email"
-                        type="email"
-                        name="email"
-                        required
-                        autofocus
-                        :tabindex="1"
-                        autocomplete="email"
-                        placeholder="email@example.com"
-                    />
-                    <InputError :message="errors.email" />
-                </div>
+            <div class="d-flex flex-column ga-6">
+                <v-text-field
+                    id="email"
+                    name="email"
+                    type="email"
+                    label="Email address"
+                    placeholder="email@example.com"
+                    variant="outlined"
+                    density="comfortable"
+                    :error-messages="errors.email"
+                    :tabindex="1"
+                    autocomplete="email"
+                    autofocus
+                    required
+                />
 
-                <div class="grid gap-2">
-                    <div class="flex items-center justify-between">
-                        <Label for="password">Password</Label>
+                <div>
+                    <div class="d-flex align-center justify-space-between mb-2">
+                        <label for="password" class="text-body-1 font-weight-medium">Password</label>
                         <TextLink
                             v-if="canResetPassword"
                             :href="request()"
-                            class="text-sm"
+                            class="text-caption"
                             :tabindex="5"
                         >
                             Forgot password?
                         </TextLink>
                     </div>
-                    <Input
+                    <v-text-field
                         id="password"
-                        type="password"
                         name="password"
-                        required
+                        type="password"
+                        placeholder="Password"
+                        variant="outlined"
+                        density="comfortable"
+                        :error-messages="errors.password"
                         :tabindex="2"
                         autocomplete="current-password"
-                        placeholder="Password"
+                        required
                     />
-                    <InputError :message="errors.password" />
                 </div>
 
-                <div class="flex items-center justify-between">
-                    <Label for="remember" class="flex items-center space-x-3">
-                        <Checkbox id="remember" name="remember" :tabindex="3" />
-                        <span>Remember me</span>
-                    </Label>
+                <div>
+                    <v-checkbox
+                        id="remember"
+                        name="remember"
+                        label="Remember me"
+                        :tabindex="3"
+                        density="compact"
+                        hide-details
+                    />
                 </div>
 
-                <Button
+                <v-btn
                     type="submit"
-                    class="mt-4 w-full"
+                    color="primary"
+                    size="large"
+                    block
                     :tabindex="4"
+                    :loading="processing"
                     :disabled="processing"
                     data-test="login-button"
                 >
-                    <LoaderCircle
-                        v-if="processing"
-                        class="h-4 w-4 animate-spin"
-                    />
-                    Log in
-                </Button>
-            </div>
+                    <v-icon v-if="processing" :icon="mdiLoading" class="animate-spin" />
+                    <span v-else>Log in</span>
+                </v-btn>
 
-            <div
-                class="text-center text-sm text-muted-foreground"
-                v-if="canRegister"
-            >
-                Don't have an account?
-                <TextLink :href="register()" :tabindex="5">Sign up</TextLink>
+                <div
+                    class="text-center text-body-2 text-medium-emphasis"
+                    v-if="canRegister"
+                >
+                    Don't have an account?
+                    <TextLink :href="register()" :tabindex="5">Sign up</TextLink>
+                </div>
             </div>
         </Form>
     </AuthBase>

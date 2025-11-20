@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { VAlert } from 'vuetify/components';
 import { AlertCircle } from 'lucide-vue-next';
 import { computed } from 'vue';
 
@@ -16,15 +16,15 @@ const uniqueErrors = computed(() => Array.from(new Set(props.errors)));
 </script>
 
 <template>
-    <Alert variant="destructive">
-        <AlertCircle class="size-4" />
-        <AlertTitle>{{ title }}</AlertTitle>
-        <AlertDescription>
-            <ul class="list-inside list-disc text-sm">
-                <li v-for="(error, index) in uniqueErrors" :key="index">
-                    {{ error }}
-                </li>
-            </ul>
-        </AlertDescription>
-    </Alert>
+    <VAlert type="error" variant="tonal" border="start" prominent>
+        <template #prepend>
+            <AlertCircle class="size-5" />
+        </template>
+        <div class="text-body-1 font-medium mb-1">{{ title }}</div>
+        <ul class="list-disc list-inside text-body-2">
+            <li v-for="(error, index) in uniqueErrors" :key="index">
+                {{ error }}
+            </li>
+        </ul>
+    </VAlert>
 </template>

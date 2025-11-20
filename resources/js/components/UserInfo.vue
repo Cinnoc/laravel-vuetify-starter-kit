@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useInitials } from '@/composables/useInitials';
 import type { User } from '@/types';
 import { computed } from 'vue';
+import { VAvatar } from 'vuetify/components';
 
 interface Props {
     user: User;
@@ -15,24 +15,39 @@ const props = withDefaults(defineProps<Props>(), {
 
 const { getInitials } = useInitials();
 
-// Compute whether we should show the avatar image
-const showAvatar = computed(
-    () => props.user.avatar && props.user.avatar !== '',
+const initials = computed(() => getInitials(props.user.name));
+const hasAvatar = computed(
+    () => props.user.avatar && props.user.avatar.trim().length > 0,
 );
 </script>
 
 <template>
-    <Avatar class="h-8 w-8 overflow-hidden rounded-lg">
-        <AvatarImage v-if="showAvatar" :src="user.avatar!" :alt="user.name" />
-        <AvatarFallback class="rounded-lg text-black dark:text-white">
-            {{ getInitials(user.name) }}
-        </AvatarFallback>
-    </Avatar>
+    <div class="d-flex align-center ga-3 w-100">
+        <VAvatar
+            rounded
+            size="40"
+            color="primary"
+            class="text-on-primary font-weight-bold text-button"
+        >
+            <img
+                v-if="hasAvatar"
+                :src="user.avatar!"
+                :alt="user.name"
+                class="w-100 h-100"
+            />
+            <span v-else>{{ initials }}</span>
+        </VAvatar>
 
-    <div class="grid flex-1 text-left text-sm leading-tight">
-        <span class="truncate font-medium">{{ user.name }}</span>
-        <span v-if="showEmail" class="truncate text-xs text-muted-foreground">{{
-            user.email
-        }}</span>
+        <div class="d-flex flex-column flex-grow-1 text-start">
+            <span class="text-body-2 font-weight-medium text-truncate">{{
+                user.name
+            }}</span>
+            <span
+                v-if="showEmail"
+                class="text-caption text-medium-emphasis text-truncate"
+            >
+                {{ user.email }}
+            </span>
+        </div>
     </div>
 </template>

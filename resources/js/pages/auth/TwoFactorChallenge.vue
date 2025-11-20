@@ -1,15 +1,9 @@
 <script setup lang="ts">
-import InputError from '@/components/InputError.vue';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import {
-    PinInput,
-    PinInputGroup,
-    PinInputSlot,
-} from '@/components/ui/pin-input';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import { store } from '@/routes/two-factor/login';
 import { Form, Head } from '@inertiajs/vue3';
+import { mdiLoading } from '@mdi/js';
+import { VBtn, VIcon, VOtpInput, VTextField } from 'vuetify/components';
 import { computed, ref } from 'vue';
 
 interface AuthConfigContent {
@@ -41,11 +35,10 @@ const showRecoveryInput = ref<boolean>(false);
 const toggleRecoveryMode = (clearErrors: () => void): void => {
     showRecoveryInput.value = !showRecoveryInput.value;
     clearErrors();
-    code.value = [];
+    code.value = '';
 };
 
-const code = ref<number[]>([]);
-const codeValue = computed<string>(() => code.value.join(''));
+const code = ref<string>('');
 </script>
 
 <template>
@@ -55,52 +48,48 @@ const codeValue = computed<string>(() => code.value.join(''));
     >
         <Head title="Two-Factor Authentication" />
 
-        <div class="space-y-6">
+        <div class="d-flex flex-column ga-6">
             <template v-if="!showRecoveryInput">
                 <Form
                     v-bind="store.form()"
-                    class="space-y-4"
                     reset-on-error
-                    @error="code = []"
+                    @error="code = ''"
                     #default="{ errors, processing, clearErrors }"
                 >
-                    <input type="hidden" name="code" :value="codeValue" />
-                    <div
-                        class="flex flex-col items-center justify-center space-y-3 text-center"
-                    >
-                        <div class="flex w-full items-center justify-center">
-                            <PinInput
-                                id="otp"
-                                placeholder="○"
-                                v-model="code"
-                                type="number"
-                                otp
-                            >
-                                <PinInputGroup>
-                                    <PinInputSlot
-                                        v-for="(id, index) in 6"
-                                        :key="id"
-                                        :index="index"
-                                        :disabled="processing"
-                                        autofocus
-                                    />
-                                </PinInputGroup>
-                            </PinInput>
-                        </div>
-                        <InputError :message="errors.code" />
-                    </div>
-                    <Button type="submit" class="w-full" :disabled="processing"
-                        >Continue</Button
-                    >
-                    <div class="text-center text-sm text-muted-foreground">
-                        <span>or you can </span>
-                        <button
-                            type="button"
-                            class="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-neutral-500"
-                            @click="() => toggleRecoveryMode(clearErrors)"
+                    <div class="d-flex flex-column ga-4">
+                        <VOtpInput
+                            v-model="code"
+                            name="code"
+                            :length="6"
+                            type="number"
+                            variant="outlined"
+                            :disabled="processing"
+                            :error-messages="errors.code"
+                            autofocus
+                        />
+                        
+                        <VBtn
+                            type="submit"
+                            color="primary"
+                            size="large"
+                            block
+                            :loading="processing"
+                            :disabled="processing"
                         >
-                            {{ authConfigContent.toggleText }}
-                        </button>
+                            <VIcon v-if="processing" :icon="mdiLoading" class="animate-spin" />
+                            <span v-else>Continue</span>
+                        </VBtn>
+                        
+                        <div class="text-center text-body-2 text-medium-emphasis">
+                            <span>or you can </span>
+                            <button
+                                type="button"
+                                class="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-neutral-500"
+                                @click="() => toggleRecoveryMode(clearErrors)"
+                            >
+                                {{ authConfigContent.toggleText }}
+                            </button>
+                        </div>
                     </div>
                 </Form>
             </template>
@@ -108,31 +97,45 @@ const codeValue = computed<string>(() => code.value.join(''));
             <template v-else>
                 <Form
                     v-bind="store.form()"
-                    class="space-y-4"
                     reset-on-error
                     #default="{ errors, processing, clearErrors }"
                 >
-                    <Input
-                        name="recovery_code"
-                        type="text"
-                        placeholder="Enter recovery code"
-                        :autofocus="showRecoveryInput"
-                        required
-                    />
-                    <InputError :message="errors.recovery_code" />
-                    <Button type="submit" class="w-full" :disabled="processing"
-                        >Continue</Button
-                    >
-
-                    <div class="text-center text-sm text-muted-foreground">
-                        <span>or you can </span>
-                        <button
-                            type="button"
-                            class="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-neutral-500"
-                            @click="() => toggleRecoveryMode(clearErrors)"
+                    <div class="d-flex flex-column ga-4">
+                        <VTextField
+                            name="recovery_code"
+                            type="text"
+                            label="Recovery code"
+                            placeholder="Enter recovery code"
+                            variant="outlined"
+                            density="comfortable"
+                            :error-messages="errors.recovery_code"
+                            :autofocus="showRecoveryInput"
+                            required
+                        />
+                        
+                        <VBtn
+                            type="submit"
+                            color="primary"
+                            size="large"
+                            block
+                            :loading="processing"
+                            :disabled="processing"
                         >
-                            {{ authConfigContent.toggleText }}
-                        </button>
+                            <VIcon v-if="processing" :icon="mdiLoading" class="animate-spin" />
+                            <span v-else>Continue</span>
+                        </VBtn>
+
+                        <div class="text-center text-body-2 text-medium-emphasis">
+                            <span>or you can </span>
+                            <v-btn
+                                variant="text"
+                                size="small"
+                                class="text-none"
+                                @click="() => toggleRecoveryMode(clearErrors)"
+                            >
+                                {{ authConfigContent.toggleText }}
+                            </v-btn>
+                        </div>
                     </div>
                 </Form>
             </template>

@@ -1,17 +1,9 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from 'vue'
-import { cn } from '@/lib/utils'
-
-const props = defineProps<{
-  class?: HTMLAttributes['class']
-}>()
+import { VCardActions } from 'vuetify/components';
 </script>
 
 <template>
-  <div
-    data-slot="card-footer"
-    :class="cn('flex items-center px-6 [.border-t]:pt-6', props.class)"
-  >
-    <slot />
-  </div>
+    <VCardActions v-bind="$attrs" class="px-6 pb-6 pt-0">
+        <slot />
+    </VCardActions>
 </template>

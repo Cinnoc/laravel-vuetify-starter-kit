@@ -5,22 +5,20 @@ import { ref } from 'vue';
 
 // Components
 import HeadingSmall from '@/components/HeadingSmall.vue';
-import InputError from '@/components/InputError.vue';
 import { Button } from '@/components/ui/button';
-import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import {
+    VDialog,
+    VCard,
+    VCardTitle,
+    VCardText,
+    VCardActions,
+    VSpacer,
+} from 'vuetify/components';
 
 const passwordInput = ref<InstanceType<typeof Input> | null>(null);
+const isDialogOpen = ref(false);
 </script>
 
 <template>
@@ -38,65 +36,71 @@ const passwordInput = ref<InstanceType<typeof Input> | null>(null);
                     Please proceed with caution, this cannot be undone.
                 </p>
             </div>
-            <Dialog>
-                <DialogTrigger as-child>
-                    <Button variant="destructive" data-test="delete-user-button"
-                        >Delete account</Button
-                    >
-                </DialogTrigger>
-                <DialogContent>
+
+            <Button
+                variant="destructive"
+                data-test="delete-user-button"
+                @click="isDialogOpen = true"
+            >
+                Delete account
+            </Button>
+
+            <VDialog v-model="isDialogOpen" max-width="500">
+                <VCard rounded="xl">
                     <Form
                         v-bind="ProfileController.destroy.form()"
                         reset-on-success
                         @error="() => passwordInput?.$el?.focus()"
+                        @success="isDialogOpen = false"
                         :options="{
                             preserveScroll: true,
                         }"
-                        class="space-y-6"
                         v-slot="{ errors, processing, reset, clearErrors }"
                     >
-                        <DialogHeader class="space-y-3">
-                            <DialogTitle
-                                >Are you sure you want to delete your
-                                account?</DialogTitle
-                            >
-                            <DialogDescription>
-                                Once your account is deleted, all of its
-                                resources and data will also be permanently
-                                deleted. Please enter your password to confirm
-                                you would like to permanently delete your
-                                account.
-                            </DialogDescription>
-                        </DialogHeader>
+                        <VCardTitle class="text-h6 pa-6 pb-4">
+                            Are you sure you want to delete your account?
+                        </VCardTitle>
 
-                        <div class="grid gap-2">
-                            <Label for="password" class="sr-only"
-                                >Password</Label
-                            >
-                            <Input
-                                id="password"
-                                type="password"
-                                name="password"
-                                ref="passwordInput"
-                                placeholder="Password"
-                            />
-                            <InputError :message="errors.password" />
-                        </div>
+                        <VCardText class="px-6 pb-4">
+                            <div class="space-y-4">
+                                <p class="text-body-2 text-medium-emphasis">
+                                    Once your account is deleted, all of its
+                                    resources and data will also be permanently
+                                    deleted. Please enter your password to
+                                    confirm you would like to permanently delete
+                                    your account.
+                                </p>
 
-                        <DialogFooter class="gap-2">
-                            <DialogClose as-child>
-                                <Button
-                                    variant="secondary"
-                                    @click="
-                                        () => {
-                                            clearErrors();
-                                            reset();
-                                        }
-                                    "
-                                >
-                                    Cancel
-                                </Button>
-                            </DialogClose>
+                                <div class="grid gap-2">
+                                    <Label for="password" class="sr-only">
+                                        Password
+                                    </Label>
+                                    <Input
+                                        id="password"
+                                        type="password"
+                                        name="password"
+                                        ref="passwordInput"
+                                        placeholder="Password"
+                                        :error-messages="errors.password"
+                                    />
+                                </div>
+                            </div>
+                        </VCardText>
+
+                        <VCardActions class="px-6 pb-6 gap-2">
+                            <VSpacer />
+                            <Button
+                                variant="secondary"
+                                @click="
+                                    () => {
+                                        clearErrors();
+                                        reset();
+                                        isDialogOpen = false;
+                                    }
+                                "
+                            >
+                                Cancel
+                            </Button>
 
                             <Button
                                 type="submit"
@@ -106,10 +110,10 @@ const passwordInput = ref<InstanceType<typeof Input> | null>(null);
                             >
                                 Delete account
                             </Button>
-                        </DialogFooter>
+                        </VCardActions>
                     </Form>
-                </DialogContent>
-            </Dialog>
+                </VCard>
+            </VDialog>
         </div>
     </div>
 </template>

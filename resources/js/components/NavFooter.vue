@@ -5,7 +5,7 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
-} from '@/components/ui/sidebar';
+} from '@/components/vuetify-sidebar';
 import { toUrl } from '@/lib/utils';
 import { type NavItem } from '@/types';
 
@@ -18,25 +18,22 @@ defineProps<Props>();
 </script>
 
 <template>
-    <SidebarGroup
-        :class="`group-data-[collapsible=icon]:p-0 ${$props.class || ''}`"
-    >
+    <SidebarGroup :class="$props.class">
         <SidebarGroupContent>
             <SidebarMenu>
                 <SidebarMenuItem v-for="item in items" :key="item.title">
-                    <SidebarMenuButton
-                        class="text-neutral-600 hover:text-neutral-800 dark:text-neutral-300 dark:hover:text-neutral-100"
-                        as-child
+                    <a
+                        :href="toUrl(item.href)"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-decoration-none"
                     >
-                        <a
-                            :href="toUrl(item.href)"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            <component :is="item.icon" />
-                            <span>{{ item.title }}</span>
-                        </a>
-                    </SidebarMenuButton>
+                        <SidebarMenuButton :title="item.title">
+                            <template #prepend>
+                                <component :is="item.icon" :size="20" />
+                            </template>
+                        </SidebarMenuButton>
+                    </a>
                 </SidebarMenuItem>
             </SidebarMenu>
         </SidebarGroupContent>

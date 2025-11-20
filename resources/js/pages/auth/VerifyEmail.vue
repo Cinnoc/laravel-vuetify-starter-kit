@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import TextLink from '@/components/TextLink.vue';
-import { Button } from '@/components/ui/button';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import { logout } from '@/routes';
 import { send } from '@/routes/verification';
 import { Form, Head } from '@inertiajs/vue3';
-import { LoaderCircle } from 'lucide-vue-next';
+import { mdiLoading } from '@mdi/js';
+import { VAlert, VBtn, VIcon } from 'vuetify/components';
 
 defineProps<{
     status?: string;
@@ -19,29 +19,34 @@ defineProps<{
     >
         <Head title="Email verification" />
 
-        <div
+        <VAlert
             v-if="status === 'verification-link-sent'"
-            class="mb-4 text-center text-sm font-medium text-green-600"
+            type="success"
+            variant="tonal"
+            density="comfortable"
+            class="mb-4 text-center"
         >
             A new verification link has been sent to the email address you
             provided during registration.
-        </div>
+        </VAlert>
 
         <Form
             v-bind="send.form()"
-            class="space-y-6 text-center"
+            class="d-flex flex-column ga-6 text-center"
             v-slot="{ processing }"
         >
-            <Button :disabled="processing" variant="secondary">
-                <LoaderCircle v-if="processing" class="h-4 w-4 animate-spin" />
-                Resend verification email
-            </Button>
-
-            <TextLink
-                :href="logout()"
-                as="button"
-                class="mx-auto block text-sm"
+            <VBtn
+                type="submit"
+                color="secondary"
+                size="large"
+                :loading="processing"
+                :disabled="processing"
             >
+                <VIcon v-if="processing" :icon="mdiLoading" class="animate-spin" />
+                <span v-else>Resend verification email</span>
+            </VBtn>
+
+            <TextLink :href="logout()" as="button" class="mx-auto text-body-2">
                 Log out
             </TextLink>
         </Form>

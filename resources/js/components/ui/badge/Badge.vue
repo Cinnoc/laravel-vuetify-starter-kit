@@ -1,26 +1,39 @@
 <script setup lang="ts">
-import type { PrimitiveProps } from "reka-ui"
-import type { HTMLAttributes } from "vue"
-import type { BadgeVariants } from "."
-import { reactiveOmit } from "@vueuse/core"
-import { Primitive } from "reka-ui"
-import { cn } from "@/lib/utils"
-import { badgeVariants } from "."
+import { computed } from 'vue';
+import { VChip } from 'vuetify/components';
 
-const props = defineProps<PrimitiveProps & {
-  variant?: BadgeVariants["variant"]
-  class?: HTMLAttributes["class"]
-}>()
+type BadgeVariant = 'default' | 'secondary' | 'outline';
 
-const delegatedProps = reactiveOmit(props, "class")
+const props = withDefaults(
+    defineProps<{
+        variant?: BadgeVariant;
+    }>(),
+    {
+        variant: 'default',
+    },
+);
+
+const variantProps = computed(() => {
+    switch (props.variant) {
+        case 'secondary':
+            return { color: 'secondary', variant: 'tonal' as const };
+        case 'outline':
+            return { color: 'primary', variant: 'outlined' as const };
+        default:
+            return { color: 'primary', variant: 'flat' as const };
+    }
+});
 </script>
 
 <template>
-  <Primitive
-    data-slot="badge"
-    :class="cn(badgeVariants({ variant }), props.class)"
-    v-bind="delegatedProps"
-  >
-    <slot />
-  </Primitive>
+    <VChip
+        v-bind="$attrs"
+        :color="variantProps.color"
+        :variant="variantProps.variant"
+        density="comfortable"
+        size="small"
+        class="text-caption font-semibold text-uppercase"
+    >
+        <slot />
+    </VChip>
 </template>

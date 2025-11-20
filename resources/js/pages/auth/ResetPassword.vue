@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import InputError from '@/components/InputError.vue';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import { update } from '@/routes/password';
 import { Form, Head } from '@inertiajs/vue3';
-import { LoaderCircle } from 'lucide-vue-next';
+import { mdiLoading } from '@mdi/js';
+import { VBtn, VIcon, VTextField } from 'vuetify/components';
 import { ref } from 'vue';
 
 const props = defineProps<{
@@ -30,62 +27,57 @@ const inputEmail = ref(props.email);
             :reset-on-success="['password', 'password_confirmation']"
             v-slot="{ errors, processing }"
         >
-            <div class="grid gap-6">
-                <div class="grid gap-2">
-                    <Label for="email">Email</Label>
-                    <Input
-                        id="email"
-                        type="email"
-                        name="email"
-                        autocomplete="email"
-                        v-model="inputEmail"
-                        class="mt-1 block w-full"
-                        readonly
-                    />
-                    <InputError :message="errors.email" class="mt-2" />
-                </div>
+            <div class="d-flex flex-column ga-6">
+                <VTextField
+                    id="email"
+                    name="email"
+                    type="email"
+                    label="Email"
+                    v-model="inputEmail"
+                    variant="outlined"
+                    density="comfortable"
+                    :error-messages="errors.email"
+                    autocomplete="email"
+                    readonly
+                />
 
-                <div class="grid gap-2">
-                    <Label for="password">Password</Label>
-                    <Input
-                        id="password"
-                        type="password"
-                        name="password"
-                        autocomplete="new-password"
-                        class="mt-1 block w-full"
-                        autofocus
-                        placeholder="Password"
-                    />
-                    <InputError :message="errors.password" />
-                </div>
+                <VTextField
+                    id="password"
+                    name="password"
+                    type="password"
+                    label="Password"
+                    placeholder="Password"
+                    variant="outlined"
+                    density="comfortable"
+                    :error-messages="errors.password"
+                    autocomplete="new-password"
+                    autofocus
+                />
 
-                <div class="grid gap-2">
-                    <Label for="password_confirmation">
-                        Confirm Password
-                    </Label>
-                    <Input
-                        id="password_confirmation"
-                        type="password"
-                        name="password_confirmation"
-                        autocomplete="new-password"
-                        class="mt-1 block w-full"
-                        placeholder="Confirm password"
-                    />
-                    <InputError :message="errors.password_confirmation" />
-                </div>
+                <VTextField
+                    id="password_confirmation"
+                    name="password_confirmation"
+                    type="password"
+                    label="Confirm Password"
+                    placeholder="Confirm password"
+                    variant="outlined"
+                    density="comfortable"
+                    :error-messages="errors.password_confirmation"
+                    autocomplete="new-password"
+                />
 
-                <Button
+                <VBtn
                     type="submit"
-                    class="mt-4 w-full"
+                    color="primary"
+                    size="large"
+                    block
+                    :loading="processing"
                     :disabled="processing"
                     data-test="reset-password-button"
                 >
-                    <LoaderCircle
-                        v-if="processing"
-                        class="h-4 w-4 animate-spin"
-                    />
-                    Reset password
-                </Button>
+                    <VIcon v-if="processing" :icon="mdiLoading" class="animate-spin" />
+                    <span v-else>Reset password</span>
+                </VBtn>
             </div>
         </Form>
     </AuthLayout>

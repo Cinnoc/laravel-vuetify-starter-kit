@@ -6,7 +6,6 @@ import { Form, Head, Link, usePage } from '@inertiajs/vue3';
 
 import DeleteUser from '@/components/DeleteUser.vue';
 import HeadingSmall from '@/components/HeadingSmall.vue';
-import InputError from '@/components/InputError.vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -58,8 +57,8 @@ const user = page.props.auth.user;
                             required
                             autocomplete="name"
                             placeholder="Full name"
+                            :error-messages="errors.name"
                         />
-                        <InputError class="mt-2" :message="errors.name" />
                     </div>
 
                     <div class="grid gap-2">
@@ -73,8 +72,8 @@ const user = page.props.auth.user;
                             required
                             autocomplete="username"
                             placeholder="Email address"
+                            :error-messages="errors.email"
                         />
-                        <InputError class="mt-2" :message="errors.email" />
                     </div>
 
                     <div v-if="mustVerifyEmail && !user.email_verified_at">

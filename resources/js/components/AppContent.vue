@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { SidebarInset } from '@/components/ui/sidebar';
+import { SidebarInset } from '@/components/vuetify-sidebar';
+import { VMain } from 'vuetify/components';
 import { computed } from 'vue';
 
 interface Props {
@@ -15,11 +16,12 @@ const className = computed(() => props.class);
     <SidebarInset v-if="props.variant === 'sidebar'" :class="className">
         <slot />
     </SidebarInset>
-    <main
+    <VMain
         v-else
-        class="mx-auto flex h-full w-full max-w-7xl flex-1 flex-col gap-4 rounded-xl"
         :class="className"
     >
-        <slot />
-    </main>
+        <div class="d-flex flex-column ga-4 mx-auto rounded-xl" style="height: 100%; width: 100%; max-width: 1280px; flex: 1">
+            <slot />
+        </div>
+    </VMain>
 </template>

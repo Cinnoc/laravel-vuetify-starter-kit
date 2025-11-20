@@ -1,42 +1,49 @@
 <script setup lang="ts">
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
+import type { BreadcrumbItemType } from '@/types';
 import { Link } from '@inertiajs/vue3';
+import { computed } from 'vue';
+import { VBreadcrumbs } from 'vuetify/components';
 
-interface BreadcrumbItemType {
-    title: string;
-    href?: string;
-}
+const props = withDefaults(
+    defineProps<{
+        breadcrumbs: BreadcrumbItemType[];
+    }>(),
+    {
+        breadcrumbs: () => [],
+    },
+);
 
-defineProps<{
-    breadcrumbs: BreadcrumbItemType[];
-}>();
+const breadcrumbItems = computed(() =>
+    props.breadcrumbs.map((item, index) => ({
+        title: item.title,
+        value: item.href ?? item.title ?? index,
+        href: item.href,
+        disabled: index === props.breadcrumbs.length - 1 || !item.href,
+    })),
+);
+
+const lastIndex = computed(() => props.breadcrumbs.length - 1);
 </script>
 
 <template>
-    <Breadcrumb>
-        <BreadcrumbList>
-            <template v-for="(item, index) in breadcrumbs" :key="index">
-                <BreadcrumbItem>
-                    <template v-if="index === breadcrumbs.length - 1">
-                        <BreadcrumbPage>{{ item.title }}</BreadcrumbPage>
-                    </template>
-                    <template v-else>
-                        <BreadcrumbLink as-child>
-                            <Link :href="item.href ?? '#'">{{
-                                item.title
-                            }}</Link>
-                        </BreadcrumbLink>
-                    </template>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator v-if="index !== breadcrumbs.length - 1" />
-            </template>
-        </BreadcrumbList>
-    </Breadcrumb>
+    <VBreadcrumbs
+        v-if="breadcrumbItems.length"
+        :items="breadcrumbItems"
+        divider="›"
+        density="compact"
+        class="text-sm text-medium-emphasis"
+    >
+        <template #item="{ item, index }">
+            <Link
+                v-if="item.href && index !== lastIndex"
+                :href="item.href"
+                class="text-primary text-decoration-none"
+            >
+                {{ item.title }}
+            </Link>
+            <span v-else class="text-high-emphasis">
+                {{ item.title }}
+            </span>
+        </template>
+    </VBreadcrumbs>
 </template>

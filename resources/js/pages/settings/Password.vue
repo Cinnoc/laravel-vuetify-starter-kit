@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import PasswordController from '@/actions/App/Http/Controllers/Settings/PasswordController';
-import InputError from '@/components/InputError.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
 import { edit } from '@/routes/user-password';
@@ -59,8 +58,8 @@ const currentPasswordInput = ref<HTMLInputElement | null>(null);
                             class="mt-1 block w-full"
                             autocomplete="current-password"
                             placeholder="Current password"
+                            :error-messages="errors.current_password"
                         />
-                        <InputError :message="errors.current_password" />
                     </div>
 
                     <div class="grid gap-2">
@@ -73,8 +72,8 @@ const currentPasswordInput = ref<HTMLInputElement | null>(null);
                             class="mt-1 block w-full"
                             autocomplete="new-password"
                             placeholder="New password"
+                            :error-messages="errors.password"
                         />
-                        <InputError :message="errors.password" />
                     </div>
 
                     <div class="grid gap-2">
@@ -88,8 +87,8 @@ const currentPasswordInput = ref<HTMLInputElement | null>(null);
                             class="mt-1 block w-full"
                             autocomplete="new-password"
                             placeholder="Confirm password"
+                            :error-messages="errors.password_confirmation"
                         />
-                        <InputError :message="errors.password_confirmation" />
                     </div>
 
                     <div class="flex items-center gap-4">

@@ -10,7 +10,7 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
-} from '@/components/ui/sidebar';
+} from '@/components/vuetify-sidebar';
 import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
@@ -41,26 +41,29 @@ const footerNavItems: NavItem[] = [
 
 <template>
     <Sidebar collapsible="icon" variant="inset">
-        <SidebarHeader>
-            <SidebarMenu>
-                <SidebarMenuItem>
-                    <SidebarMenuButton size="lg" as-child>
-                        <Link :href="dashboard()">
-                            <AppLogo />
+        <div class="d-flex flex-column h-100">
+            <SidebarHeader>
+                <SidebarMenu>
+                    <SidebarMenuItem>
+                        <Link :href="dashboard()" class="text-decoration-none">
+                            <SidebarMenuButton size="lg" title="Laravel Starter Kit">
+                                <template #prepend>
+                                    <AppLogo />
+                                </template>
+                            </SidebarMenuButton>
                         </Link>
-                    </SidebarMenuButton>
-                </SidebarMenuItem>
-            </SidebarMenu>
-        </SidebarHeader>
+                    </SidebarMenuItem>
+                </SidebarMenu>
+            </SidebarHeader>
 
-        <SidebarContent>
-            <NavMain :items="mainNavItems" />
-        </SidebarContent>
+            <SidebarContent>
+                <NavMain :items="mainNavItems" />
+            </SidebarContent>
 
-        <SidebarFooter>
-            <NavFooter :items="footerNavItems" />
-            <NavUser />
-        </SidebarFooter>
+            <SidebarFooter>
+                <NavFooter :items="footerNavItems" />
+                <NavUser />
+            </SidebarFooter>
+        </div>
     </Sidebar>
-    <slot />
 </template>

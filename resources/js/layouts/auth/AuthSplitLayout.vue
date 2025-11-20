@@ -2,6 +2,7 @@
 import AppLogoIcon from '@/components/AppLogoIcon.vue';
 import { home } from '@/routes';
 import { Link, usePage } from '@inertiajs/vue3';
+import { VApp, VMain } from 'vuetify/components';
 
 const page = usePage();
 const name = page.props.name;
@@ -14,43 +15,57 @@ defineProps<{
 </script>
 
 <template>
-    <div
-        class="relative grid h-dvh flex-col items-center justify-center px-8 sm:px-0 lg:max-w-none lg:grid-cols-2 lg:px-0"
-    >
-        <div
-            class="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r"
-        >
-            <div class="absolute inset-0 bg-zinc-900" />
-            <Link
-                :href="home()"
-                class="relative z-20 flex items-center text-lg font-medium"
+    <VApp>
+        <VMain>
+            <v-row
+                no-gutters
+                class="position-relative align-center justify-center px-8 px-sm-0 px-lg-0"
+                style="height: 100dvh"
             >
-                <AppLogoIcon class="mr-2 size-8 fill-current text-white" />
-                {{ name }}
-            </Link>
-            <div v-if="quote" class="relative z-20 mt-auto">
-                <blockquote class="space-y-2">
-                    <p class="text-lg">&ldquo;{{ quote.message }}&rdquo;</p>
-                    <footer class="text-sm text-neutral-300">
-                        {{ quote.author }}
-                    </footer>
-                </blockquote>
-            </div>
-        </div>
-        <div class="lg:p-8">
-            <div
-                class="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]"
-            >
-                <div class="flex flex-col space-y-2 text-center">
-                    <h1 class="text-xl font-medium tracking-tight" v-if="title">
-                        {{ title }}
-                    </h1>
-                    <p class="text-sm text-muted-foreground" v-if="description">
-                        {{ description }}
-                    </p>
-                </div>
-                <slot />
-            </div>
-        </div>
-    </div>
+                <v-col
+                    cols="12"
+                    lg="6"
+                    class="position-relative d-none d-lg-flex flex-column bg-surface-variant pa-10 text-white h-100"
+                    style="border-right: 1px solid rgba(var(--v-border-color), var(--v-border-opacity))"
+                >
+                    <div
+                        class="position-absolute"
+                        style="inset: 0; background-color: rgb(24, 24, 27)"
+                    />
+                    <Link
+                        :href="home()"
+                        class="position-relative d-flex align-center text-h6 text-decoration-none font-weight-medium text-white"
+                        style="z-index: 20"
+                    >
+                        <AppLogoIcon class="mr-2 text-white" style="width: 32px; height: 32px" />
+                        {{ name }}
+                    </Link>
+                    <div v-if="quote" class="position-relative mt-auto" style="z-index: 20">
+                        <blockquote class="d-flex flex-column ga-2">
+                            <p class="text-h6">&ldquo;{{ quote.message }}&rdquo;</p>
+                            <footer class="text-body-2" style="color: rgb(212, 212, 212)">
+                                {{ quote.author }}
+                            </footer>
+                        </blockquote>
+                    </div>
+                </v-col>
+                <v-col cols="12" lg="6" class="pa-lg-8">
+                    <div
+                        class="mx-auto d-flex flex-column justify-center ga-6"
+                        style="width: 100%; max-width: 350px"
+                    >
+                        <div class="d-flex flex-column ga-2 text-center">
+                            <h1 class="text-h5 font-weight-medium" v-if="title" style="letter-spacing: -0.025em">
+                                {{ title }}
+                            </h1>
+                            <p class="text-body-2 text-medium-emphasis" v-if="description">
+                                {{ description }}
+                            </p>
+                        </div>
+                        <slot />
+                    </div>
+                </v-col>
+            </v-row>
+        </VMain>
+    </VApp>
 </template>
