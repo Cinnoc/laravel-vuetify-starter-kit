@@ -26,7 +26,7 @@ const shadcnLight: ThemeDefinition = {
     colors: {
         background: '#ffffff',
         surface: '#ffffff',
-        'surface-variant': '#f4f4f5',
+        'surface-variant': '#f5f3ff', // Subtle purple tint for better brand cohesion and visibility
         primary: '#7c3aed',
         'primary-darken-1': '#5b21b6',
         secondary: '#e4e4e7',

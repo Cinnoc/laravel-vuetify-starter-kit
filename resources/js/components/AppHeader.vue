@@ -143,7 +143,7 @@ const avatarSrc = computed(() => auth.value.user?.avatar ?? '');
             <Link :href="dashboard()" class="d-flex align-center ga-2 text-decoration-none">
                 <AppLogo />
             </Link>
-
+c
             <div class="d-none d-lg-flex align-center ms-8 ga-2">
                 <Link
                     v-for="item in mainNavItems"
@@ -152,7 +152,7 @@ const avatarSrc = computed(() => auth.value.user?.avatar ?? '');
                     class="d-flex align-center ga-2 text-body-2 text-medium-emphasis px-3 py-2 rounded transition-all"
                     :class="[
                         isCurrentRoute(item.href)
-                            ? 'text-high-emphasis font-weight-medium bg-surface-variant'
+                            ? 'text-primary font-weight-medium bg-surface-variant'
                             : 'hover:bg-surface-variant/50',
                     ]"
                 >

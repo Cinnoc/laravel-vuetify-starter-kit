@@ -33,7 +33,7 @@ const currentPath = typeof window !== 'undefined' ? window.location.pathname : '
 <template>
     <div class="pa-0">
         <div class="mb-6">
-            <h1 class="text-h4 font-weight-bold text-high-emphasis mb-2">Settings</h1>
+            <h1 class="text-h4 font-weight-bold mb-2">Settings</h1>
             <p class="text-body-2 text-medium-emphasis">Manage your profile and account settings</p>
         </div>
 
@@ -47,7 +47,7 @@ const currentPath = typeof window !== 'undefined' ? window.location.pathname : '
                         class="d-flex align-center ga-2 px-3 py-2 rounded text-decoration-none text-body-2 transition-all"
                         :class="[
                             urlIsActive(item.href, currentPath)
-                                ? 'bg-surface-variant text-high-emphasis font-weight-medium'
+                                ? 'bg-surface-variant text-primary font-weight-medium'
                                 : 'text-medium-emphasis hover:bg-surface-variant/50',
                         ]"
                     >
