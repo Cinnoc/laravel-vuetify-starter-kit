@@ -4,12 +4,10 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
 import { edit } from '@/routes/user-password';
 import { Form, Head } from '@inertiajs/vue3';
+import { VBtn, VTextField } from 'vuetify/components';
 import { ref } from 'vue';
 
 import HeadingSmall from '@/components/HeadingSmall.vue';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { type BreadcrumbItem } from '@/types';
 
 const breadcrumbItems: BreadcrumbItem[] = [
@@ -48,52 +46,53 @@ const currentPasswordInput = ref<HTMLInputElement | null>(null);
                     class="d-flex flex-column ga-4"
                     v-slot="{ errors, processing, recentlySuccessful }"
                 >
-                    <div class="d-flex flex-column ga-2">
-                        <Label for="current_password">Current password</Label>
-                        <Input
-                            id="current_password"
-                            ref="currentPasswordInput"
-                            name="current_password"
-                            type="password"
-                            autocomplete="current-password"
-                            placeholder="Current password"
-                            :error-messages="errors.current_password"
-                        />
-                    </div>
+                    <VTextField
+                        id="current_password"
+                        ref="currentPasswordInput"
+                        name="current_password"
+                        type="password"
+                        label="Current password"
+                        variant="outlined"
+                        density="comfortable"
+                        autocomplete="current-password"
+                        placeholder="Current password"
+                        :error-messages="errors.current_password"
+                    />
 
-                    <div class="d-flex flex-column ga-2">
-                        <Label for="password">New password</Label>
-                        <Input
-                            id="password"
-                            ref="passwordInput"
-                            name="password"
-                            type="password"
-                            autocomplete="new-password"
-                            placeholder="New password"
-                            :error-messages="errors.password"
-                        />
-                    </div>
+                    <VTextField
+                        id="password"
+                        ref="passwordInput"
+                        name="password"
+                        type="password"
+                        label="New password"
+                        variant="outlined"
+                        density="comfortable"
+                        autocomplete="new-password"
+                        placeholder="New password"
+                        :error-messages="errors.password"
+                    />
 
-                    <div class="d-flex flex-column ga-2">
-                        <Label for="password_confirmation"
-                            >Confirm password</Label
-                        >
-                        <Input
-                            id="password_confirmation"
-                            name="password_confirmation"
-                            type="password"
-                            autocomplete="new-password"
-                            placeholder="Confirm password"
-                            :error-messages="errors.password_confirmation"
-                        />
-                    </div>
+                    <VTextField
+                        id="password_confirmation"
+                        name="password_confirmation"
+                        type="password"
+                        label="Confirm password"
+                        variant="outlined"
+                        density="comfortable"
+                        autocomplete="new-password"
+                        placeholder="Confirm password"
+                        :error-messages="errors.password_confirmation"
+                    />
 
                     <div class="d-flex align-center ga-4">
-                        <Button
+                        <VBtn
+                            type="submit"
+                            color="primary"
                             :disabled="processing"
                             data-test="update-password-button"
-                            >Save password</Button
                         >
+                            Save password
+                        </VBtn>
 
                         <Transition
                             enter-active-class="v-fade-transition"

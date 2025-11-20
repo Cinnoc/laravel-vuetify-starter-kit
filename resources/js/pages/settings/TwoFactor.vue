@@ -2,8 +2,6 @@
 import HeadingSmall from '@/components/HeadingSmall.vue';
 import TwoFactorRecoveryCodes from '@/components/TwoFactorRecoveryCodes.vue';
 import TwoFactorSetupModal from '@/components/TwoFactorSetupModal.vue';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { useTwoFactorAuth } from '@/composables/useTwoFactorAuth';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
@@ -11,6 +9,7 @@ import { disable, enable, show } from '@/routes/two-factor';
 import { BreadcrumbItem } from '@/types';
 import { Form, Head } from '@inertiajs/vue3';
 import { ShieldBan, ShieldCheck } from 'lucide-vue-next';
+import { VBtn, VChip } from 'vuetify/components';
 import { onUnmounted, ref } from 'vue';
 
 interface Props {
@@ -52,7 +51,14 @@ onUnmounted(() => {
                     v-if="!twoFactorEnabled"
                     class="d-flex flex-column align-start ga-4"
                 >
-                    <Badge variant="destructive">Disabled</Badge>
+                    <VChip
+                        color="error"
+                        variant="flat"
+                        size="small"
+                        class="text-caption font-weight-bold text-uppercase"
+                    >
+                        Disabled
+                    </VChip>
 
                     <p class="text-body-2 text-medium-emphasis">
                         When you enable two-factor authentication, you will be
@@ -62,22 +68,27 @@ onUnmounted(() => {
                     </p>
 
                     <div>
-                        <Button
+                        <VBtn
                             v-if="hasSetupData"
+                            color="primary"
                             @click="showSetupModal = true"
                         >
                             <ShieldCheck class="size-4" />Continue Setup
-                        </Button>
+                        </VBtn>
                         <Form
                             v-else
                             v-bind="enable.form()"
                             @success="showSetupModal = true"
                             #default="{ processing }"
                         >
-                            <Button type="submit" :disabled="processing">
-                                <ShieldCheck class="size-4" />Enable 2FA</Button
-                            ></Form
-                        >
+                            <VBtn
+                                type="submit"
+                                color="primary"
+                                :disabled="processing"
+                            >
+                                <ShieldCheck class="size-4" />Enable 2FA
+                            </VBtn>
+                        </Form>
                     </div>
                 </div>
 
@@ -85,7 +96,14 @@ onUnmounted(() => {
                     v-else
                     class="d-flex flex-column align-start ga-4"
                 >
-                    <Badge variant="default">Enabled</Badge>
+                    <VChip
+                        color="primary"
+                        variant="flat"
+                        size="small"
+                        class="text-caption font-weight-bold text-uppercase"
+                    >
+                        Enabled
+                    </VChip>
 
                     <p class="text-body-2 text-medium-emphasis">
                         With two-factor authentication enabled, you will be
@@ -98,14 +116,14 @@ onUnmounted(() => {
 
                     <div>
                         <Form v-bind="disable.form()" #default="{ processing }">
-                            <Button
-                                variant="destructive"
+                            <VBtn
+                                color="error"
                                 type="submit"
                                 :disabled="processing"
                             >
                                 <ShieldBan class="size-4" />
                                 Disable 2FA
-                            </Button>
+                            </VBtn>
                         </Form>
                     </div>
                 </div>

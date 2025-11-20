@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import AlertError from '@/components/AlertError.vue';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 import { useTwoFactorAuth } from '@/composables/useTwoFactorAuth';
 import { regenerateRecoveryCodes } from '@/routes/two-factor';
 import { Form } from '@inertiajs/vue3';
 import { Eye, EyeOff, LockKeyhole, RefreshCw } from 'lucide-vue-next';
+import { VBtn, VCard } from 'vuetify/components';
 import { nextTick, onMounted, ref } from 'vue';
 
 const { recoveryCodesList, fetchRecoveryCodes, errors } = useTwoFactorAuth();
@@ -33,7 +32,12 @@ onMounted(async () => {
 </script>
 
 <template>
-    <Card class="w-full pa-0">
+    <VCard
+        variant="outlined"
+        rounded="xl"
+        elevation="0"
+        class="w-full"
+    >
         <div class="pa-6 pb-4">
             <div class="d-flex align-center ga-3 mb-2">
                 <LockKeyhole class="size-4" />
@@ -46,14 +50,18 @@ onMounted(async () => {
         </div>
         <div class="pa-6 pt-0">
             <div class="d-flex flex-column flex-sm-row ga-3 align-sm-center justify-sm-space-between user-select-none">
-                <Button @click="toggleRecoveryCodesVisibility" class="w-auto">
+                <VBtn
+                    color="primary"
+                    @click="toggleRecoveryCodesVisibility"
+                    class="w-auto"
+                >
                     <component
                         :is="isRecoveryCodesVisible ? EyeOff : Eye"
                         class="size-4"
                     />
                     {{ isRecoveryCodesVisible ? 'Hide' : 'View' }} Recovery
                     Codes
-                </Button>
+                </VBtn>
 
                 <Form
                     v-if="isRecoveryCodesVisible && recoveryCodesList.length"
@@ -63,13 +71,13 @@ onMounted(async () => {
                     @success="fetchRecoveryCodes"
                     #default="{ processing }"
                 >
-                    <Button
-                        variant="secondary"
+                    <VBtn
+                        color="secondary"
                         type="submit"
                         :disabled="processing"
                     >
                         <RefreshCw /> Regenerate Codes
-                    </Button>
+                    </VBtn>
                 </Form>
             </div>
             <div
@@ -114,5 +122,5 @@ onMounted(async () => {
                 </div>
             </div>
         </div>
-    </Card>
+    </VCard>
 </template>

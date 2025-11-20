@@ -3,18 +3,18 @@ import ProfileController from '@/actions/App/Http/Controllers/Settings/ProfileCo
 import { Form } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import {
+    VBtn,
     VDialog,
     VCard,
     VCardTitle,
     VCardText,
     VCardActions,
     VSpacer,
+    VTextField,
 } from 'vuetify/components';
 
-const passwordInput = ref<InstanceType<typeof Input> | null>(null);
+const passwordInput = ref<InstanceType<typeof VTextField> | null>(null);
 const isDialogOpen = ref(false);
 </script>
 
@@ -35,16 +35,16 @@ const isDialogOpen = ref(false);
                 </p>
             </div>
 
-            <Button
-                variant="destructive"
+            <VBtn
+                color="error"
                 data-test="delete-user-button"
                 @click="isDialogOpen = true"
             >
                 Delete account
-            </Button>
+            </VBtn>
 
             <VDialog v-model="isDialogOpen" max-width="500">
-                <VCard rounded="xl">
+                <VCard rounded="">
                     <Form
                         v-bind="ProfileController.destroy.form()"
                         reset-on-success
@@ -69,24 +69,25 @@ const isDialogOpen = ref(false);
                                     your account.
                                 </p>
 
-                                <div class="d-flex flex-column ga-2">
-                                    <Input
-                                        id="password"
-                                        type="password"
-                                        name="password"
-                                        ref="passwordInput"
-                                        placeholder="Password"
-                                        aria-label="Password"
-                                        :error-messages="errors.password"
-                                    />
-                                </div>
+                                <VTextField
+                                    id="password"
+                                    type="password"
+                                    name="password"
+                                    ref="passwordInput"
+                                    label="Password"
+                                    variant="outlined"
+                                    density="comfortable"
+                                    placeholder="Password"
+                                    aria-label="Password"
+                                    :error-messages="errors.password"
+                                />
                             </div>
                         </VCardText>
 
                         <VCardActions class="px-6 pb-6 ga-2">
                             <VSpacer />
-                            <Button
-                                variant="secondary"
+                            <VBtn
+                                variant="text"
                                 @click="
                                     () => {
                                         clearErrors();
@@ -96,16 +97,16 @@ const isDialogOpen = ref(false);
                                 "
                             >
                                 Cancel
-                            </Button>
+                            </VBtn>
 
-                            <Button
+                            <VBtn
                                 type="submit"
-                                variant="destructive"
-                                :disabled="processing"
+                                color="error"
+                                :loading="processing"
                                 data-test="confirm-delete-user-button"
                             >
                                 Delete account
-                            </Button>
+                            </VBtn>
                         </VCardActions>
                     </Form>
                 </VCard>

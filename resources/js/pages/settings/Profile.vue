@@ -6,12 +6,10 @@ import { Form, Head, Link, usePage } from '@inertiajs/vue3';
 
 import DeleteUser from '@/components/DeleteUser.vue';
 import HeadingSmall from '@/components/HeadingSmall.vue';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
 import { type BreadcrumbItem } from '@/types';
+import { VBtn, VTextField } from 'vuetify/components';
 
 interface Props {
     mustVerifyEmail: boolean;
@@ -47,32 +45,32 @@ const user = page.props.auth.user;
                     class="d-flex flex-column ga-4"
                     v-slot="{ errors, processing, recentlySuccessful }"
                 >
-                    <div class="d-flex flex-column ga-2">
-                        <Label for="name">Name</Label>
-                        <Input
-                            id="name"
-                            name="name"
-                            :default-value="user.name"
-                            required
-                            autocomplete="name"
-                            placeholder="Full name"
-                            :error-messages="errors.name"
-                        />
-                    </div>
+                    <VTextField
+                        id="name"
+                        name="name"
+                        label="Name"
+                        :model-value="user.name"
+                        variant="outlined"
+                        density="comfortable"
+                        required
+                        autocomplete="name"
+                        placeholder="Full name"
+                        :error-messages="errors.name"
+                    />
 
-                    <div class="d-flex flex-column ga-2">
-                        <Label for="email">Email address</Label>
-                        <Input
-                            id="email"
-                            type="email"
-                            name="email"
-                            :default-value="user.email"
-                            required
-                            autocomplete="username"
-                            placeholder="Email address"
-                            :error-messages="errors.email"
-                        />
-                    </div>
+                    <VTextField
+                        id="email"
+                        type="email"
+                        name="email"
+                        label="Email address"
+                        :model-value="user.email"
+                        variant="outlined"
+                        density="comfortable"
+                        required
+                        autocomplete="username"
+                        placeholder="Email address"
+                        :error-messages="errors.email"
+                    />
 
                     <div v-if="mustVerifyEmail && !user.email_verified_at">
                         <p class="text-body-2 text-medium-emphasis">
@@ -96,11 +94,14 @@ const user = page.props.auth.user;
                     </div>
 
                     <div class="d-flex align-center ga-4">
-                        <Button
+                        <VBtn
+                            type="submit"
+                            color="primary"
                             :disabled="processing"
                             data-test="update-profile-button"
-                            >Save</Button
                         >
+                            Save
+                        </VBtn>
 
                         <Transition
                             enter-active-class="v-fade-transition"

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import AlertError from '@/components/AlertError.vue';
-import { Button } from '@/components/ui/button';
 import { useTwoFactorAuth } from '@/composables/useTwoFactorAuth';
 import { confirm } from '@/routes/two-factor';
 import { Form } from '@inertiajs/vue3';
@@ -175,9 +174,13 @@ watch(
                                 </div>
                             </div>
 
-                            <Button class="w-100" @click="handleModalNextStep">
+                            <VBtn
+                                color="primary"
+                                block
+                                @click="handleModalNextStep"
+                            >
                                 {{ modalConfig.buttonText }}
-                            </Button>
+                            </VBtn>
 
                             <VDivider class="my-2" />
 
@@ -243,24 +246,26 @@ watch(
                             />
 
                             <div class="d-flex w-100 align-center ga-3">
-                                <Button
+                                <VBtn
                                     type="button"
-                                    variant="outline"
+                                    variant="outlined"
+                                    color="primary"
                                     class="flex-1"
                                     @click="showVerificationStep = false"
                                     :disabled="processing"
                                 >
                                     Back
-                                </Button>
-                                <Button
+                                </VBtn>
+                                <VBtn
                                     type="submit"
+                                    color="primary"
                                     class="flex-1"
                                     :disabled="
                                         processing || code.length < 6
                                     "
                                 >
                                     Confirm
-                                </Button>
+                                </VBtn>
                             </div>
                         </div>
                     </Form>
