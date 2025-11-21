@@ -20,13 +20,14 @@ const tabs = [
             :key="value"
             @click="updateAppearance(value)"
             :class="[
-                'appearance-tab-btn d-flex align-center ga-2 rounded px-4 py-2 transition-all text-body-2',
+                'appearance-tab-btn d-flex align-center ga-2 rounded px-4 py-2 text-body-2',
                 appearance === value
                     ? 'bg-surface elevation-1 text-high-emphasis font-weight-medium'
                     : 'text-medium-emphasis bg-transparent',
             ]"
+            style="transition: all 0.2s;"
         >
-            <component :is="Icon" class="size-4" />
+            <component :is="Icon" style="width: 16px; height: 16px;" />
             <span>{{ label }}</span>
         </button>
     </div>

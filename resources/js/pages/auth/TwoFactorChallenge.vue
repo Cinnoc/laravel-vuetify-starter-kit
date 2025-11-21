@@ -84,7 +84,8 @@ const code = ref<string>('');
                             <span>or you can </span>
                             <button
                                 type="button"
-                                class="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-neutral-500"
+                                class="text-foreground text-decoration-underline"
+                                style="text-underline-offset: 4px; text-decoration-color: rgb(212, 212, 212); transition: all 0.3s ease-out;"
                                 @click="() => toggleRecoveryMode(clearErrors)"
                             >
                                 {{ authConfigContent.toggleText }}

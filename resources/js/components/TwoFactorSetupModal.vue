@@ -134,7 +134,7 @@ watch(
                                 :class="{ 'border-b-0': i === 5 }"
                             />
                         </div>
-                        <ScanLine class="position-relative size-6 text-foreground" style="z-index: 20" />
+                        <ScanLine class="position-relative text-foreground" style="z-index: 20; width: 24px; height: 24px;" />
                     </div>
                 </div>
                 <div class="text-h6 text-center mt-2">{{ modalConfig.title }}</div>
@@ -158,7 +158,7 @@ watch(
                                         class="position-absolute inset-0 d-flex align-center justify-center bg-background animate-pulse"
                                         style="z-index: 10; aspect-ratio: 1; width: 100%"
                                     >
-                                        <Loader2 class="size-6 animate-spin" />
+                                        <Loader2 class="animate-spin" style="width: 24px; height: 24px;" />
                                     </div>
                                     <div
                                         v-else
@@ -196,7 +196,7 @@ watch(
                                         v-if="!manualSetupKey"
                                         class="d-flex align-center justify-center bg-muted pa-3 w-100"
                                     >
-                                        <Loader2 class="size-4 animate-spin" />
+                                        <Loader2 class="animate-spin" style="width: 16px; height: 16px;" />
                                     </div>
                                     <template v-else>
                                         <input
@@ -215,9 +215,10 @@ watch(
                                         >
                                             <Check
                                                 v-if="copied"
-                                                class="w-4 text-green-500"
+                                                class="text-success"
+                                                style="width: 16px; height: 16px;"
                                             />
-                                            <Copy v-else class="w-4" />
+                                            <Copy v-else style="width: 16px; height: 16px;" />
                                         </VBtn>
                                     </template>
                                 </div>
@@ -250,7 +251,7 @@ watch(
                                     type="button"
                                     variant="outlined"
                                     color="primary"
-                                    class="flex-1"
+                                    class="flex-1-1"
                                     @click="showVerificationStep = false"
                                     :disabled="processing"
                                 >
@@ -259,7 +260,7 @@ watch(
                                 <VBtn
                                     type="submit"
                                     color="primary"
-                                    class="flex-1"
+                                    class="flex-1-1"
                                     :disabled="
                                         processing || code.length < 6
                                     "

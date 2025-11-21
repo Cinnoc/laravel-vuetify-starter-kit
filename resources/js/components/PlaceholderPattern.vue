@@ -8,7 +8,8 @@ const patternId = computed(
 
 <template>
     <svg
-        class="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20"
+        class="position-absolute stroke-neutral-900/20 dark:stroke-neutral-100/20"
+        style="inset: 0; width: 100%; height: 100%;"
         fill="none"
     >
         <defs>

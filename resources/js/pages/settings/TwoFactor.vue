@@ -73,7 +73,7 @@ onUnmounted(() => {
                             color="primary"
                             @click="showSetupModal = true"
                         >
-                            <ShieldCheck class="size-4" />Continue Setup
+                            <ShieldCheck style="width: 16px; height: 16px;" />Continue Setup
                         </VBtn>
                         <Form
                             v-else
@@ -86,7 +86,7 @@ onUnmounted(() => {
                                 color="primary"
                                 :disabled="processing"
                             >
-                                <ShieldCheck class="size-4" />Enable 2FA
+                                <ShieldCheck style="width: 16px; height: 16px;" />Enable 2FA
                             </VBtn>
                         </Form>
                     </div>
@@ -121,7 +121,7 @@ onUnmounted(() => {
                                 type="submit"
                                 :disabled="processing"
                             >
-                                <ShieldBan class="size-4" />
+                                <ShieldBan style="width: 16px; height: 16px;" />
                                 Disable 2FA
                             </VBtn>
                         </Form>

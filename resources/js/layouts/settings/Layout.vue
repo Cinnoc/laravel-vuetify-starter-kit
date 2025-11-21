@@ -44,14 +44,15 @@ const currentPath = typeof window !== 'undefined' ? window.location.pathname : '
                         v-for="item in sidebarNavItems"
                         :key="toUrl(item.href)"
                         :href="toUrl(item.href)"
-                        class="d-flex align-center ga-2 px-3 py-2 rounded text-decoration-none text-body-2 transition-all"
+                        class="d-flex align-center ga-2 px-3 py-2 rounded text-decoration-none text-body-2"
                         :class="[
                             urlIsActive(item.href, currentPath)
                                 ? 'bg-surface-variant text-primary font-weight-medium'
                                 : 'text-medium-emphasis hover:bg-surface-variant/50',
                         ]"
+                        style="transition: all 0.2s;"
                     >
-                        <component v-if="item.icon" :is="item.icon" class="size-4" />
+                        <component v-if="item.icon" :is="item.icon" style="width: 16px; height: 16px;" />
                         {{ item.title }}
                     </Link>
                 </nav>

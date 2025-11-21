@@ -18,10 +18,10 @@ const uniqueErrors = computed(() => Array.from(new Set(props.errors)));
 <template>
     <VAlert type="error" variant="tonal" border="start" prominent>
         <template #prepend>
-            <AlertCircle class="size-5" />
+            <AlertCircle style="width: 20px; height: 20px;" />
         </template>
-        <div class="text-body-1 font-medium mb-1">{{ title }}</div>
-        <ul class="list-disc list-inside text-body-2">
+        <div class="text-body-1 font-weight-medium mb-1">{{ title }}</div>
+        <ul class="text-body-2" style="list-style-type: disc; list-style-position: inside;">
             <li v-for="(error, index) in uniqueErrors" :key="index">
                 {{ error }}
             </li>

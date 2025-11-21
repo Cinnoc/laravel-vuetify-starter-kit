@@ -40,7 +40,7 @@ onMounted(async () => {
     >
         <div class="pa-6 pb-4">
             <div class="d-flex align-center ga-3 mb-2">
-                <LockKeyhole class="size-4" />
+                <LockKeyhole style="width: 16px; height: 16px;" />
                 <h3 class="text-h6">2FA Recovery Codes</h3>
             </div>
             <p class="text-body-2 text-medium-emphasis">
@@ -49,7 +49,7 @@ onMounted(async () => {
             </p>
         </div>
         <div class="pa-6 pt-0">
-            <div class="d-flex flex-column flex-sm-row ga-3 align-sm-center justify-sm-space-between user-select-none">
+            <div class="d-flex flex-column flex-sm-row ga-3 align-sm-center justify-sm-space-between" style="user-select: none;">
                 <VBtn
                     color="primary"
                     @click="toggleRecoveryCodesVisibility"
@@ -57,7 +57,7 @@ onMounted(async () => {
                 >
                     <component
                         :is="isRecoveryCodesVisible ? EyeOff : Eye"
-                        class="size-4"
+                        style="width: 16px; height: 16px;"
                     />
                     {{ isRecoveryCodesVisible ? 'Hide' : 'View' }} Recovery
                     Codes
@@ -113,7 +113,7 @@ onMounted(async () => {
                             {{ code }}
                         </div>
                     </div>
-                    <p class="text-caption text-medium-emphasis user-select-none">
+                    <p class="text-caption text-medium-emphasis" style="user-select: none;">
                         Each recovery code can be used once to access your
                         account and will be removed after use. If you need more,
                         click

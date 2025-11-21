@@ -103,7 +103,7 @@ const avatarSrc = computed(() => auth.value.user?.avatar ?? '');
                             <component
                                 v-if="item.icon"
                                 :is="item.icon"
-                                class="size-5"
+                                style="width: 20px; height: 20px;"
                             />
                             {{ item.title }}
                         </Link>
@@ -122,7 +122,7 @@ const avatarSrc = computed(() => auth.value.user?.avatar ?? '');
                         rel="noopener noreferrer"
                         class="d-flex align-center ga-3 text-body-2 text-decoration-none text-medium-emphasis"
                     >
-                        <component :is="item.icon" class="size-5" />
+                        <component :is="item.icon" style="width: 20px; height: 20px;" />
                         {{ item.title }}
                     </a>
                 </VListItem>
@@ -137,7 +137,7 @@ const avatarSrc = computed(() => auth.value.user?.avatar ?? '');
                 class="d-lg-none me-2"
                 @click="isMobileNavOpen = true"
             >
-                <Menu class="size-5" />
+                <Menu style="width: 20px; height: 20px;" />
             </VBtn>
 
             <Link :href="dashboard()" class="d-flex align-center ga-2 text-decoration-none">
@@ -149,17 +149,18 @@ c
                     v-for="item in mainNavItems"
                     :key="item.title"
                     :href="item.href"
-                    class="d-flex align-center ga-2 text-body-2 text-medium-emphasis px-3 py-2 rounded transition-all"
+                    class="d-flex align-center ga-2 text-body-2 text-medium-emphasis px-3 py-2 rounded"
                     :class="[
                         isCurrentRoute(item.href)
                             ? 'text-primary font-weight-medium bg-surface-variant'
                             : 'hover:bg-surface-variant/50',
                     ]"
+                    style="transition: all 0.2s;"
                 >
                     <component
                         v-if="item.icon"
                         :is="item.icon"
-                        class="size-4"
+                        style="width: 16px; height: 16px;"
                     />
                     {{ item.title }}
                 </Link>
@@ -169,7 +170,7 @@ c
 
             <div class="d-flex align-center ga-1">
                 <VBtn icon variant="text" size="small">
-                    <Search class="size-4" />
+                    <Search style="width: 16px; height: 16px;" />
                 </VBtn>
 
 
@@ -190,7 +191,7 @@ c
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                <component :is="item.icon" class="size-4" />
+                                <component :is="item.icon" style="width: 16px; height: 16px;" />
                             </VBtn>
                         </template>
                     </VTooltip>
@@ -232,10 +233,13 @@ c
 
         <div
             v-if="props.breadcrumbs.length > 1"
-            class="flex w-full border-b border-sidebar-border/70"
+            class="d-flex w-100 border-b border-sidebar-border/70"
         >
             <div
-                class="mx-auto flex h-12 w-full items-center justify-start px-4 text-neutral-500 md:max-w-7xl"
+                class="mx-auto d-flex align-center justify-start px-4 w-100 text-neutral-500"
+                :class="{ 'md:max-w-7xl': $vuetify.display.mdAndUp }"
+                style="height: 48px; max-width: 100%;"
+                :style="{ 'max-width': $vuetify.display.mdAndUp ? '1280px' : '100%' }"
             >
                 <Breadcrumbs :breadcrumbs="breadcrumbs" />
             </div>
