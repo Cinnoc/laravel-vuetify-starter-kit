@@ -2,14 +2,14 @@
     import { ref, computed } from 'vue';
     import { router, usePage } from '@inertiajs/vue3';
     import {
-        LayoutGrid,
-        Folder,
-        BookOpen,
-        ChevronsUpDown,
-        Settings,
-        LogOut,
-        PanelLeft
-    } from 'lucide-vue-next';
+        mdiViewDashboard,
+        mdiFolder,
+        mdiBookOpenPageVariant,
+        mdiUnfoldMoreHorizontal,
+        mdiCog,
+        mdiLogout,
+        mdiPageLayoutSidebarLeft
+    } from '@mdi/js';
     import AppLogo from './AppLogo.vue';
     import { type NavItem } from '@/types';
     import { useSidebar } from '@/composables/useSidebar';
@@ -19,15 +19,15 @@
         {
             title: 'Dashboard',
             href: '/dashboard',
-            icon: LayoutGrid,
+            icon: mdiViewDashboard,
         },
         {
             title: 'Playground',
             href: '#',
-            icon: Folder,
+            icon: mdiFolder,
             items: [
-                { title: 'History', href: '#', icon: BookOpen },
-                { title: 'Starred', href: '#', icon: Folder },
+                { title: 'History', href: '#', icon: mdiBookOpenPageVariant },
+                { title: 'Starred', href: '#', icon: mdiFolder },
             ],
         },
     ];
@@ -36,12 +36,12 @@
         {
             title: 'Github Repo',
             href: 'https://github.com/laravel/vue-starter-kit',
-            icon: Folder,
+            icon: mdiFolder,
         },
         {
             title: 'Documentation',
             href: 'https://laravel.com/docs/starter-kits#vue',
-            icon: BookOpen,
+            icon: mdiBookOpenPageVariant,
         },
     ];
 
@@ -140,7 +140,7 @@
                     <v-list-item v-for="(item, i) in footerNavItems" :key="i" :href="getHref(item.href)" target="_blank"
                         rounded="md" class="mb-1">
                         <template #prepend>
-                            <component :is="item.icon" :size="20" />
+                            <v-icon :icon="item.icon" size="20"></v-icon>
                         </template>
                         <v-list-item-title v-if="!rail || isMobile" class="text-body-2 font-weight-medium">
                             {{ item.title }}
@@ -168,7 +168,7 @@
                                 {{ user.email }}
                             </v-list-item-subtitle>
                             <template #append v-if="!rail || isMobile">
-                                <ChevronsUpDown :size="16" class="text-medium-emphasis" />
+                                <v-icon :icon="mdiUnfoldMoreHorizontal" size="16" class="text-medium-emphasis"></v-icon>
                             </template>
                         </v-list-item>
                     </template>
@@ -190,7 +190,7 @@
                             <!-- Settings -->
                             <v-list-item link class="px-2" @click="handleSettings">
                                 <template #prepend>
-                                    <Settings :size="16" class="me-2 text-medium-emphasis" />
+                                    <v-icon :icon="mdiCog" size="16" class="me-2 text-medium-emphasis"></v-icon>
                                 </template>
                                 <v-list-item-title class="text-body-2">Settings</v-list-item-title>
                             </v-list-item>
@@ -200,7 +200,7 @@
                             <!-- Logout -->
                             <v-list-item link class="px-2" @click="handleLogout">
                                 <template #prepend>
-                                    <LogOut :size="16" class="me-2 text-medium-emphasis" />
+                                    <v-icon :icon="mdiLogout" size="16" class="me-2 text-medium-emphasis"></v-icon>
                                 </template>
                                 <v-list-item-title class="text-body-2">Log out</v-list-item-title>
                             </v-list-item>
@@ -210,7 +210,7 @@
 
                 <!-- Toggle Button (Desktop only) -->
                 <v-btn v-if="!isMobile" icon size="small" variant="text" class="mt-2 w-100" @click="toggleRail">
-                    <PanelLeft :size="20" />
+                    <v-icon :icon="mdiPageLayoutSidebarLeft" size="20"></v-icon>
                 </v-btn>
             </div>
         </template>

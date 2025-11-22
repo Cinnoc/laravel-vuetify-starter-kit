@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useSidebar } from '@/composables/useSidebar';
 import { VBtn } from 'vuetify/components';
-import { Menu } from 'lucide-vue-next';
+import { mdiMenu } from '@mdi/js';
 
 const { toggleRail, toggleMobile, mobile } = useSidebar();
 
@@ -21,7 +21,7 @@ const handleClick = () => {
         size="small"
         @click="handleClick"
     >
-        <Menu :size="20" />
+        <v-icon :icon="mdiMenu" size="20"></v-icon>
     </VBtn>
 </template>
 

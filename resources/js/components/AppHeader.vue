@@ -22,7 +22,7 @@ import {
     VSpacer,
     VTooltip,
 } from 'vuetify/components';
-import { BookOpen, Folder, LayoutGrid, Menu, Search } from 'lucide-vue-next';
+import { mdiBookOpenPageVariant, mdiFolder, mdiViewDashboard, mdiMenu, mdiMagnify } from '@mdi/js';
 import { computed, ref } from 'vue';
 
 interface Props {
@@ -47,7 +47,7 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
         href: dashboard(),
-        icon: LayoutGrid,
+        icon: mdiViewDashboard,
     },
 ];
 
@@ -55,12 +55,12 @@ const rightNavItems: NavItem[] = [
     {
         title: 'Repository',
         href: 'https://github.com/laravel/vue-starter-kit',
-        icon: Folder,
+        icon: mdiFolder,
     },
     {
         title: 'Documentation',
         href: 'https://laravel.com/docs/starter-kits#vue',
-        icon: BookOpen,
+        icon: mdiBookOpenPageVariant,
     },
 ];
 
@@ -100,11 +100,11 @@ const avatarSrc = computed(() => auth.value.user?.avatar ?? '');
                                     isCurrentRoute(item.href),
                             }"
                         >
-                            <component
+                            <v-icon
                                 v-if="item.icon"
-                                :is="item.icon"
-                                style="width: 20px; height: 20px;"
-                            />
+                                :icon="item.icon"
+                                size="20"
+                            ></v-icon>
                             {{ item.title }}
                         </Link>
                     </VListItemTitle>
@@ -122,7 +122,7 @@ const avatarSrc = computed(() => auth.value.user?.avatar ?? '');
                         rel="noopener noreferrer"
                         class="d-flex align-center ga-3 text-body-2 text-decoration-none text-medium-emphasis"
                     >
-                        <component :is="item.icon" style="width: 20px; height: 20px;" />
+                        <v-icon :icon="item.icon" size="20"></v-icon>
                         {{ item.title }}
                     </a>
                 </VListItem>
@@ -137,7 +137,7 @@ const avatarSrc = computed(() => auth.value.user?.avatar ?? '');
                 class="d-lg-none me-2"
                 @click="isMobileNavOpen = true"
             >
-                <Menu style="width: 20px; height: 20px;" />
+                <v-icon :icon="mdiMenu" size="20"></v-icon>
             </VBtn>
 
             <Link :href="dashboard()" class="d-flex align-center ga-2 text-decoration-none">
@@ -157,11 +157,11 @@ c
                     ]"
                     style="transition: all 0.2s;"
                 >
-                    <component
+                    <v-icon
                         v-if="item.icon"
-                        :is="item.icon"
-                        style="width: 16px; height: 16px;"
-                    />
+                        :icon="item.icon"
+                        size="16"
+                    ></v-icon>
                     {{ item.title }}
                 </Link>
             </div>
@@ -170,7 +170,7 @@ c
 
             <div class="d-flex align-center ga-1">
                 <VBtn icon variant="text" size="small">
-                    <Search style="width: 16px; height: 16px;" />
+                    <v-icon :icon="mdiMagnify" size="16"></v-icon>
                 </VBtn>
 
 
@@ -191,7 +191,7 @@ c
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                <component :is="item.icon" style="width: 16px; height: 16px;" />
+                                <v-icon :icon="item.icon" size="16"></v-icon>
                             </VBtn>
                         </template>
                     </VTooltip>

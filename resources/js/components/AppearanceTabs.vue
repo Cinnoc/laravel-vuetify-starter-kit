@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { useAppearance } from '@/composables/useAppearance';
-import { Monitor, Moon, Sun } from 'lucide-vue-next';
+import { mdiMonitor, mdiWeatherNight, mdiWhiteBalanceSunny } from '@mdi/js';
 
 const { appearance, updateAppearance } = useAppearance();
 
 const tabs = [
-    { value: 'light', Icon: Sun, label: 'Light' },
-    { value: 'dark', Icon: Moon, label: 'Dark' },
-    { value: 'system', Icon: Monitor, label: 'System' },
+    { value: 'light', icon: mdiWhiteBalanceSunny, label: 'Light' },
+    { value: 'dark', icon: mdiWeatherNight, label: 'Dark' },
+    { value: 'system', icon: mdiMonitor, label: 'System' },
 ] as const;
 </script>
 
@@ -16,7 +16,7 @@ const tabs = [
         class="d-inline-flex ga-1 rounded-lg bg-surface-variant pa-1"
     >
         <button
-            v-for="{ value, Icon, label } in tabs"
+            v-for="{ value, icon, label } in tabs"
             :key="value"
             @click="updateAppearance(value)"
             :class="[
@@ -27,7 +27,7 @@ const tabs = [
             ]"
             style="transition: all 0.2s;"
         >
-            <component :is="Icon" style="width: 16px; height: 16px;" />
+            <v-icon :icon="icon" size="16"></v-icon>
             <span>{{ label }}</span>
         </button>
     </div>

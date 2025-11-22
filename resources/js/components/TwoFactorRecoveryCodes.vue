@@ -3,7 +3,7 @@ import AlertError from '@/components/AlertError.vue';
 import { useTwoFactorAuth } from '@/composables/useTwoFactorAuth';
 import { regenerateRecoveryCodes } from '@/routes/two-factor';
 import { Form } from '@inertiajs/vue3';
-import { Eye, EyeOff, LockKeyhole, RefreshCw } from 'lucide-vue-next';
+import { mdiEye, mdiEyeOff, mdiLockOutline, mdiRefresh } from '@mdi/js';
 import { VBtn, VCard } from 'vuetify/components';
 import { nextTick, onMounted, ref } from 'vue';
 
@@ -40,7 +40,7 @@ onMounted(async () => {
     >
         <div class="pa-6 pb-4">
             <div class="d-flex align-center ga-3 mb-2">
-                <LockKeyhole style="width: 16px; height: 16px;" />
+                <v-icon :icon="mdiLockOutline" size="16"></v-icon>
                 <h3 class="text-h6">2FA Recovery Codes</h3>
             </div>
             <p class="text-body-2 text-medium-emphasis">
@@ -55,10 +55,10 @@ onMounted(async () => {
                     @click="toggleRecoveryCodesVisibility"
                     class="w-auto"
                 >
-                    <component
-                        :is="isRecoveryCodesVisible ? EyeOff : Eye"
-                        style="width: 16px; height: 16px;"
-                    />
+                    <v-icon
+                        :icon="isRecoveryCodesVisible ? mdiEyeOff : mdiEye"
+                        size="16"
+                    ></v-icon>
                     {{ isRecoveryCodesVisible ? 'Hide' : 'View' }} Recovery
                     Codes
                 </VBtn>
@@ -76,7 +76,7 @@ onMounted(async () => {
                         type="submit"
                         :disabled="processing"
                     >
-                        <RefreshCw /> Regenerate Codes
+                        <v-icon :icon="mdiRefresh" size="16"></v-icon> Regenerate Codes
                     </VBtn>
                 </Form>
             </div>

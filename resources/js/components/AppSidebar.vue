@@ -14,14 +14,14 @@ import {
 import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
+import { mdiViewDashboard, mdiFolder, mdiBookOpenPageVariant } from '@mdi/js';
 import AppLogo from './AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
         href: dashboard(),
-        icon: LayoutGrid,
+        icon: mdiViewDashboard,
     },
 ];
 
@@ -29,12 +29,12 @@ const footerNavItems: NavItem[] = [
     {
         title: 'Github Repo',
         href: 'https://github.com/laravel/vue-starter-kit',
-        icon: Folder,
+        icon: mdiFolder,
     },
     {
         title: 'Documentation',
         href: 'https://laravel.com/docs/starter-kits#vue',
-        icon: BookOpen,
+        icon: mdiBookOpenPageVariant,
     },
 ];
 </script>

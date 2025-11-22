@@ -8,7 +8,7 @@ import SettingsLayout from '@/layouts/settings/Layout.vue';
 import { disable, enable, show } from '@/routes/two-factor';
 import { BreadcrumbItem } from '@/types';
 import { Form, Head } from '@inertiajs/vue3';
-import { ShieldBan, ShieldCheck } from 'lucide-vue-next';
+import { mdiShieldOff, mdiShieldCheck } from '@mdi/js';
 import { VBtn, VChip } from 'vuetify/components';
 import { onUnmounted, ref } from 'vue';
 
@@ -73,7 +73,7 @@ onUnmounted(() => {
                             color="primary"
                             @click="showSetupModal = true"
                         >
-                            <ShieldCheck style="width: 16px; height: 16px;" />Continue Setup
+                            <v-icon :icon="mdiShieldCheck" size="16"></v-icon>Continue Setup
                         </VBtn>
                         <Form
                             v-else
@@ -86,7 +86,7 @@ onUnmounted(() => {
                                 color="primary"
                                 :disabled="processing"
                             >
-                                <ShieldCheck style="width: 16px; height: 16px;" />Enable 2FA
+                                <v-icon :icon="mdiShieldCheck" size="16"></v-icon>Enable 2FA
                             </VBtn>
                         </Form>
                     </div>
@@ -121,7 +121,7 @@ onUnmounted(() => {
                                 type="submit"
                                 :disabled="processing"
                             >
-                                <ShieldBan style="width: 16px; height: 16px;" />
+                                <v-icon :icon="mdiShieldOff" size="16"></v-icon>
                                 Disable 2FA
                             </VBtn>
                         </Form>

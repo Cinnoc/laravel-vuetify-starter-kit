@@ -4,7 +4,7 @@ import { logout } from '@/routes';
 import { edit } from '@/routes/profile';
 import type { User } from '@/types';
 import { Link, router } from '@inertiajs/vue3';
-import { LogOut, Settings } from 'lucide-vue-next';
+import { mdiLogout, mdiCog } from '@mdi/js';
 import { VDivider, VList, VListItem } from 'vuetify/components';
 
 interface Props {
@@ -30,10 +30,9 @@ defineProps<Props>();
             link
             class="px-2"
             @click="router.visit(edit())"
-            prepend-icon="mdi-cog"
         >
             <template #prepend>
-                <Settings :size="16" class="me-2 text-medium-emphasis" />
+                <v-icon :icon="mdiCog" size="16" class="me-2 text-medium-emphasis"></v-icon>
             </template>
             <span class="text-body-2">Settings</span>
         </VListItem>
@@ -47,7 +46,7 @@ defineProps<Props>();
             data-test="logout-button"
         >
             <template #prepend>
-                <LogOut :size="16" class="me-2 text-medium-emphasis" />
+                <v-icon :icon="mdiLogout" size="16" class="me-2 text-medium-emphasis"></v-icon>
             </template>
             <span class="text-body-2">Log out</span>
         </VListItem>

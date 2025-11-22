@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { VAlert } from 'vuetify/components';
-import { AlertCircle } from 'lucide-vue-next';
+import { mdiAlertCircle } from '@mdi/js';
 import { computed } from 'vue';
 
 interface Props {
@@ -18,7 +18,7 @@ const uniqueErrors = computed(() => Array.from(new Set(props.errors)));
 <template>
     <VAlert type="error" variant="tonal" border="start" prominent>
         <template #prepend>
-            <AlertCircle style="width: 20px; height: 20px;" />
+            <v-icon :icon="mdiAlertCircle" size="20"></v-icon>
         </template>
         <div class="text-body-1 font-weight-medium mb-1">{{ title }}</div>
         <ul class="text-body-2" style="list-style-type: disc; list-style-position: inside;">

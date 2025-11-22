@@ -2,22 +2,22 @@ import '@mdi/font/css/materialdesignicons.css';
 import 'vuetify/styles';
 
 import { createVuetify, type ThemeDefinition } from 'vuetify';
-import { aliases, mdi } from 'vuetify/iconsets/mdi';
+import { aliases, mdi } from 'vuetify/iconsets/mdi-svg';
 
 // Get initial theme from localStorage
 function getInitialTheme(): 'light' | 'dark' {
     if (typeof window === 'undefined') {
         return 'light';
     }
-    
+
     const savedAppearance = localStorage.getItem('appearance') as 'light' | 'dark' | 'system' | null;
-    
+
     if (!savedAppearance || savedAppearance === 'system') {
         // Check system preference
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         return prefersDark ? 'dark' : 'light';
     }
-    
+
     return savedAppearance;
 }
 

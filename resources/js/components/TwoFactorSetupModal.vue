@@ -4,7 +4,7 @@ import { useTwoFactorAuth } from '@/composables/useTwoFactorAuth';
 import { confirm } from '@/routes/two-factor';
 import { Form } from '@inertiajs/vue3';
 import { useClipboard } from '@vueuse/core';
-import { Check, Copy, Loader2, ScanLine } from 'lucide-vue-next';
+import { mdiCheck, mdiContentCopy, mdiLoading, mdiQrcodeScan } from '@mdi/js';
 import { computed, nextTick, ref, watch } from 'vue';
 import {
     VDialog,
@@ -134,7 +134,7 @@ watch(
                                 :class="{ 'border-b-0': i === 5 }"
                             />
                         </div>
-                        <ScanLine class="position-relative text-foreground" style="z-index: 20; width: 24px; height: 24px;" />
+                        <v-icon :icon="mdiQrcodeScan" size="24" class="position-relative text-foreground" style="z-index: 20;"></v-icon>
                     </div>
                 </div>
                 <div class="text-h6 text-center mt-2">{{ modalConfig.title }}</div>
@@ -158,7 +158,7 @@ watch(
                                         class="position-absolute inset-0 d-flex align-center justify-center bg-background animate-pulse"
                                         style="z-index: 10; aspect-ratio: 1; width: 100%"
                                     >
-                                        <Loader2 class="animate-spin" style="width: 24px; height: 24px;" />
+                                        <v-icon :icon="mdiLoading" size="24" class="animate-spin"></v-icon>
                                     </div>
                                     <div
                                         v-else
@@ -196,7 +196,7 @@ watch(
                                         v-if="!manualSetupKey"
                                         class="d-flex align-center justify-center bg-muted pa-3 w-100"
                                     >
-                                        <Loader2 class="animate-spin" style="width: 16px; height: 16px;" />
+                                        <v-icon :icon="mdiLoading" size="16" class="animate-spin"></v-icon>
                                     </div>
                                     <template v-else>
                                         <input
@@ -213,12 +213,13 @@ watch(
                                             class="border-s border-border"
                                             style="border-radius: 0"
                                         >
-                                            <Check
+                                            <v-icon
                                                 v-if="copied"
+                                                :icon="mdiCheck"
+                                                size="16"
                                                 class="text-success"
-                                                style="width: 16px; height: 16px;"
-                                            />
-                                            <Copy v-else style="width: 16px; height: 16px;" />
+                                            ></v-icon>
+                                            <v-icon v-else :icon="mdiContentCopy" size="16"></v-icon>
                                         </VBtn>
                                     </template>
                                 </div>

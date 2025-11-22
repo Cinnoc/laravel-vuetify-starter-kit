@@ -7,7 +7,7 @@ import {
 } from '@/components/vuetify-sidebar';
 import { useSidebar } from '@/composables/useSidebar';
 import { usePage } from '@inertiajs/vue3';
-import { ChevronsUpDown } from 'lucide-vue-next';
+import { mdiUnfoldMoreHorizontal } from '@mdi/js';
 import UserMenuContent from './UserMenuContent.vue';
 import { VAvatar, VMenu, VSheet } from 'vuetify/components';
 import { computed, ref } from 'vue';
@@ -58,7 +58,7 @@ const menuLocation = computed(() => {
                             </v-avatar>
                         </template>
                         <template #append>
-                            <ChevronsUpDown :size="16" />
+                            <v-icon :icon="mdiUnfoldMoreHorizontal" size="16"></v-icon>
                         </template>
                     </SidebarMenuButton>
                 </template>
