@@ -8,7 +8,6 @@
         mdiUnfoldMoreHorizontal,
         mdiCog,
         mdiLogout,
-        mdiPageLayoutSidebarLeft
     } from '@mdi/js';
     import AppLogo from './AppLogo.vue';
     import { type NavItem } from '@/types';
@@ -26,8 +25,8 @@
             href: '#',
             icon: mdiFolder,
             items: [
-                { title: 'History', href: '#', icon: mdiBookOpenPageVariant },
-                { title: 'Starred', href: '#', icon: mdiFolder },
+                { title: 'History', href: '#', },
+                { title: 'Starred', href: '#', },
             ],
         },
     ];
@@ -119,9 +118,7 @@
                     <v-list-item v-for="(subItem, j) in item.items" :key="j" :href="getHref(subItem.href)"
                         :active="isUrlActive(subItem.href)" :variant="isUrlActive(subItem.href) ? 'tonal' : 'text'"
                         color="primary" rounded="md" class="mb-1 ml-4">
-                        <template #prepend>
-                            <v-icon :icon="subItem.icon"></v-icon>
-                        </template>
+                       
                         <v-list-item-title v-if="!rail || isMobile" class="text-body-2">
                             {{ subItem.title }}
                         </v-list-item-title>
@@ -207,11 +204,6 @@
                         </v-list>
                     </v-sheet>
                 </v-menu>
-
-                <!-- Toggle Button (Desktop only) -->
-                <v-btn v-if="!isMobile" icon size="small" variant="text" class="mt-2 w-100" @click="toggleRail">
-                    <v-icon :icon="mdiPageLayoutSidebarLeft" size="20"></v-icon>
-                </v-btn>
             </div>
         </template>
     </v-navigation-drawer>
