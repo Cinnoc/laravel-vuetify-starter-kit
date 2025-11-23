@@ -18,12 +18,12 @@ withDefaults(
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
     </Head>
     <div
-        class="d-flex flex-column align-center pa-6 pa-lg-8 text-[#1b1b18] dark:bg-[#0a0a0a]"
-        style="min-height: 100vh; background: #FDFDFC; justify-content: flex-start;"
+        class="d-flex flex-column align-center pa-6 pa-lg-8 root-container"
+        style="min-height: 100vh; background: #FDFDFC; color: #1b1b18; font-family: Inter, system-ui, -apple-system, sans-serif;"
         :style="{ 'justify-content': $vuetify.display.lgAndUp ? 'center' : 'flex-start' }"
     >
         <header
-            class="mb-6 w-100 text-body-2 not-has-[nav]:hidden"
+            class="mb-6 w-100 text-body-2"
             style="max-width: 335px;"
             :style="{ 'max-width': $vuetify.display.lgAndUp ? '896px' : '335px' }"
         >
@@ -31,24 +31,21 @@ withDefaults(
                 <Link
                     v-if="$page.props.auth.user"
                     :href="dashboard()"
-                    class="d-inline-block rounded-sm border border-[#19140035] px-5 text-body-2 text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
-                    style="padding-top: 6px; padding-bottom: 6px; line-height: normal;"
+                    class="nav-link nav-link-bordered"
                 >
                     Dashboard
                 </Link>
                 <template v-else>
                     <Link
                         :href="login()"
-                        class="d-inline-block rounded-sm border border-transparent px-5 text-body-2 text-[#1b1b18] hover:border-[#19140035] dark:text-[#EDEDEC] dark:hover:border-[#3E3E3A]"
-                        style="padding-top: 6px; padding-bottom: 6px; line-height: normal;"
+                        class="nav-link"
                     >
                         Log in
                     </Link>
                     <Link
                         v-if="canRegister"
                         :href="register()"
-                        class="d-inline-block rounded-sm border border-[#19140035] px-5 text-body-2 text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
-                        style="padding-top: 6px; padding-bottom: 6px; line-height: normal;"
+                        class="nav-link nav-link-bordered"
                     >
                         Register
                     </Link>
@@ -56,42 +53,32 @@ withDefaults(
             </nav>
         </header>
         <div
-            class="d-flex w-100 align-center justify-center opacity-100 transition-opacity duration-750 starting:opacity-0"
+            class="d-flex w-100 align-center justify-center opacity-100 page-transition"
             :class="{ 'flex-lg-grow-1': $vuetify.display.lgAndUp }"
         >
             <main
-                class="d-flex w-100 flex-column-reverse overflow-hidden rounded-lg"
+                class="d-flex w-100 flex-column-reverse  rounded-sm"
                 :class="{ 'flex-lg-row': $vuetify.display.lgAndUp }"
                 style="max-width: 335px;"
                 :style="{ 'max-width': $vuetify.display.lgAndUp ? '896px' : '335px' }"
             >
                 <div
-                    class="flex-1-1 rounded-br-lg rounded-bl-lg bg-white pa-6 pb-12 shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]"
-                    :class="{ 'rounded-tl-lg rounded-br-0 pa-lg-20': $vuetify.display.lgAndUp }"
+                    class="flex-1-1 bg-white pa-6 pb-12 content-card"
+                    :class="{ 'pa-lg-20': $vuetify.display.lgAndUp }"
                     style="font-size: 13px; line-height: 20px;"
                 >
                     <h1 class="mb-1 font-weight-medium">Let's get started</h1>
-                    <p class="mb-2 text-[#706f6c] dark:text-[#A1A09A]">
+                    <p class="mb-2 text-secondary">
                         Laravel has an incredibly rich ecosystem. <br />We
                         suggest starting with the following.
                     </p>
                     <ul class="mb-4 d-flex flex-column"
                         :class="{ 'mb-lg-6': $vuetify.display.lgAndUp }"
                     >
-                        <li
-                            class="position-relative d-flex align-center ga-4 py-2 before:absolute before:top-1/2 before:bottom-0 before:left-[0.4rem] before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A]"
-                        >
-                            <span
-                                class="position-relative bg-white py-1 dark:bg-[#161615]"
-                            >
-                                <span
-                                    class="d-flex align-center justify-center rounded-circle border border-[#e3e3e0] bg-[#FDFDFC] shadow-[0px_0px_1px_0px_rgba(0,0,0,0.03),0px_1px_2px_0px_rgba(0,0,0,0.06)] dark:border-[#3E3E3A] dark:bg-[#161615]"
-                                    style="height: 14px; width: 14px;"
-                                >
-                                    <span
-                                        class="rounded-circle bg-[#dbdbd7] dark:bg-[#3E3E3A]"
-                                        style="height: 6px; width: 6px;"
-                                    />
+                        <li class="timeline-item timeline-item-first">
+                            <span class="timeline-dot-wrapper">
+                                <span class="timeline-dot">
+                                    <span class="timeline-dot-inner" />
                                 </span>
                             </span>
                             <span>
@@ -99,13 +86,13 @@ withDefaults(
                                 <a
                                     href="https://laravel.com/docs"
                                     target="_blank"
-                                    class="ml-1 d-inline-flex align-center font-weight-medium text-[#f53003] text-decoration-underline dark:text-[#FF4433]"
-                                    style="gap: 4px; text-underline-offset: 4px;"
+                                    class="ml-1 d-inline-flex align-center font-weight-medium external-link"
+                                    style="gap: 4px;"
                                 >
                                     <span>Documentation</span>
                                     <svg
-                                        width="{10}"
-                                        height="{11}"
+                                        width="10"
+                                        height="11"
                                         viewBox="0 0 10 11"
                                         fill="none"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -120,20 +107,10 @@ withDefaults(
                                 </a>
                             </span>
                         </li>
-                        <li
-                            class="position-relative d-flex align-center ga-4 py-2 before:absolute before:top-0 before:bottom-1/2 before:left-[0.4rem] before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A]"
-                        >
-                            <span
-                                class="position-relative bg-white py-1 dark:bg-[#161615]"
-                            >
-                                <span
-                                    class="d-flex align-center justify-center rounded-circle border border-[#e3e3e0] bg-[#FDFDFC] shadow-[0px_0px_1px_0px_rgba(0,0,0,0.03),0px_1px_2px_0px_rgba(0,0,0,0.06)] dark:border-[#3E3E3A] dark:bg-[#161615]"
-                                    style="height: 14px; width: 14px;"
-                                >
-                                    <span
-                                        class="rounded-circle bg-[#dbdbd7] dark:bg-[#3E3E3A]"
-                                        style="height: 6px; width: 6px;"
-                                    />
+                        <li class="timeline-item timeline-item-last">
+                            <span class="timeline-dot-wrapper">
+                                <span class="timeline-dot">
+                                    <span class="timeline-dot-inner" />
                                 </span>
                             </span>
                             <span>
@@ -141,13 +118,13 @@ withDefaults(
                                 <a
                                     href="https://laracasts.com"
                                     target="_blank"
-                                    class="ml-1 d-inline-flex align-center font-weight-medium text-[#f53003] text-decoration-underline dark:text-[#FF4433]"
-                                    style="gap: 4px; text-underline-offset: 4px;"
+                                    class="ml-1 d-inline-flex align-center font-weight-medium external-link"
+                                    style="gap: 4px;"
                                 >
                                     <span>Laracasts</span>
                                     <svg
-                                        width="{10}"
-                                        height="{11}"
+                                        width="10"
+                                        height="11"
                                         viewBox="0 0 10 11"
                                         fill="none"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -163,13 +140,12 @@ withDefaults(
                             </span>
                         </li>
                     </ul>
-                    <ul class="d-flex ga-3 text-body-2" style="line-height: normal;">
+                    <ul class="d-flex ga-3 text-body-2" style="line-height: normal; list-style-type: none;">
                         <li>
                             <a
                                 href="https://cloud.laravel.com"
                                 target="_blank"
-                                class="d-inline-block rounded-sm border border-black bg-[#1b1b18] px-5 text-body-2 text-white hover:border-black hover:bg-black dark:border-[#eeeeec] dark:bg-[#eeeeec] dark:text-[#1C1C1A] dark:hover:border-white dark:hover:bg-white"
-                                style="padding-top: 6px; padding-bottom: 6px; line-height: normal;"
+                                class="deploy-button"
                             >
                                 Deploy now
                             </a>
@@ -177,11 +153,8 @@ withDefaults(
                     </ul>
                 </div>
                 <div
-                    class="position-relative overflow-hidden rounded-t-lg bg-[#fff2f2] flex-shrink-0 w-100 dark:bg-[#1D0002]"
-                    :class="{
-                        'rounded-t-0 rounded-r-lg': $vuetify.display.lgAndUp
-                    }"
-                    style="margin-bottom: -1px; aspect-ratio: 335/376;"
+                    class="position-relative overflow-hidden flex-shrink-0 logo-container"
+                    style="margin-bottom: -1px; background-color: #fff2f2; aspect-ratio: 335/376;"
                     :style="{
                         'margin-bottom': $vuetify.display.lgAndUp ? '0' : '-1px',
                         'margin-left': $vuetify.display.lgAndUp ? '-1px' : '0',
@@ -190,8 +163,8 @@ withDefaults(
                     }"
                 >
                     <svg
-                        class="w-100 opacity-100 text-[#F53003] dark:text-[#F61500]"
-                        style="max-width: none; transform: translateY(0); transition: all 750ms;"
+                        class="w-100 opacity-100 laravel-text-logo"
+                        style="max-width: none; color: #F53003; transform: translateY(0); transition: all 750ms;"
                         viewBox="0 0 438 104"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -226,7 +199,7 @@ withDefaults(
                         />
                     </svg>
                     <svg
-                        class="position-relative dark:d-none"
+                        class="position-relative logo-light-mode"
                         style="margin-top: -4.9rem; margin-left: -2rem; width: 448px; max-width: none;"
                         :style="{
                             'margin-top': $vuetify.display.lgAndUp ? '-6.6rem' : '-4.9rem',
@@ -561,7 +534,7 @@ withDefaults(
                         </g>
                     </svg>
                     <svg
-                        class="position-relative d-none dark:d-block"
+                        class="position-relative logo-dark-mode"
                         style="margin-top: -4.9rem; margin-left: -2rem; width: 448px; max-width: none;"
                         :style="{
                             'margin-top': $vuetify.display.lgAndUp ? '-6.6rem' : '-4.9rem',
@@ -887,10 +860,7 @@ withDefaults(
                         </g>
                     </svg>
                     <div
-                        class="position-absolute rounded-t-lg shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]"
-                        :class="{
-                            'overflow-hidden rounded-t-0 rounded-r-lg': $vuetify.display.lgAndUp
-                        }"
+                        class="position-absolute logo-border"
                         style="inset: 0;"
                     />
                 </div>
@@ -903,3 +873,266 @@ withDefaults(
         ></div>
     </div>
 </template>
+
+<style scoped>
+/* Root Container */
+.root-container {
+    font-family: Inter, system-ui, -apple-system, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+    .root-container {
+        background-color: #0a0a0a !important;
+    }
+}
+
+/* Page Transition */
+.page-transition {
+    opacity: 1;
+    transition: opacity 750ms;
+}
+
+/* Navigation Links */
+.nav-link {
+    display: inline-block;
+    border-radius: 2px;
+    border: 1px solid transparent;
+    padding: 6px 20px;
+    font-size: 14px;
+    line-height: normal;
+    color: #1b1b18;
+    text-decoration: none;
+    transition: border-color 200ms;
+}
+
+.nav-link:hover {
+    border-color: rgba(25, 20, 0, 0.21);
+}
+
+.nav-link-bordered {
+    border-color: rgba(25, 20, 0, 0.21);
+}
+
+.nav-link-bordered:hover {
+    border-color: rgba(25, 21, 1, 0.29);
+}
+
+@media (prefers-color-scheme: dark) {
+    .nav-link {
+        color: #EDEDEC;
+    }
+    
+    .nav-link:hover {
+        border-color: #3E3E3A;
+    }
+    
+    .nav-link-bordered {
+        border-color: #3E3E3A;
+    }
+    
+    .nav-link-bordered:hover {
+        border-color: #62605b;
+    }
+}
+
+/* Content Card */
+.content-card {
+    box-shadow: inset 0 0 0 1px rgba(26, 26, 0, 0.16);
+}
+
+@media (prefers-color-scheme: dark) {
+    .content-card {
+        background-color: #161615 !important;
+        color: #EDEDEC;
+        box-shadow: inset 0 0 0 1px rgba(255, 250, 237, 0.18);
+    }
+}
+
+/* Secondary Text */  
+.text-secondary {
+    color: #706f6c;
+}
+
+@media (prefers-color-scheme: dark) {
+    .text-secondary {
+        color: #A1A09A;
+    }
+}
+
+/* Timeline */
+.timeline-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.timeline-item-first::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    bottom: 0;
+    left: 0.4rem;
+    border-left: 1px solid #e3e3e0;
+}
+
+.timeline-item-last::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 50%;
+    left: 0.4rem;
+    border-left: 1px solid #e3e3e0;
+}
+
+@media (prefers-color-scheme: dark) {
+    .timeline-item-first::before,
+    .timeline-item-last::before {
+        border-color: #3E3E3A;
+    }
+}
+
+.timeline-dot-wrapper {
+    position: relative;
+    background-color: white;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .timeline-dot-wrapper {
+        background-color: #161615;
+    }
+}
+
+.timeline-dot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid #e3e3e0;
+    background-color: #FDFDFC;
+    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.03), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    width: 14px;
+    height: 14px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .timeline-dot {
+        border-color: #3E3E3A;
+        background-color: #161615;
+    }
+}
+
+.timeline-dot-inner {
+    border-radius: 50%;
+    background-color: #dbdbd7;
+    width: 6px;
+    height: 6px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .timeline-dot-inner {
+        background-color: #3E3E3A;
+    }
+}
+
+/* External Links */
+.external-link {
+    color: #f53003;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .external-link {
+        color: #FF4433;
+    }
+}
+
+/* Deploy Button */
+.deploy-button {
+    display: inline-block;
+    border-radius: 2px;
+    border: 1px solid #1b1b18;
+    background-color: #1b1b18;
+    padding: 6px 20px;
+    font-size: 14px;
+    line-height: normal;
+    color: white;
+    text-decoration: none;
+    transition: all 200ms;
+}
+
+.deploy-button:hover {
+    border-color: black;
+    background-color: black;
+}
+
+@media (prefers-color-scheme: dark) {
+    .deploy-button {
+        border-color: #eeeeec;
+        background-color: #eeeeec;
+        color: #1C1C1A;
+    }
+    
+    .deploy-button:hover {
+        border-color: white;
+        background-color: white;
+    }
+}
+
+/* Logo Container */
+.logo-container {
+    background-color: #fff2f2;
+}
+
+@media (prefers-color-scheme: dark) {
+    .logo-container {
+        background-color: #1D0002 !important;
+    }
+}
+
+/* Laravel Text Logo */
+.laravel-text-logo {
+    color: #F53003;
+}
+
+@media (prefers-color-scheme: dark) {
+    .laravel-text-logo {
+        color: #F61500;
+    }
+}
+
+/* Logo Visibility for Light/Dark Mode */
+.logo-light-mode {
+    display: block;
+}
+
+.logo-dark-mode {
+    display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    .logo-light-mode {
+        display: none;
+    }
+    
+    .logo-dark-mode {
+        display: block;
+    }
+}
+
+/* Logo Border */
+.logo-border {
+    box-shadow: inset 0 0 0 1px rgba(26, 26, 0, 0.16);
+}
+
+@media (prefers-color-scheme: dark) {
+    .logo-border {
+        box-shadow: inset 0 0 0 1px rgba(255, 250, 237, 0.18);
+    }
+}
+</style>
