@@ -84,7 +84,7 @@ withDefaults(
                             <span>
                                 Explore
                                 <a
-                                    href="https://vuetifyjs.com/en/getting-started/installation/"
+                                    href="https://vuetifyjs.com/en/components/all/"
                                     target="_blank"
                                     class="ml-1 d-inline-flex align-center font-weight-medium external-link"
                                     style="gap: 4px;"
