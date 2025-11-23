@@ -63,19 +63,51 @@ withDefaults(
                 :style="{ 'max-width': $vuetify.display.lgAndUp ? '896px' : '335px' }"
             >
                 <div
-                    class="flex-1-1 bg-white pa-6 pb-12 content-card"
-                    :class="{ 'pa-lg-20': $vuetify.display.lgAndUp }"
+                    class="flex-1-1 bg-white pa-8 pb-12 content-card d-flex flex-column align-center text-center"
+                    :class="{ 'pa-lg-16': $vuetify.display.lgAndUp }"
                     style="font-size: 13px; line-height: 20px;"
                 >
-                    <h1 class="mb-1 font-weight-medium">Let's get started</h1>
-                    <p class="mb-2 text-secondary">
-                        Laravel has an incredibly rich ecosystem. <br />We
-                        suggest starting with the following.
+                    <h1 class="mb-3 font-weight-medium" style="font-size: 1.75rem;">Let's get started</h1>
+                    <p class="mb-6 text-muted" style="max-width: 600px; font-size: 14px; line-height: 1.6;">
+                        This Vuetify-Laravel starter kit combines powerful backend capabilities with beautiful Material Design components. Here are some resources to help you build amazing applications.
                     </p>
-                    <ul class="mb-4 d-flex flex-column"
-                        :class="{ 'mb-lg-6': $vuetify.display.lgAndUp }"
+                    <ul class="mb-6 d-flex flex-column align-center"
+                        :class="{ 'mb-lg-8': $vuetify.display.lgAndUp }"
+                        style="max-width: 500px;"
                     >
                         <li class="timeline-item timeline-item-first">
+                            <span class="timeline-dot-wrapper">
+                                <span class="timeline-dot">
+                                    <span class="timeline-dot-inner" />
+                                </span>
+                            </span>
+                            <span>
+                                Explore
+                                <a
+                                    href="https://vuetifyjs.com/en/getting-started/installation/"
+                                    target="_blank"
+                                    class="ml-1 d-inline-flex align-center font-weight-medium external-link"
+                                    style="gap: 4px;"
+                                >
+                                    <span>Vuetify Components</span>
+                                    <svg
+                                        width="10"
+                                        height="11"
+                                        viewBox="0 0 10 11"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        style="height: 10px; width: 10px;"
+                                    >
+                                        <path
+                                            d="M7.70833 6.95834V2.79167H3.54167M2.5 8L7.5 3.00001"
+                                            stroke="currentColor"
+                                            stroke-linecap="square"
+                                        />
+                                    </svg>
+                                </a>
+                            </span>
+                        </li>
+                        <li class="timeline-item">
                             <span class="timeline-dot-wrapper">
                                 <span class="timeline-dot">
                                     <span class="timeline-dot-inner" />
@@ -89,7 +121,7 @@ withDefaults(
                                     class="ml-1 d-inline-flex align-center font-weight-medium external-link"
                                     style="gap: 4px;"
                                 >
-                                    <span>Documentation</span>
+                                    <span>Laravel Documentation</span>
                                     <svg
                                         width="10"
                                         height="11"
@@ -140,21 +172,19 @@ withDefaults(
                             </span>
                         </li>
                     </ul>
-                    <ul class="d-flex ga-3 text-body-2" style="line-height: normal; list-style-type: none;">
-                        <li>
-                            <a
-                                href="https://cloud.laravel.com"
-                                target="_blank"
-                                class="deploy-button"
-                            >
-                                Deploy now
-                            </a>
-                        </li>
-                    </ul>
+                    <div class="d-flex justify-center text-body-2" style="line-height: normal;">
+                        <a
+                            href="https://cloud.laravel.com"
+                            target="_blank"
+                            class="deploy-button"
+                        >
+                            Deploy now
+                        </a>
+                    </div>
                 </div>
                 <div
                     class="position-relative overflow-hidden flex-shrink-0 logo-container"
-                    style="margin-bottom: -1px; background-color: #fff2f2; aspect-ratio: 335/376;"
+                    style="margin-bottom: -1px; background-color: #f0f4ff; aspect-ratio: 335/376;"
                     :style="{
                         'margin-bottom': $vuetify.display.lgAndUp ? '0' : '-1px',
                         'margin-left': $vuetify.display.lgAndUp ? '-1px' : '0',
@@ -162,6 +192,36 @@ withDefaults(
                         'width': $vuetify.display.lgAndUp ? '438px' : '100%'
                     }"
                 >
+                    <!-- Vuetify Logo -->
+                    <div 
+                        class="d-flex align-center justify-center pa-8"
+                        style="padding-top: 40px !important;"
+                    >
+                        <svg 
+                            class="vuetify-logo"
+                            width="120" 
+                            height="120" 
+                            viewBox="0 0 256 256"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <polygon 
+                                fill="#1697F6" 
+                                points="0,60 128,220 256,60"
+                            />
+                            <polygon 
+                                fill="#7BC6FF" 
+                                points="0,60 128,220 256,60 192,60 128,150 64,60"
+                            />
+                            <polygon 
+                                fill="#1867C0" 
+                                points="64,60 128,150 192,60"
+                            />
+                            <polygon 
+                                fill="#AEDDFF" 
+                                points="96,60 128,110 160,60"
+                            />
+                        </svg>
+                    </div>
                     <svg
                         class="w-100 opacity-100 laravel-text-logo"
                         style="max-width: none; color: #F53003; transform: translateY(0); transition: all 750ms;"
@@ -938,6 +998,8 @@ withDefaults(
 /* Content Card */
 .content-card {
     box-shadow: inset 0 0 0 1px rgba(26, 26, 0, 0.16);
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -948,14 +1010,10 @@ withDefaults(
     }
 }
 
-/* Secondary Text */  
-.text-secondary {
-    color: #706f6c;
-}
-
-@media (prefers-color-scheme: dark) {
-    .text-secondary {
-        color: #A1A09A;
+@media (min-width: 1280px) {
+    .content-card {
+        padding-top: 4rem !important;
+        padding-bottom: 4rem !important;
     }
 }
 
@@ -965,8 +1023,9 @@ withDefaults(
     display: flex;
     align-items: center;
     gap: 16px;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    width: 100%;
 }
 
 .timeline-item-first::before {
@@ -1086,13 +1145,23 @@ withDefaults(
 
 /* Logo Container */
 .logo-container {
-    background-color: #fff2f2;
+    background-color: #f0f4ff;
 }
 
 @media (prefers-color-scheme: dark) {
     .logo-container {
-        background-color: #1D0002 !important;
+        background-color: #0a1929 !important;
     }
+}
+
+/* Vuetify Logo */
+.vuetify-logo {
+    opacity: 0.9;
+    transition: opacity 300ms;
+}
+
+.vuetify-logo:hover {
+    opacity: 1;
 }
 
 /* Laravel Text Logo */
