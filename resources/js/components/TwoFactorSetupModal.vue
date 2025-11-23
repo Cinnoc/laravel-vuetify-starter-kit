@@ -5,7 +5,7 @@ import { confirm } from '@/routes/two-factor';
 import { Form } from '@inertiajs/vue3';
 import { useClipboard } from '@vueuse/core';
 import { mdiCheck, mdiContentCopy, mdiLoading, mdiQrcodeScan } from '@mdi/js';
-import { computed, nextTick, ref, watch } from 'vue';
+import { computed, nextTick, ref, useTemplateRef, watch } from 'vue';
 import {
     VDialog,
     VCard,
@@ -29,9 +29,18 @@ const { qrCodeSvg, manualSetupKey, clearSetupData, fetchSetupData, errors } =
     useTwoFactorAuth();
 
 const showVerificationStep = ref(false);
-const code = ref<string>('');
+const code = ref<number[]>([]);
+const codeValue = computed<string>(() => code.value.join(''));
 
-const otpInputRef = ref<InstanceType<typeof VOtpInput> | null>(null);
+// Computed property to bridge VOtpInput (string) with code (number[])
+const otpValue = computed({
+    get: () => codeValue.value,
+    set: (value: string) => {
+        code.value = value.split('').map(Number);
+    }
+});
+
+const otpInputContainerRef = useTemplateRef('otpInputContainerRef');
 
 const modalConfig = computed<{
     title: string;
@@ -68,7 +77,7 @@ const handleModalNextStep = () => {
         showVerificationStep.value = true;
 
         nextTick(() => {
-            otpInputRef.value?.$el?.querySelector('input')?.focus();
+            otpInputContainerRef.value?.querySelector('input')?.focus();
         });
 
         return;
@@ -84,7 +93,7 @@ const resetModalState = () => {
     }
 
     showVerificationStep.value = false;
-    code.value = '';
+    code.value = [];
 };
 
 watch(
@@ -103,48 +112,27 @@ watch(
 </script>
 
 <template>
-    <VDialog v-model="isOpen" max-width="500" persistent>
-        <VCard rounded="xl">
-            <VCardTitle class="d-flex flex-column align-center justify-center pa-6 pb-4">
+    <VDialog v-model="isOpen" max-width="500" persistent scrollable>
+        <VCard rounded>
+            <VCardTitle class="d-flex flex-column align-center justify-center pa-6 pb-0">
                 <div
                     class="mb-3 w-auto rounded-full border border-border bg-card pa-1 elevation-1"
                 >
                     <div
                         class="relative overflow-hidden rounded-full border border-border bg-muted pa-2"
                     >
-                        <div
-                            class="absolute inset-0 d-grid opacity-50"
-                            style="grid-template-columns: repeat(5, 1fr)"
-                        >
-                            <div
-                                v-for="i in 5"
-                                :key="`col-${i}`"
-                                class="border-e border-border"
-                                :class="{ 'border-e-0': i === 5 }"
-                            />
-                        </div>
-                        <div
-                            class="absolute inset-0 d-grid opacity-50"
-                            style="grid-template-rows: repeat(5, 1fr)"
-                        >
-                            <div
-                                v-for="i in 5"
-                                :key="`row-${i}`"
-                                class="border-b border-border"
-                                :class="{ 'border-b-0': i === 5 }"
-                            />
-                        </div>
                         <v-icon :icon="mdiQrcodeScan" size="24" class="position-relative text-foreground" style="z-index: 20;"></v-icon>
                     </div>
                 </div>
-                <div class="text-h6 text-center mt-2">{{ modalConfig.title }}</div>
-                <div class="text-body-2 text-medium-emphasis text-center mt-1">
-                    {{ modalConfig.description }}
-                </div>
+                <div class="text-body-1 text-center mt-2">{{ modalConfig.title }}</div>
             </VCardTitle>
+            <VCardSubtitle class="text-body-2 text-medium-emphasis text-center px-6 pt-0 pb-4 text-wrap">
+                {{ modalConfig.description }}
+            </VCardSubtitle>
 
             <VCardText class="px-6 pb-4">
                 <div class="d-flex flex-column align-center justify-center ga-5">
+                    <!-- Step 1: QR Code View -->
                     <template v-if="!showVerificationStep">
                         <AlertError v-if="errors?.length" :errors="errors" />
                         <template v-else>
@@ -174,15 +162,17 @@ watch(
                                 </div>
                             </div>
 
-                            <VBtn
-                                color="primary"
-                                block
-                                @click="handleModalNextStep"
-                            >
-                                {{ modalConfig.buttonText }}
-                            </VBtn>
+                            <div class="d-flex w-100 align-center ga-5">
+                                <VBtn
+                                    color="primary"
+                                    block
+                                    @click="handleModalNextStep"
+                                >
+                                    {{ modalConfig.buttonText }}
+                                </VBtn>
+                            </div>
 
-                            <VDivider class="my-2" />
+                            <VDivider class="my-1" />
 
                             <div class="text-body-2 text-center text-medium-emphasis mb-2">
                                 or, enter the code manually
@@ -227,50 +217,58 @@ watch(
                         </template>
                     </template>
 
-                    <Form
-                        v-bind="confirm.form()"
-                        reset-on-error
-                        @finish="code = ''"
-                        @success="isOpen = false"
-                        v-slot="{ errors, processing }"
-                    >
-                        <div class="position-relative w-100 d-flex flex-column ga-3">
-                            <VOtpInput
-                                ref="otpInputRef"
-                                v-model="code"
-                                name="code"
-                                :length="6"
-                                type="number"
-                                variant="outlined"
-                                :disabled="processing"
-                                :error-messages="errors?.confirmTwoFactorAuthentication?.code"
-                                autofocus
-                            />
+                    <!-- Step 2: OTP Verification -->
+                    <template v-else>
+                        <Form
+                            v-bind="confirm.form()"
+                            reset-on-error
+                            @finish="code = []"
+                            @success="isOpen = false"
+                            v-slot="{ errors, processing }"
+                        >
+                            <input type="hidden" name="code" :value="codeValue" />
+                            <div
+                                ref="otpInputContainerRef"
+                                class="position-relative w-100 d-flex flex-column ga-3"
+                            >
+                                <div class="d-flex w-100 flex-column align-center justify-center ga-3 py-2">
+                                    <VOtpInput
+                                        id="otp"
+                                        v-model="otpValue"
+                                        :length="6"
+                                        type="number"
+                                        variant="outlined"
+                                        :disabled="processing"
+                                        :error-messages="errors?.confirmTwoFactorAuthentication?.code"
+                                        autofocus
+                                    />
+                                </div>
 
-                            <div class="d-flex w-100 align-center ga-3">
-                                <VBtn
-                                    type="button"
-                                    variant="outlined"
-                                    color="primary"
-                                    class="flex-1-1"
-                                    @click="showVerificationStep = false"
-                                    :disabled="processing"
-                                >
-                                    Back
-                                </VBtn>
-                                <VBtn
-                                    type="submit"
-                                    color="primary"
-                                    class="flex-1-1"
-                                    :disabled="
-                                        processing || code.length < 6
-                                    "
-                                >
-                                    Confirm
-                                </VBtn>
+                                <div class="d-flex w-100 align-center ga-3">
+                                    <VBtn
+                                        type="button"
+                                        variant="outlined"
+                                        color="primary"
+                                        class="flex-1-1"
+                                        @click="showVerificationStep = false"
+                                        :disabled="processing"
+                                    >
+                                        Back
+                                    </VBtn>
+                                    <VBtn
+                                        type="submit"
+                                        color="primary"
+                                        class="flex-1-1"
+                                        :disabled="
+                                            processing || codeValue.length < 6
+                                        "
+                                    >
+                                        Confirm
+                                    </VBtn>
+                                </div>
                             </div>
-                        </div>
-                    </Form>
+                        </Form>
+                    </template>
                 </div>
             </VCardText>
         </VCard>

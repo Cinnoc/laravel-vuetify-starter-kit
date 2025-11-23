@@ -34,7 +34,7 @@ defineProps<{
                     <div class="d-flex flex-column ga-6">
                         <VCard
                             variant="outlined"
-                            rounded="xl"
+                            rounded
                             elevation="0"
                             class="pa-0"
                         >

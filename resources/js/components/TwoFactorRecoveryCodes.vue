@@ -34,7 +34,7 @@ onMounted(async () => {
 <template>
     <VCard
         variant="outlined"
-        rounded="xl"
+        rounded
         elevation="0"
         class="w-full"
     >
