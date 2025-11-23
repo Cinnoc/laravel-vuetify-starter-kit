@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Breadcrumbs from '@/components/Breadcrumbs.vue';
 import { SidebarTrigger } from '@/components/vuetify-sidebar';
 import type { BreadcrumbItemType } from '@/types';
 
@@ -20,9 +19,9 @@ withDefaults(
     >
         <div class="d-flex align-center ga-2">
             <SidebarTrigger />
-            <template v-if="breadcrumbs && breadcrumbs.length > 0">
-                <Breadcrumbs :breadcrumbs="breadcrumbs" />
-            </template>
+            <h1 class="text-h6 font-weight-medium" v-if="breadcrumbs && breadcrumbs.length > 0">
+                {{ breadcrumbs[breadcrumbs.length - 1].title }}
+            </h1>
         </div>
     </header>
 </template>
