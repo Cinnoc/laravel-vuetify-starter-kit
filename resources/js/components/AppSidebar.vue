@@ -93,7 +93,7 @@
                 <!-- Single Item (no dropdown) -->
                 <v-list-item v-if="!item.items || item.items.length === 0" :href="getHref(item.href)"
                     :active="isUrlActive(item.href)" :variant="isUrlActive(item.href) ? 'tonal' : 'text'"
-                    color="primary" rounded="md" class="mb-1">
+                    color="primary" rounded="md" class="mb-1" @click.prevent="$inertia.visit(getHref(item.href))">
                     <template #prepend>
                         <v-icon :icon="item.icon"></v-icon>
                     </template>

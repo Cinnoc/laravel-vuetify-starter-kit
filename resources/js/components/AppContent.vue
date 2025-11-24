@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SidebarInset } from '@/components/vuetify-sidebar';
+
 import { VMain } from 'vuetify/components';
 import { computed } from 'vue';
 
@@ -13,11 +13,11 @@ const className = computed(() => props.class);
 </script>
 
 <template>
-    <SidebarInset v-if="props.variant === 'sidebar'">
+    <VMain v-if="props.variant === 'sidebar'" class="flex-grow-1">
         <div class="pa-4" :class="className">
             <slot />
         </div>
-    </SidebarInset>
+    </VMain>
     <VMain v-else>
         <div class="pa-4">
             <div class="mx-auto" :class="className" style="max-width: 1280px">
