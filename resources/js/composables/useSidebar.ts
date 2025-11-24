@@ -1,4 +1,4 @@
-import { computed, inject, provide, ref, type ComputedRef, type InjectionKey, type Ref } from 'vue';
+import { computed, inject, provide, ref, type InjectionKey, type Ref } from 'vue';
 import { useDisplay } from 'vuetify';
 
 export const SIDEBAR_COOKIE_NAME = 'sidebar_state';

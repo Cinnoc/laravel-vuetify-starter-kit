@@ -3,7 +3,7 @@ import UserInfo from '@/components/UserInfo.vue';
 import { logout } from '@/routes';
 import { edit } from '@/routes/profile';
 import type { User } from '@/types';
-import { Link, router } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3';
 import { mdiLogout, mdiCog } from '@mdi/js';
 
 interface Props {

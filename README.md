@@ -6,9 +6,9 @@ A **feature‑rich** starter kit that combines the power of **Laravel** with the
 
 ## ✨ Features
 
-- **Laravel 12** backend with API resources, authentication scaffolding, and robust routing.
-- **Vuetify 3** UI components with auto‑imported kebab‑case syntax for a clean component structure.
-- **Vue 3** composition API and TypeScript support.
+- **Laravel 12**
+- **Vuetify 3**
+- **Vue 3**
 - Ready‑to‑use **dark mode** and **responsive layout**.
 
 ---
@@ -57,8 +57,6 @@ The application will be available at `http://localhost:8000`.
 
 - **Authentication** – Register, login, password reset, and two‑factor authentication are already wired up.
 - **Vuetify components** – All components are auto‑imported; use kebab‑case tags directly in your `.vue` files.
-- **API** – Example API routes are defined in `routes/api.php`. Extend them as needed.
-- **Docker** – Run `docker-compose up -d` to spin up a containerised environment (see `docker-compose.yml`).
 
 ---
 
@@ -68,7 +66,7 @@ Contributions are welcome! Please follow these steps:
 
 1. Fork the repository.
 2. Create a feature branch (`git checkout -b feature/awesome-feature`).
-3. Ensure code passes linting (`npm run lint` and `composer lint`).
+3. Ensure code passes linting (`npm run lint`).
 4. Submit a Pull Request with a clear description of changes.
 
 ---

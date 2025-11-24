@@ -6,7 +6,6 @@ import { edit } from '@/routes/user-password';
 import { Form, Head } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
-import HeadingSmall from '@/components/HeadingSmall.vue';
 import { type BreadcrumbItem } from '@/types';
 
 const breadcrumbItems: BreadcrumbItem[] = [
@@ -27,8 +26,15 @@ const currentPasswordInput = ref<HTMLInputElement | null>(null);
         <SettingsLayout>
             <div class="d-flex flex-column ga-4">
                 <div>
-                    <h2 class="text-h6 font-weight-bold text-high-emphasis mb-1">Update password</h2>
-                    <p class="text-body-2 text-medium-emphasis">Ensure your account is using a long, random password to stay secure</p>
+                    <h2
+                        class="text-h6 font-weight-bold text-high-emphasis mb-1"
+                    >
+                        Update password
+                    </h2>
+                    <p class="text-body-2 text-medium-emphasis">
+                        Ensure your account is using a long, random password to
+                        stay secure
+                    </p>
                 </div>
 
                 <Form
