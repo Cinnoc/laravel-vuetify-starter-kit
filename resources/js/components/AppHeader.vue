@@ -40,7 +40,7 @@ const mainNavItems: NavItem[] = [
 const rightNavItems: NavItem[] = [
     {
         title: 'Repository',
-        href: 'https://github.com/laravel/vue-starter-kit',
+        href: 'https://github.com/Cinnoc/laravel-vuetify-starter-kit',
         icon: mdiFolder,
     },
     {
@@ -129,7 +129,7 @@ const avatarSrc = computed(() => auth.value.user?.avatar ?? '');
             <Link :href="dashboard()" class="d-flex align-center ga-2 text-decoration-none">
                 <AppLogo />
             </Link>
-c
+
             <div class="d-none d-lg-flex align-center ms-8 ga-2">
                 <Link
                     v-for="item in mainNavItems"
