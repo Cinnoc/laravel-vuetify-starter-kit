@@ -26,6 +26,18 @@ Make sure you have the following installed on your machine:
 
 ## 🚀 Installation
 
+### Option 1: Using Laravel Installer (Recommended)
+
+```bash
+laravel new my-app --using=cinnoc/laravel-vuetify-starter-kit
+cd my-app
+php artisan serve
+```
+
+The application will be available at `http://127.0.0.1:8000`.
+
+### Option 2: Clone the Repository
+
 ```bash
 # Clone the repository
 git clone https://github.com/chibyk101/laravel-vuetify-starter-kit.git
