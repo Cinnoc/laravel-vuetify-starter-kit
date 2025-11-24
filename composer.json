@@ -1,11 +1,13 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/vue-starter-kit",
+    "name": "cinnoc/laravel-vuetify-starter-kit",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "The skeleton application for the Laravel & Vuetify.",
     "keywords": [
         "laravel",
-        "framework"
+        "vuetify",
+        "framework",
+        "vue"
     ],
     "license": "MIT",
     "require": {
