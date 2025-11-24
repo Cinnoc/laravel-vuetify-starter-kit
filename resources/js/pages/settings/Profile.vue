@@ -9,7 +9,6 @@ import HeadingSmall from '@/components/HeadingSmall.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
 import { type BreadcrumbItem } from '@/types';
-import { VBtn, VTextField } from 'vuetify/components';
 
 interface Props {
     mustVerifyEmail: boolean;
@@ -45,7 +44,7 @@ const user = page.props.auth.user;
                     class="d-flex flex-column ga-4"
                     v-slot="{ errors, processing, recentlySuccessful }"
                 >
-                    <VTextField
+                    <v-text-field
                         id="name"
                         name="name"
                         label="Name"
@@ -58,7 +57,7 @@ const user = page.props.auth.user;
                         :error-messages="errors.name"
                     />
 
-                    <VTextField
+                    <v-text-field
                         id="email"
                         type="email"
                         name="email"
@@ -94,14 +93,14 @@ const user = page.props.auth.user;
                     </div>
 
                     <div class="d-flex align-center ga-4">
-                        <VBtn
+                        <v-btn
                             type="submit"
                             color="primary"
                             :disabled="processing"
                             data-test="update-profile-button"
                         >
                             Save
-                        </VBtn>
+                        </v-btn>
 
                         <Transition
                             enter-active-class="v-fade-transition"

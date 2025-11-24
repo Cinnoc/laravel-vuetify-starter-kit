@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { SidebarProvider } from '@/components/vuetify-sidebar';
 import { usePage } from '@inertiajs/vue3';
-import { VApp, VMain } from 'vuetify/components';
 
 interface Props {
     variant?: 'header' | 'sidebar';
@@ -13,12 +12,12 @@ const isOpen = usePage().props.sidebarOpen;
 </script>
 
 <template>
-    <VApp>
-        <VMain v-if="variant === 'header'">
+    <v-app>
+        <v-main v-if="variant === 'header'">
             <slot />
-        </VMain>
+        </v-main>
         <SidebarProvider v-else :default-open="isOpen">
             <slot />
         </SidebarProvider>
-    </VApp>
+    </v-app>
 </template>

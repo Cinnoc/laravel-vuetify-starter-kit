@@ -3,7 +3,6 @@ import AuthLayout from '@/layouts/AuthLayout.vue';
 import { update } from '@/routes/password';
 import { Form, Head } from '@inertiajs/vue3';
 import { mdiLoading } from '@mdi/js';
-import { VBtn, VIcon, VTextField } from 'vuetify/components';
 import { ref } from 'vue';
 
 const props = defineProps<{
@@ -28,7 +27,7 @@ const inputEmail = ref(props.email);
             v-slot="{ errors, processing }"
         >
             <div class="d-flex flex-column ga-6">
-                <VTextField
+                <v-text-field
                     id="email"
                     name="email"
                     type="email"
@@ -41,7 +40,7 @@ const inputEmail = ref(props.email);
                     readonly
                 />
 
-                <VTextField
+                <v-text-field
                     id="password"
                     name="password"
                     type="password"
@@ -54,7 +53,7 @@ const inputEmail = ref(props.email);
                     autofocus
                 />
 
-                <VTextField
+                <v-text-field
                     id="password_confirmation"
                     name="password_confirmation"
                     type="password"
@@ -66,7 +65,7 @@ const inputEmail = ref(props.email);
                     autocomplete="new-password"
                 />
 
-                <VBtn
+                <v-btn
                     type="submit"
                     color="primary"
                     size="large"
@@ -75,9 +74,9 @@ const inputEmail = ref(props.email);
                     :disabled="processing"
                     data-test="reset-password-button"
                 >
-                    <VIcon v-if="processing" :icon="mdiLoading" class="animate-spin" />
+                    <v-icon v-if="processing" :icon="mdiLoading" class="animate-spin" />
                     <span v-else>Reset password</span>
-                </VBtn>
+                </v-btn>
             </div>
         </Form>
     </AuthLayout>

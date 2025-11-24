@@ -2,7 +2,6 @@
 import type { BreadcrumbItemType } from '@/types';
 import { Link } from '@inertiajs/vue3';
 import { computed } from 'vue';
-import { VBreadcrumbs } from 'vuetify/components';
 
 const props = withDefaults(
     defineProps<{
@@ -26,7 +25,7 @@ const lastIndex = computed(() => props.breadcrumbs.length - 1);
 </script>
 
 <template>
-    <VBreadcrumbs
+    <v-breadcrumbs
         v-if="breadcrumbItems.length"
         :items="breadcrumbItems"
         divider="›"
@@ -45,5 +44,5 @@ const lastIndex = computed(() => props.breadcrumbs.length - 1);
                 {{ item.title }}
             </span>
         </template>
-    </VBreadcrumbs>
+    </v-breadcrumbs>
 </template>

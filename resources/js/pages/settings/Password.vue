@@ -4,7 +4,6 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
 import { edit } from '@/routes/user-password';
 import { Form, Head } from '@inertiajs/vue3';
-import { VBtn, VTextField } from 'vuetify/components';
 import { ref } from 'vue';
 
 import HeadingSmall from '@/components/HeadingSmall.vue';
@@ -46,7 +45,7 @@ const currentPasswordInput = ref<HTMLInputElement | null>(null);
                     class="d-flex flex-column ga-4"
                     v-slot="{ errors, processing, recentlySuccessful }"
                 >
-                    <VTextField
+                    <v-text-field
                         id="current_password"
                         ref="currentPasswordInput"
                         name="current_password"
@@ -59,7 +58,7 @@ const currentPasswordInput = ref<HTMLInputElement | null>(null);
                         :error-messages="errors.current_password"
                     />
 
-                    <VTextField
+                    <v-text-field
                         id="password"
                         ref="passwordInput"
                         name="password"
@@ -72,7 +71,7 @@ const currentPasswordInput = ref<HTMLInputElement | null>(null);
                         :error-messages="errors.password"
                     />
 
-                    <VTextField
+                    <v-text-field
                         id="password_confirmation"
                         name="password_confirmation"
                         type="password"
@@ -85,14 +84,14 @@ const currentPasswordInput = ref<HTMLInputElement | null>(null);
                     />
 
                     <div class="d-flex align-center ga-4">
-                        <VBtn
+                        <v-btn
                             type="submit"
                             color="primary"
                             :disabled="processing"
                             data-test="update-password-button"
                         >
                             Save password
-                        </VBtn>
+                        </v-btn>
 
                         <Transition
                             enter-active-class="v-fade-transition"

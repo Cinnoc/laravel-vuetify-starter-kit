@@ -3,7 +3,6 @@ import AuthLayout from '@/layouts/AuthLayout.vue';
 import { store } from '@/routes/password/confirm';
 import { Form, Head } from '@inertiajs/vue3';
 import { mdiLoading } from '@mdi/js';
-import { VBtn, VIcon, VTextField } from 'vuetify/components';
 </script>
 
 <template>
@@ -19,7 +18,7 @@ import { VBtn, VIcon, VTextField } from 'vuetify/components';
             v-slot="{ errors, processing }"
         >
             <div class="d-flex flex-column ga-6">
-                <VTextField
+                <v-text-field
                     id="password"
                     name="password"
                     type="password"
@@ -32,7 +31,7 @@ import { VBtn, VIcon, VTextField } from 'vuetify/components';
                     required
                 />
 
-                <VBtn
+                <v-btn
                     type="submit"
                     color="primary"
                     size="large"
@@ -41,9 +40,9 @@ import { VBtn, VIcon, VTextField } from 'vuetify/components';
                     :disabled="processing"
                     data-test="confirm-password-button"
                 >
-                    <VIcon v-if="processing" :icon="mdiLoading" class="animate-spin" />
+                    <v-icon v-if="processing" :icon="mdiLoading" class="animate-spin" />
                     <span v-else>Confirm Password</span>
-                </VBtn>
+                </v-btn>
             </div>
         </Form>
     </AuthLayout>

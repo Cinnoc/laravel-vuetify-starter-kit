@@ -5,7 +5,6 @@ import { login } from '@/routes';
 import { email } from '@/routes/password';
 import { Form, Head } from '@inertiajs/vue3';
 import { mdiLoading } from '@mdi/js';
-import { VAlert, VBtn, VIcon, VTextField } from 'vuetify/components';
 
 defineProps<{
     status?: string;
@@ -19,7 +18,7 @@ defineProps<{
     >
         <Head title="Forgot password" />
 
-        <VAlert
+        <v-alert
             v-if="status"
             type="success"
             variant="tonal"
@@ -27,12 +26,12 @@ defineProps<{
             class="mb-4 text-center"
         >
             {{ status }}
-        </VAlert>
+        </v-alert>
 
         <div class="d-flex flex-column ga-6">
             <Form v-bind="email.form()" v-slot="{ errors, processing }">
                 <div class="d-flex flex-column ga-4">
-                    <VTextField
+                    <v-text-field
                         id="email"
                         name="email"
                         type="email"
@@ -45,7 +44,7 @@ defineProps<{
                         autofocus
                     />
 
-                    <VBtn
+                    <v-btn
                         type="submit"
                         color="primary"
                         size="large"
@@ -54,9 +53,9 @@ defineProps<{
                         :disabled="processing"
                         data-test="email-password-reset-link-button"
                     >
-                        <VIcon v-if="processing" :icon="mdiLoading" class="animate-spin" />
+                        <v-icon v-if="processing" :icon="mdiLoading" class="animate-spin" />
                         <span v-else>Email password reset link</span>
-                    </VBtn>
+                    </v-btn>
                 </div>
             </Form>
 

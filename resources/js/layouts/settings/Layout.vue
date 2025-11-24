@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { VDivider } from 'vuetify/components';
 import { toUrl, urlIsActive } from '@/lib/utils';
 import { edit as editAppearance } from '@/routes/appearance';
 import { edit as editProfile } from '@/routes/profile';
@@ -58,7 +57,7 @@ const currentPath = typeof window !== 'undefined' ? window.location.pathname : '
                 </nav>
             </aside>
 
-            <VDivider class="my-4 d-lg-none" />
+            <v-divider class="my-4 d-lg-none" />
 
             <div class="flex-grow-1" style="max-width: 600px">
                 <div class="d-flex flex-column ga-8">

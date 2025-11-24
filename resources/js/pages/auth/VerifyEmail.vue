@@ -5,7 +5,6 @@ import { logout } from '@/routes';
 import { send } from '@/routes/verification';
 import { Form, Head } from '@inertiajs/vue3';
 import { mdiLoading } from '@mdi/js';
-import { VAlert, VBtn, VIcon } from 'vuetify/components';
 
 defineProps<{
     status?: string;
@@ -19,7 +18,7 @@ defineProps<{
     >
         <Head title="Email verification" />
 
-        <VAlert
+        <v-alert
             v-if="status === 'verification-link-sent'"
             type="success"
             variant="tonal"
@@ -28,23 +27,23 @@ defineProps<{
         >
             A new verification link has been sent to the email address you
             provided during registration.
-        </VAlert>
+        </v-alert>
 
         <Form
             v-bind="send.form()"
             class="d-flex flex-column ga-6 text-center"
             v-slot="{ processing }"
         >
-            <VBtn
+            <v-btn
                 type="submit"
                 color="secondary"
                 size="large"
                 :loading="processing"
                 :disabled="processing"
             >
-                <VIcon v-if="processing" :icon="mdiLoading" class="animate-spin" />
+                <v-icon v-if="processing" :icon="mdiLoading" class="animate-spin" />
                 <span v-else>Resend verification email</span>
-            </VBtn>
+            </v-btn>
 
             <TextLink :href="logout()" as="button" class="mx-auto text-body-2">
                 Log out

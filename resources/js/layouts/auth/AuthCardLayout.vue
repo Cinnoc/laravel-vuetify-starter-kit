@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import AppLogoIcon from '@/components/AppLogoIcon.vue';
 import { home } from '@/routes';
-import { VCard } from 'vuetify/components';
 import { Link } from '@inertiajs/vue3';
-import { VApp, VMain } from 'vuetify/components';
 
 defineProps<{
     title?: string;
@@ -12,8 +10,8 @@ defineProps<{
 </script>
 
 <template>
-    <VApp>
-        <VMain>
+    <v-app>
+        <v-main>
             <v-container
                 fluid
                 class="d-flex flex-column align-center justify-center ga-6 bg-surface-variant pa-6 pa-md-10"
@@ -32,7 +30,7 @@ defineProps<{
                     </Link>
 
                     <div class="d-flex flex-column ga-6">
-                        <VCard
+                        <v-card
                             variant="outlined"
                             rounded
                             elevation="0"
@@ -47,10 +45,10 @@ defineProps<{
                             <div class="px-10 py-8">
                                 <slot />
                             </div>
-                        </VCard>
+                        </v-card>
                     </div>
                 </div>
             </v-container>
-        </VMain>
-    </VApp>
+        </v-main>
+    </v-app>
 </template>

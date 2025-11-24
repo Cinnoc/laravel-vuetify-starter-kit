@@ -6,15 +6,6 @@ import { Form } from '@inertiajs/vue3';
 import { useClipboard } from '@vueuse/core';
 import { mdiCheck, mdiContentCopy, mdiLoading, mdiQrcodeScan } from '@mdi/js';
 import { computed, nextTick, ref, useTemplateRef, watch } from 'vue';
-import {
-    VDialog,
-    VCard,
-    VCardTitle,
-    VCardText,
-    VBtn,
-    VDivider,
-    VOtpInput,
-} from 'vuetify/components';
 
 interface Props {
     requiresConfirmation: boolean;
@@ -112,9 +103,9 @@ watch(
 </script>
 
 <template>
-    <VDialog v-model="isOpen" max-width="500" persistent scrollable>
-        <VCard rounded>
-            <VCardTitle class="d-flex flex-column align-center justify-center pa-6 pb-0">
+    <v-dialog v-model="isOpen" max-width="500" persistent scrollable>
+        <v-card rounded>
+            <v-card-title class="d-flex flex-column align-center justify-center pa-6 pb-0">
                 <div
                     class="mb-3 w-auto rounded-full border border-border bg-card pa-1 elevation-1"
                 >
@@ -125,12 +116,12 @@ watch(
                     </div>
                 </div>
                 <div class="text-body-1 text-center mt-2">{{ modalConfig.title }}</div>
-            </VCardTitle>
-            <VCardSubtitle class="text-body-2 text-medium-emphasis text-center px-6 pt-0 pb-4 text-wrap">
+            </v-card-title>
+            <v-card-subtitle class="text-body-2 text-medium-emphasis text-center px-6 pt-0 pb-4 text-wrap">
                 {{ modalConfig.description }}
-            </VCardSubtitle>
+            </v-card-subtitle>
 
-            <VCardText class="px-6 pb-4">
+            <v-card-text class="px-6 pb-4">
                 <div class="d-flex flex-column align-center justify-center ga-5">
                     <!-- Step 1: QR Code View -->
                     <template v-if="!showVerificationStep">
@@ -163,16 +154,16 @@ watch(
                             </div>
 
                             <div class="d-flex w-100 align-center ga-5">
-                                <VBtn
+                                <v-btn
                                     color="primary"
                                     block
                                     @click="handleModalNextStep"
                                 >
                                     {{ modalConfig.buttonText }}
-                                </VBtn>
+                                </v-btn>
                             </div>
 
-                            <VDivider class="my-1" />
+                            <v-divider class="my-1" />
 
                             <div class="text-body-2 text-center text-medium-emphasis mb-2">
                                 or, enter the code manually
@@ -196,7 +187,7 @@ watch(
                                             class="h-100 w-100 bg-background pa-3 text-foreground"
                                             style="border: none; outline: none"
                                         />
-                                        <VBtn
+                                        <v-btn
                                             icon
                                             variant="text"
                                             @click="copy(manualSetupKey || '')"
@@ -210,7 +201,7 @@ watch(
                                                 class="text-success"
                                             ></v-icon>
                                             <v-icon v-else :icon="mdiContentCopy" size="16"></v-icon>
-                                        </VBtn>
+                                        </v-btn>
                                     </template>
                                 </div>
                             </div>
@@ -232,20 +223,20 @@ watch(
                                 class="position-relative w-100 d-flex flex-column ga-3"
                             >
                                 <div class="d-flex w-100 flex-column align-center justify-center ga-3 py-2">
-                                    <VOtpInput
+                                    <v-otp-input
                                         id="otp"
                                         v-model="otpValue"
                                         :length="6"
                                         type="number"
                                         variant="outlined"
                                         :disabled="processing"
-                                        :error-messages="errors?.confirmTwoFactorAuthentication?.code"
+                                        :error-messages="errors.code"
                                         autofocus
                                     />
                                 </div>
 
                                 <div class="d-flex w-100 align-center ga-3">
-                                    <VBtn
+                                    <v-btn
                                         type="button"
                                         variant="outlined"
                                         color="primary"
@@ -254,8 +245,8 @@ watch(
                                         :disabled="processing"
                                     >
                                         Back
-                                    </VBtn>
-                                    <VBtn
+                                    </v-btn>
+                                    <v-btn
                                         type="submit"
                                         color="primary"
                                         class="flex-1-1"
@@ -264,13 +255,13 @@ watch(
                                         "
                                     >
                                         Confirm
-                                    </VBtn>
+                                    </v-btn>
                                 </div>
                             </div>
                         </Form>
                     </template>
                 </div>
-            </VCardText>
-        </VCard>
-    </VDialog>
+            </v-card-text>
+        </v-card>
+    </v-dialog>
 </template>

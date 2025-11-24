@@ -5,7 +5,6 @@ import { login } from '@/routes';
 import { store } from '@/routes/register';
 import { Form, Head } from '@inertiajs/vue3';
 import { mdiLoading } from '@mdi/js';
-import { VBtn, VIcon, VTextField } from 'vuetify/components';
 </script>
 
 <template>
@@ -21,7 +20,7 @@ import { VBtn, VIcon, VTextField } from 'vuetify/components';
             v-slot="{ errors, processing }"
         >
             <div class="d-flex flex-column ga-6">
-                <VTextField
+                <v-text-field
                     id="name"
                     name="name"
                     type="text"
@@ -36,7 +35,7 @@ import { VBtn, VIcon, VTextField } from 'vuetify/components';
                     required
                 />
 
-                <VTextField
+                <v-text-field
                     id="email"
                     name="email"
                     type="email"
@@ -50,7 +49,7 @@ import { VBtn, VIcon, VTextField } from 'vuetify/components';
                     required
                 />
 
-                <VTextField
+                <v-text-field
                     id="password"
                     name="password"
                     type="password"
@@ -64,7 +63,7 @@ import { VBtn, VIcon, VTextField } from 'vuetify/components';
                     required
                 />
 
-                <VTextField
+                <v-text-field
                     id="password_confirmation"
                     name="password_confirmation"
                     type="password"
@@ -78,7 +77,7 @@ import { VBtn, VIcon, VTextField } from 'vuetify/components';
                     required
                 />
 
-                <VBtn
+                <v-btn
                     type="submit"
                     color="primary"
                     size="large"
@@ -88,9 +87,9 @@ import { VBtn, VIcon, VTextField } from 'vuetify/components';
                     :disabled="processing"
                     data-test="register-user-button"
                 >
-                    <VIcon v-if="processing" :icon="mdiLoading" class="animate-spin" />
+                    <v-icon v-if="processing" :icon="mdiLoading" class="animate-spin" />
                     <span v-else>Create account</span>
-                </VBtn>
+                </v-btn>
 
                 <div class="text-center text-body-2 text-medium-emphasis">
                     Already have an account?

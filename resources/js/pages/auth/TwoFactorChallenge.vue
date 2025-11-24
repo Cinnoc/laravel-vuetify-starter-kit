@@ -3,7 +3,6 @@ import AuthLayout from '@/layouts/AuthLayout.vue';
 import { store } from '@/routes/two-factor/login';
 import { Form, Head } from '@inertiajs/vue3';
 import { mdiLoading } from '@mdi/js';
-import { VBtn, VIcon, VOtpInput, VTextField } from 'vuetify/components';
 import { computed, ref } from 'vue';
 
 interface AuthConfigContent {
@@ -57,7 +56,7 @@ const code = ref<string>('');
                     #default="{ errors, processing, clearErrors }"
                 >
                     <div class="d-flex flex-column ga-4">
-                        <VOtpInput
+                        <v-otp-input
                             v-model="code"
                             name="code"
                             :length="6"
@@ -68,7 +67,7 @@ const code = ref<string>('');
                             autofocus
                         />
                         
-                        <VBtn
+                        <v-btn
                             type="submit"
                             color="primary"
                             size="large"
@@ -76,9 +75,9 @@ const code = ref<string>('');
                             :loading="processing"
                             :disabled="processing"
                         >
-                            <VIcon v-if="processing" :icon="mdiLoading" class="animate-spin" />
+                            <v-icon v-if="processing" :icon="mdiLoading" class="animate-spin" />
                             <span v-else>Continue</span>
-                        </VBtn>
+                        </v-btn>
                         
                         <div class="text-center text-body-2 text-medium-emphasis">
                             <span>or you can </span>
@@ -102,7 +101,7 @@ const code = ref<string>('');
                     #default="{ errors, processing, clearErrors }"
                 >
                     <div class="d-flex flex-column ga-4">
-                        <VTextField
+                        <v-text-field
                             name="recovery_code"
                             type="text"
                             label="Recovery code"
@@ -114,7 +113,7 @@ const code = ref<string>('');
                             required
                         />
                         
-                        <VBtn
+                        <v-btn
                             type="submit"
                             color="primary"
                             size="large"
@@ -122,9 +121,9 @@ const code = ref<string>('');
                             :loading="processing"
                             :disabled="processing"
                         >
-                            <VIcon v-if="processing" :icon="mdiLoading" class="animate-spin" />
+                            <v-icon v-if="processing" :icon="mdiLoading" class="animate-spin" />
                             <span v-else>Continue</span>
-                        </VBtn>
+                        </v-btn>
 
                         <div class="text-center text-body-2 text-medium-emphasis">
                             <span>or you can </span>

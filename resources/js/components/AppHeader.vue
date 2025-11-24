@@ -8,20 +8,6 @@ import { toUrl, urlIsActive } from '@/lib/utils';
 import { dashboard } from '@/routes';
 import type { BreadcrumbItem, NavItem } from '@/types';
 import { InertiaLinkProps, Link, usePage } from '@inertiajs/vue3';
-import {
-    VAppBar,
-    VAvatar,
-    VBtn,
-    VDivider,
-    VList,
-    VListItem,
-    VListItemTitle,
-    VMenu,
-    VNavigationDrawer,
-    VSheet,
-    VSpacer,
-    VTooltip,
-} from 'vuetify/components';
 import { mdiBookOpenPageVariant, mdiFolder, mdiViewDashboard, mdiMenu, mdiMagnify } from '@mdi/js';
 import { computed, ref } from 'vue';
 
@@ -73,25 +59,25 @@ const avatarSrc = computed(() => auth.value.user?.avatar ?? '');
 
 <template>
     <div>
-        <VNavigationDrawer
+        <v-navigation-drawer
             v-model="isMobileNavOpen"
             temporary
             width="300"
             scrim
             class="d-lg-none"
         >
-            <VSheet class="px-4 py-3 d-flex align-center ga-2">
+            <v-sheet class="px-4 py-3 d-flex align-center ga-2">
                 <AppLogoIcon style="width: 30px; height: 30px;" />
                 <span class="text-body-2 font-weight-medium text-high-emphasis">Navigation</span>
-            </VSheet>
-            <VDivider />
-            <VList nav density="comfortable">
-                <VListItem
+            </v-sheet>
+            <v-divider />
+            <v-list nav density="comfortable">
+                <v-list-item
                     v-for="item in mainNavItems"
                     :key="item.title"
                     @click="handleNavigate"
                 >
-                    <VListItemTitle>
+                    <v-list-item-title>
                         <Link
                             :href="item.href"
                             class="d-flex align-center ga-3 text-body-1 w-100 py-2 text-decoration-none text-medium-emphasis"
@@ -107,12 +93,12 @@ const avatarSrc = computed(() => auth.value.user?.avatar ?? '');
                             ></v-icon>
                             {{ item.title }}
                         </Link>
-                    </VListItemTitle>
-                </VListItem>
-            </VList>
-            <VDivider class="my-2" />
-            <VList density="comfortable">
-                <VListItem
+                    </v-list-item-title>
+                </v-list-item>
+            </v-list>
+            <v-divider class="my-2" />
+            <v-list density="comfortable">
+                <v-list-item
                     v-for="item in rightNavItems"
                     :key="item.title"
                 >
@@ -125,12 +111,12 @@ const avatarSrc = computed(() => auth.value.user?.avatar ?? '');
                         <v-icon :icon="item.icon" size="20"></v-icon>
                         {{ item.title }}
                     </a>
-                </VListItem>
-            </VList>
-        </VNavigationDrawer>
+                </v-list-item>
+            </v-list>
+        </v-navigation-drawer>
 
-        <VAppBar flat height="64" class="border-b border-opacity-20 px-4">
-            <VBtn
+        <v-app-bar flat height="64" class="border-b border-opacity-20 px-4">
+            <v-btn
                 icon
                 variant="text"
                 size="small"
@@ -138,7 +124,7 @@ const avatarSrc = computed(() => auth.value.user?.avatar ?? '');
                 @click="isMobileNavOpen = true"
             >
                 <v-icon :icon="mdiMenu" size="20"></v-icon>
-            </VBtn>
+            </v-btn>
 
             <Link :href="dashboard()" class="d-flex align-center ga-2 text-decoration-none">
                 <AppLogo />
@@ -166,23 +152,23 @@ c
                 </Link>
             </div>
 
-            <VSpacer />
+            <v-spacer />
 
             <div class="d-flex align-center ga-1">
-                <VBtn icon variant="text" size="small">
+                <v-btn icon variant="text" size="small">
                     <v-icon :icon="mdiMagnify" size="16"></v-icon>
-                </VBtn>
+                </v-btn>
 
 
                 <div class="d-none d-lg-flex align-center ga-1">
-                    <VTooltip
+                    <v-tooltip
                         v-for="item in rightNavItems"
                         :key="item.title"
                         :text="item.title"
                         location="bottom"
                     >
                         <template #activator="{ props: tooltipProps }">
-                            <VBtn
+                            <v-btn
                                 v-bind="tooltipProps"
                                 icon
                                 variant="text"
@@ -192,27 +178,27 @@ c
                                 rel="noopener noreferrer"
                             >
                                 <v-icon :icon="item.icon" size="16"></v-icon>
-                            </VBtn>
+                            </v-btn>
                         </template>
-                    </VTooltip>
+                    </v-tooltip>
                 </div>
 
 
-                <VMenu
+                <v-menu
                     v-model="isUserMenuOpen"
                     location="bottom end"
                     offset-y
                     min-width="260"
                 >
                     <template #activator="{ props: menuActivator }">
-                        <VBtn
+                        <v-btn
                             v-bind="menuActivator"
                             icon
                             variant="text"
                             size="small"
                             class="border border-opacity-100 rounded-circle"
                         >
-                            <VAvatar size="32">
+                            <v-avatar size="32">
                                 <img
                                     v-if="avatarSrc"
                                     :src="avatarSrc"
@@ -221,15 +207,15 @@ c
                                 <span v-else class="text-caption font-weight-medium">
                                     {{ getInitials(auth.user?.name) }}
                                 </span>
-                            </VAvatar>
-                        </VBtn>
+                            </v-avatar>
+                        </v-btn>
                     </template>
-                    <VSheet class="py-2 px-2 rounded" elevation="5">
+                    <v-sheet class="py-2 px-2 rounded" elevation="5">
                         <UserMenuContent :user="auth.user" />
-                    </VSheet>
-                </VMenu>
+                    </v-sheet>
+                </v-menu>
             </div>
-        </VAppBar>
+        </v-app-bar>
 
         <div
             v-if="props.breadcrumbs.length > 1"

@@ -4,7 +4,6 @@ import { useTwoFactorAuth } from '@/composables/useTwoFactorAuth';
 import { regenerateRecoveryCodes } from '@/routes/two-factor';
 import { Form } from '@inertiajs/vue3';
 import { mdiEye, mdiEyeOff, mdiLockOutline, mdiRefresh } from '@mdi/js';
-import { VBtn, VCard } from 'vuetify/components';
 import { nextTick, onMounted, ref } from 'vue';
 
 const { recoveryCodesList, fetchRecoveryCodes, errors } = useTwoFactorAuth();
@@ -32,7 +31,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <VCard
+    <v-card
         variant="outlined"
         rounded
         elevation="0"
@@ -50,7 +49,7 @@ onMounted(async () => {
         </div>
         <div class="pa-6 pt-0">
             <div class="d-flex flex-column flex-sm-row ga-3 align-sm-center justify-sm-space-between" style="user-select: none;">
-                <VBtn
+                <v-btn
                     color="primary"
                     @click="toggleRecoveryCodesVisibility"
                     class="w-auto"
@@ -61,7 +60,7 @@ onMounted(async () => {
                     ></v-icon>
                     {{ isRecoveryCodesVisible ? 'Hide' : 'View' }} Recovery
                     Codes
-                </VBtn>
+                </v-btn>
 
                 <Form
                     v-if="isRecoveryCodesVisible && recoveryCodesList.length"
@@ -71,13 +70,13 @@ onMounted(async () => {
                     @success="fetchRecoveryCodes"
                     #default="{ processing }"
                 >
-                    <VBtn
+                    <v-btn
                         color="secondary"
                         type="submit"
                         :disabled="processing"
                     >
                         <v-icon :icon="mdiRefresh" size="16"></v-icon> Regenerate Codes
-                    </VBtn>
+                    </v-btn>
                 </Form>
             </div>
             <div
@@ -122,5 +121,5 @@ onMounted(async () => {
                 </div>
             </div>
         </div>
-    </VCard>
+    </v-card>
 </template>

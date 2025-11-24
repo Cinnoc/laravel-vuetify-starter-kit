@@ -9,7 +9,6 @@ import { disable, enable, show } from '@/routes/two-factor';
 import { BreadcrumbItem } from '@/types';
 import { Form, Head } from '@inertiajs/vue3';
 import { mdiShieldOff, mdiShieldCheck } from '@mdi/js';
-import { VBtn, VChip } from 'vuetify/components';
 import { onUnmounted, ref } from 'vue';
 
 interface Props {
@@ -51,14 +50,14 @@ onUnmounted(() => {
                     v-if="!twoFactorEnabled"
                     class="d-flex flex-column align-start ga-4"
                 >
-                    <VChip
+                    <v-chip
                         color="error"
                         variant="flat"
                         size="small"
                         class="text-caption font-weight-bold text-uppercase"
                     >
                         Disabled
-                    </VChip>
+                    </v-chip>
 
                     <p class="text-body-2 text-medium-emphasis">
                         When you enable two-factor authentication, you will be
@@ -68,26 +67,26 @@ onUnmounted(() => {
                     </p>
 
                     <div>
-                        <VBtn
+                        <v-btn
                             v-if="hasSetupData"
                             color="primary"
                             @click="showSetupModal = true"
                         >
                             <v-icon :icon="mdiShieldCheck" size="16"></v-icon>Continue Setup
-                        </VBtn>
+                        </v-btn>
                         <Form
                             v-else
                             v-bind="enable.form()"
                             @success="showSetupModal = true"
                             #default="{ processing }"
                         >
-                            <VBtn
+                            <v-btn
                                 type="submit"
                                 color="primary"
                                 :disabled="processing"
                             >
                                 <v-icon :icon="mdiShieldCheck" size="16"></v-icon>Enable 2FA
-                            </VBtn>
+                            </v-btn>
                         </Form>
                     </div>
                 </div>
@@ -96,14 +95,14 @@ onUnmounted(() => {
                     v-else
                     class="d-flex flex-column align-start ga-4"
                 >
-                    <VChip
+                    <v-chip
                         color="primary"
                         variant="flat"
                         size="small"
                         class="text-caption font-weight-bold text-uppercase"
                     >
                         Enabled
-                    </VChip>
+                    </v-chip>
 
                     <p class="text-body-2 text-medium-emphasis">
                         With two-factor authentication enabled, you will be
@@ -116,14 +115,14 @@ onUnmounted(() => {
 
                     <div>
                         <Form v-bind="disable.form()" #default="{ processing }">
-                            <VBtn
+                            <v-btn
                                 color="error"
                                 type="submit"
                                 :disabled="processing"
                             >
                                 <v-icon :icon="mdiShieldOff" size="16"></v-icon>
                                 Disable 2FA
-                            </VBtn>
+                            </v-btn>
                         </Form>
                     </div>
                 </div>

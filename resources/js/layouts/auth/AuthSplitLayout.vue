@@ -2,7 +2,6 @@
 import AppLogoIcon from '@/components/AppLogoIcon.vue';
 import { home } from '@/routes';
 import { Link, usePage } from '@inertiajs/vue3';
-import { VApp, VMain } from 'vuetify/components';
 
 const page = usePage();
 const name = page.props.name;
@@ -15,8 +14,8 @@ defineProps<{
 </script>
 
 <template>
-    <VApp>
-        <VMain>
+    <v-app>
+        <v-main>
             <v-row
                 no-gutters
                 class="position-relative align-center justify-center px-8 px-sm-0 px-lg-0"
@@ -66,6 +65,6 @@ defineProps<{
                     </div>
                 </v-col>
             </v-row>
-        </VMain>
-    </VApp>
+        </v-main>
+    </v-app>
 </template>

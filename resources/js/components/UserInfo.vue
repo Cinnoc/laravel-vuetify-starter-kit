@@ -2,7 +2,6 @@
 import { useInitials } from '@/composables/useInitials';
 import type { User } from '@/types';
 import { computed } from 'vue';
-import { VAvatar } from 'vuetify/components';
 
 interface Props {
     user: User;
@@ -23,7 +22,7 @@ const hasAvatar = computed(
 
 <template>
     <div class="d-flex align-center ga-3 w-100">
-        <VAvatar
+        <v-avatar
             rounded
             size="40"
             color="primary"
@@ -36,7 +35,7 @@ const hasAvatar = computed(
                 class="w-100 h-100"
             />
             <span v-else>{{ initials }}</span>
-        </VAvatar>
+        </v-avatar>
 
         <div class="d-flex flex-column flex-grow-1 text-start">
             <span class="text-body-2 font-weight-medium text-truncate">{{

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { VAlert } from 'vuetify/components';
 import { mdiAlertCircle } from '@mdi/js';
 import { computed } from 'vue';
 
@@ -16,7 +15,7 @@ const uniqueErrors = computed(() => Array.from(new Set(props.errors)));
 </script>
 
 <template>
-    <VAlert type="error" variant="tonal" border="start" prominent>
+    <v-alert type="error" variant="tonal" border="start" prominent>
         <template #prepend>
             <v-icon :icon="mdiAlertCircle" size="20"></v-icon>
         </template>
@@ -26,5 +25,5 @@ const uniqueErrors = computed(() => Array.from(new Set(props.errors)));
                 {{ error }}
             </li>
         </ul>
-    </VAlert>
+    </v-alert>
 </template>

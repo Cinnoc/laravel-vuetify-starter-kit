@@ -5,7 +5,6 @@ import { edit } from '@/routes/profile';
 import type { User } from '@/types';
 import { Link, router } from '@inertiajs/vue3';
 import { mdiLogout, mdiCog } from '@mdi/js';
-import { VDivider, VList, VListItem } from 'vuetify/components';
 
 interface Props {
     user: User;
@@ -19,14 +18,14 @@ defineProps<Props>();
 </script>
 
 <template>
-    <VList density="compact" class="pa-0">
-        <VListItem class="px-2 py-2">
+    <v-list density="compact" class="pa-0">
+        <v-list-item class="px-2 py-2">
             <UserInfo :user="user" :show-email="true" />
-        </VListItem>
+        </v-list-item>
 
-        <VDivider class="my-1" />
+        <v-divider class="my-1" />
 
-        <VListItem
+        <v-list-item
             link
             class="px-2"
             @click="router.visit(edit())"
@@ -35,11 +34,11 @@ defineProps<Props>();
                 <v-icon :icon="mdiCog" size="16" class="me-2 text-medium-emphasis"></v-icon>
             </template>
             <span class="text-body-2">Settings</span>
-        </VListItem>
+        </v-list-item>
 
-        <VDivider class="my-1" />
+        <v-divider class="my-1" />
 
-        <VListItem
+        <v-list-item
             link
             class="px-2"
             @click="() => { handleLogout(); router.visit(logout()); }"
@@ -49,6 +48,6 @@ defineProps<Props>();
                 <v-icon :icon="mdiLogout" size="16" class="me-2 text-medium-emphasis"></v-icon>
             </template>
             <span class="text-body-2">Log out</span>
-        </VListItem>
-    </VList>
+        </v-list-item>
+    </v-list>
 </template>
