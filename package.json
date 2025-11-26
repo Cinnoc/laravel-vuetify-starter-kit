@@ -29,7 +29,7 @@
         "vite": "^7.0.4",
         "vite-plugin-vuetify": "^2.1.2",
         "vue-tsc": "^2.2.4",
-        "vuetify": "^3.10.11"
+        "vuetify": "^3.11.0"
     },
     "dependencies": {
         "@inertiajs/vue3": "^2.1.0",
