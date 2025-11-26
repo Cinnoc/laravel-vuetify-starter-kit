@@ -4,7 +4,7 @@ A **feature‑rich** starter kit that combines the power of **Laravel** with the
 
 ---
 
-## ✨ Features
+## Features
 
 - **Laravel 12**
 - **Vuetify 3**
@@ -13,7 +13,7 @@ A **feature‑rich** starter kit that combines the power of **Laravel** with the
 
 ---
 
-## 📦 Prerequisites
+## Prerequisites
 
 Make sure you have the following installed on your machine:
 
@@ -24,7 +24,7 @@ Make sure you have the following installed on your machine:
 
 ---
 
-## 🚀 Installation
+## Installation
 
 ### Option 1: Using Laravel Installer (Recommended)
 
@@ -65,14 +65,14 @@ The application will be available at `http://localhost:8000`.
 
 ---
 
-## 🛠️ Usage
+## Usage
 
 - **Authentication** – Register, login, password reset, and two‑factor authentication are already wired up.
 - **Vuetify components** – All components are auto‑imported; use kebab‑case tags directly in your `.vue` files.
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please follow these steps:
 
@@ -83,13 +83,33 @@ Contributions are welcome! Please follow these steps:
 
 ---
 
-## 📜 License
+## License
 
 This project is open‑source and available under the **MIT License**.
 
 ---
 
-## 🙏 Acknowledgements
+## Screenshots
+
+### Register Page
+![Register Page](https://github.com/user-attachments/assets/78d61632-83d7-46a5-a884-f49eb7ec7ae7)
+
+### Login
+![Login](https://github.com/user-attachments/assets/c127115d-6743-44e1-9300-b70d26315aab)
+
+### Dark Mode Dashboard
+![Dark Mode Dashboard](https://github.com/user-attachments/assets/847d4fe5-c965-49b5-842c-fbc9429b7566)
+
+### Settings Page
+![Settings Page](https://github.com/user-attachments/assets/f317356a-aa01-48ca-a7be-0d5d4aea916b)
+
+### Light Mode Dashboard
+![Light Mode Dashboard](https://github.com/user-attachments/assets/08bb0d6d-dd30-4e52-8561-e742af1078fb)
+
+### Authentication Code
+![Authentication Code](https://github.com/user-attachments/assets/38bf3470-1274-4090-b7dc-c4c79ef832ac)
+
+## Acknowledgements
 
 - **Laravel** – https://laravel.com/
 - **Vuetify** – https://vuetifyjs.com/
